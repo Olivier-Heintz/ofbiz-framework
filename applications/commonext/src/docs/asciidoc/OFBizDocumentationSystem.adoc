@@ -17,6 +17,10 @@ specific language governing permissions and limitations
 under the License.
 ////
 = The Apache OFBiz documentation system
+There are two main documentation place
+
+* the https://cwiki.apache.org/confluence/display/OFBIZ/Home[OFBiz wiki documentation site]
+* the online help, base on book in html or pdf format
 
 == Overview
 The OFBiz documentation system consist out of a number of DocBook xml files.
