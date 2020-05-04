@@ -1893,6 +1893,10 @@
         <value xml:lang="zh">职位薪水管理</value>
         <value xml:lang="zh-TW">職位薪水管理</value>
     </property>
+    <property key="HumanResEmplPositionTypeGrade">
+        <value xml:lang="en">Position Type Grade</value>
+        <value xml:lang="fr">Grade par type de position</value>
+    </property>
     <property key="HumanResEmplReasonType">
         <value xml:lang="de">Art des Beurlaubungsgrundes</value>
         <value xml:lang="en">EmplLeave Reason Type</value>
