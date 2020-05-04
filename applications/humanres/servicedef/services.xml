@@ -611,11 +611,7 @@ under the License.
         <auto-attributes include="nonpk" mode="IN" optional="true"/>
         <attribute name="rateAmount" type="BigDecimal" mode="IN" optional="true"/>
         <attribute name="rateCurrencyUomId" type="String" mode="IN" optional="true"/>
-        <attribute name="periodTypeId" type="String" mode="IN">
-            <type-validate>
-                <fail-property property="HRRequiredFieldMissingPeriodTypeId" resource="HumanResErrorUiLabels"/>
-            </type-validate>
-        </attribute>
+        <attribute name="periodTypeId" type="String" mode="IN" optional="true"/>
         <override name="fromDate" optional="true"/>
     </service>
 
@@ -624,6 +620,7 @@ under the License.
         <description>Delete Valid EmplPositionTypeRate</description>
         <permission-service service-name="humanResManagerPermission" main-action="DELETE"/>
         <auto-attributes mode="IN" include="pk" optional="false"/>
+        <attribute name="payGradeId" type="String" mode="IN" optional="true"/><!-- to be able to expire EmplPositionTypeRate specific ....-->
         <attribute name="rateAmountFromDate" type="Timestamp" mode="IN" optional="true"/><!-- to be able to expire rateamount specific to a party records....-->
         <attribute name="periodTypeId" type="String" mode="IN" optional="true"/>
     </service>

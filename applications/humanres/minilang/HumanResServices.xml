@@ -119,6 +119,18 @@
     </simple-method>
 
     <simple-method method-name="updateEmplPositionTypeRate" short-description="Update/create EmplPositionTypeRate">
+        <if>
+            <condition>
+                <and>
+                    <not><if-empty field="parameters.rateAmount"></if-empty></not>
+                    <not><if-empty field="parameters.payGradeId"></if-empty></not>
+                </and>
+            </condition>
+            <then>
+                <add-error><fail-message message="You must choose between Rate Amount and Pay Grade + step"/></add-error>
+                <check-errors/>
+            </then>
+        </if>
         <entity-one entity-name="EmplPositionTypeRate" value-field="lookedUpValue"/>
         <!-- check if already exist is so expire current record -->
         <entity-and entity-name="EmplPositionTypeRate" list="emplPositionTypeRates" filter-by-date="true">
@@ -138,19 +150,27 @@
         <create-value value-field="newEntity"/>
 
         <if-not-empty field="parameters.rateAmount">
+            <if-empty field="parameters.periodTypeId">
+                <add-error><fail-message message="Period Type is mandatory when Rate Amount is used"/></add-error>
+                <check-errors/>
+            </if-empty>
             <set-service-fields service-name="updateRateAmount" map="parameters" to-map="updRate"/>
             <call-service service-name="updateRateAmount" in-map-name="updRate"/>
         </if-not-empty>
     </simple-method>
 
     <simple-method method-name="deleteEmplPositionTypeRate" short-description="Delete EmplPositionTypeRate">
-        <entity-one entity-name="EmplPositionTypeRate" value-field="lookedUpValue"/>
-        <now-timestamp field="lookedUpValue.thruDate"/>
-        <store-value value-field="lookedUpValue"/>
+        <if-not-empty field="parameters.payGradeId">
+            <entity-one entity-name="EmplPositionTypeRate" value-field="lookedUpValue"/>
+            <now-timestamp field="lookedUpValue.thruDate"/>
+            <store-value value-field="lookedUpValue"/>
+        </if-not-empty>
 
-        <set-service-fields service-name="deleteRateAmount" map="parameters" to-map="delRateAmount"/>
-        <set field="delRateAmount.fromDate" from-field="parameters.rateAmountFromDate"/>
-        <call-service service-name="deleteRateAmount" in-map-name="delRateAmount"/>
+        <if-not-empty field="parameters.rateAmountFromDate">
+            <set-service-fields service-name="deleteRateAmount" map="parameters" to-map="delRateAmount"/>
+            <set field="delRateAmount.fromDate" from-field="parameters.rateAmountFromDate"/>
+            <call-service service-name="deleteRateAmount" in-map-name="delRateAmount"/>
+        </if-not-empty>
     </simple-method>
     <simple-method method-name="getCurrentPartyEmploymentData" short-description="Get all current employment information for a certain partyId">
         <!-- party benefit -->

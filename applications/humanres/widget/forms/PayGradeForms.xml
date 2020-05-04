@@ -81,8 +81,8 @@
     <form name="AddSalaryStep" type="single" target="createSalaryStep"
         header-row-style="header-row" default-table-style="basic-table">
         <auto-fields-service service-name="createSalaryStep"/>
-        <field name="salaryStepSeqId"><ignored/></field>
-        <field name="payGradeId"><hidden/></field>
+        <field name="payGradeId"><display/></field>
+        <field name="salaryStepSeqId"><text/></field>
         <field name="submitButton" title="${uiLabelMap.CommonCreate}" widget-style="smallSubmit"><submit button-type="button"/></field>
     </form>
 </forms>

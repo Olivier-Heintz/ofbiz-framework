@@ -168,6 +168,29 @@
             </widgets>
         </section>
     </screen>
+    <screen name="EditEmplPositionTypeGrades">
+        <section>
+            <actions>
+                <set field="titleProperty" value="HumanResEmplPositionTypeGrade"/>
+                <set field="headerItem" value="EmplPositionTypes"/>
+                <set field="tabButtonItem" value="EmplPositionTypes"/>
+                <set field="tabButtonItem2" value="EditEmplPositionTypeGrade"/>
+                <set field="emplPositionTypeId" from-field="parameters.emplPositionTypeId"/>
+                <entity-one entity-name="EmplPositionTypeRate" value-field="emplPositionTypeRate"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="GlobalHRSettingsDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <include-menu name="EmplPositionTypeTabBar" location="component://humanres/widget/HumanresMenus.xml"/>
+                        <screenlet id="AddEmplPositionTypeRatePanel" title="${uiLabelMap.CommonAdd} ${uiLabelMap.HumanResEmplPositionType} ${uiLabelMap.HumanResPayGrade}" collapsible="true">
+                            <include-form name="AddEmplPositionTypeGrade" location="component://humanres/widget/forms/GlobalHRSettingForms.xml"/>
+                        </screenlet>
+                            <include-form name="ListEmplPositionTypeGrades" location="component://humanres/widget/forms/GlobalHRSettingForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
     <screen name="EditTerminationReasons">
         <section>
             <actions>
