@@ -141,6 +141,7 @@ under the License.
     <form name="LookupSalaryStep" type="single" target="LookupSalaryStep"
         header-row-style="header-row" default-table-style="basic-table">
         <auto-fields-entity entity-name="SalaryStep" default-field-type="hidden"/>
+        <field name="payGradeId"><display/></field>
         <field name="salaryStepSeqId" title="${uiLabelMap.HumanResLookupSalaryStepSeqId}"><text-find/></field>
         <field name="fromDate" title="${uiLabelMap.CommonFrom}"><text-find/></field>
         <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
@@ -156,6 +157,7 @@ under the License.
                 <field-map field-name="viewSize" from-field="viewSize"/>
             </service>
         </actions>
+        <field name="payGradeId"><display/></field>
         <field name="salaryStepSeqId" title="${uiLabelMap.HumanResLookupSalaryStepSeqId}" widget-style="buttontext">
             <hyperlink description="${salaryStepSeqId}" target="javascript:set_value('${salaryStepSeqId}')" also-hidden="false" target-type="plain"/>
         </field>

@@ -736,6 +736,20 @@ under the License.
         <event type="service" invoke="deleteEmplPositionTypeRate"/>
         <response name="success" type="view" value="EditEmplPositionTypeRates"/>
     </request-map>
+    <request-map uri="EditEmplPositionTypeGrades">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="EditEmplPositionTypeGrades"/>
+    </request-map>
+    <request-map uri="updateEmplPositionTypeGrade">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateEmplPositionTypeRate"/>
+        <response name="success" type="view" value="EditEmplPositionTypeGrades"/>
+    </request-map>
+    <request-map uri="deleteEmplPositionTypeGrade">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deleteEmplPositionTypeRate"/>
+        <response name="success" type="view" value="EditEmplPositionTypeGrades"/>
+    </request-map>
     <request-map uri="EditAgreementEmploymentAppls">
         <security https="true" auth="true"/>
         <response name="success" type="view" value="EditAgreementEmploymentAppls"/>
@@ -1204,6 +1218,7 @@ under the License.
     <view-map name="FindEmplPositionTypes" type="screen" page="component://humanres/widget/GlobalHRSettingScreens.xml#FindEmplPositionTypes"/>
     <view-map name="EditEmplPositionTypes" type="screen" page="component://humanres/widget/GlobalHRSettingScreens.xml#EditEmplPositionTypes"/>
     <view-map name="EditEmplPositionTypeRates" type="screen" page="component://humanres/widget/GlobalHRSettingScreens.xml#EditEmplPositionTypeRates"/>
+    <view-map name="EditEmplPositionTypeGrades" type="screen" page="component://humanres/widget/GlobalHRSettingScreens.xml#EditEmplPositionTypeGrades"/>
     <view-map name="EditResponsibilityTypes" type="screen" page="component://humanres/widget/GlobalHRSettingScreens.xml#EditResponsibilityTypes"/>
     <view-map name="EditTerminationTypes" type="screen" page="component://humanres/widget/GlobalHRSettingScreens.xml#EditTerminationTypes"/>
     <view-map name="EditTerminationReasons" type="screen" page="component://humanres/widget/GlobalHRSettingScreens.xml#EditTerminationReasons"/>

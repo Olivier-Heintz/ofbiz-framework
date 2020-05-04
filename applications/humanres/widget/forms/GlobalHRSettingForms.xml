@@ -157,8 +157,8 @@ under the License.
         <field name="rateAmountFromDate"><hidden/></field>
         <field name="rateTypeId"><display-entity entity-name="RateType"/></field>
         <field name="periodTypeId"><display-entity entity-name="PeriodType"/></field>
-        <field name="payGradeId"><display-entity entity-name="PayGrade"/></field>
-        <field name="salaryStepSeqId" title="${uiLabelMap.HumanResSalaryStepSeqId}"><display/></field>
+<!--         <field name="payGradeId"><display-entity entity-name="PayGrade"/></field> -->
+<!--         <field name="salaryStepSeqId" title="${uiLabelMap.HumanResSalaryStepSeqId}"><display/></field> -->
         <field name="rateAmount"><display type="currency" currency="${rateCurrencyUomId}"/></field>
         <field name="deleteButton" widget-style="buttontext"><submit/></field>
     </form>
@@ -175,7 +175,6 @@ under the License.
                 </entity-options>
             </drop-down>
         </field>
-        <field name="payGradeId" position="2"><lookup target-form-name="LookupPayGrade"/></field>
         <field name="periodTypeId" required-field="true">
             <drop-down allow-empty="false" no-current-selected-key="RATE_MONTH">
                 <entity-options key-field-name="periodTypeId" entity-name="PeriodType">
@@ -183,7 +182,6 @@ under the License.
                 </entity-options>
             </drop-down>
         </field>
-        <field name="salaryStepSeqId" title="${uiLabelMap.HumanResSalaryStepSeqId}" position="2"><lookup target-form-name="LookupSalaryStep"/></field>
         <field name="rateAmount"><text/></field>
         <field name="rateCurrencyUomId" position="2">
             <drop-down allow-empty="true" no-current-selected-key="${defaultOrganizationPartyCurrencyUomId}">
@@ -193,6 +191,38 @@ under the License.
                 </entity-options>
             </drop-down>
         </field>
+        <field name="submitButton" title="${uiLabelMap.CommonCreate}" widget-style="buttontext"><submit button-type="text-link"/></field>
+    </form>
+    <form name="ListEmplPositionTypeGrades" type="list" title="" target="deleteEmplPositionTypeGrade">
+        <actions>
+            <entity-condition entity-name="EmplPositionTypeRate">
+                <condition-expr field-name="emplPositionTypeId" operator="equals" from-field="parameters.emplPositionTypeId"/>
+                <order-by field-name="rateTypeId"/>
+                <order-by field-name="fromDate"/>
+            </entity-condition>
+        </actions>
+        <field name="emplPositionTypeId"><hidden/></field>
+        <field name="rateTypeId"><display-entity entity-name="RateType"/></field>
+        <field name="fromDate"><display/></field>
+        <field name="thruDate"><display/></field>
+        <field name="payGradeId"><display-entity entity-name="PayGrade"/></field>
+        <field name="salaryStepSeqId" title="${uiLabelMap.HumanResSalaryStepSeqId}"><display/></field>
+        <field name="deleteButton" widget-style="buttontext" use-when="${groovy:payGradeId!=null}"><submit/></field>
+    </form>
+    <form name="AddEmplPositionTypeGrade" type="single" target="updateEmplPositionTypeGrade" default-map-name="emplPositionTypeRate">
+        <actions>
+            <property-to-field field="defaultCurrencyUomId" resource="general" property="currency.uom.id.default" default="USD"/>
+        </actions>
+        <field name="emplPositionTypeId"><hidden value="${parameters.emplPositionTypeId}"/></field>
+        <field name="rateTypeId"   required-field="true">
+            <drop-down>
+                <entity-options key-field-name="rateTypeId" entity-name="RateType">
+                    <entity-order-by field-name="description"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="payGradeId" required-field="true"><lookup target-form-name="LookupPayGrade"/></field>
+        <field name="salaryStepSeqId" title="${uiLabelMap.HumanResSalaryStepSeqId}"><lookup target-form-name="LookupSalaryStep" target-parameter="payGradeId"/></field>
         <field name="submitButton" title="${uiLabelMap.CommonCreate}" widget-style="buttontext"><submit button-type="text-link"/></field>
     </form>
     <form name="ListTerminationReasons" type="multi" title="" target="updateTerminationReason" paginate-target="EditTerminationReasons"
