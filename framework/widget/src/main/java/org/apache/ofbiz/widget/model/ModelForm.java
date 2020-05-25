@@ -1849,6 +1849,15 @@ public abstract class ModelForm extends ModelWidget {
         public List<CommonWidgetModels.Parameter> getParameterList() {
             return parameterList;
         }
+
+        public Map<String, Object> toMap(Map<String, Object> context) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("eventType",    this.getEventType());
+            map.put("areaId",       FlexibleStringExpander.expandString(this.getAreaId(), context));
+            map.put("areaTarget",   FlexibleStringExpander.expandString(this.getAreaTarget(), context));
+            map.put("parameterMap", this.getParameterMap(context));
+            return map;
+        }
     }
 
     static protected List<UpdateArea> getValidUpdateAreas(List<UpdateArea> updateAreas, Map<String, Object> context) {
