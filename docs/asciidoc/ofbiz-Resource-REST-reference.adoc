@@ -1,0 +1,1 @@
+../../plugins/vuejsPortal//ofbizFiles/docs/asciidoc/ofbiz-Resource-REST-reference.adoc
