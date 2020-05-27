@@ -39,6 +39,7 @@ import org.apache.ofbiz.base.util.cache.UtilCache;
 import org.apache.ofbiz.base.util.collections.MapStack;
 import org.apache.ofbiz.base.util.string.FlexibleStringExpander;
 import org.apache.ofbiz.base.util.template.FreeMarkerWorker;
+import org.apache.ofbiz.widget.WidgetFactory;
 import org.apache.ofbiz.widget.renderer.ScreenRenderer;
 import org.apache.ofbiz.widget.renderer.ScreenStringRenderer;
 import org.apache.ofbiz.widget.renderer.html.HtmlWidgetRenderer;
@@ -127,6 +128,8 @@ public class HtmlWidget extends ModelScreenWidget {
                     subWidgets.add(new HtmlTemplate(modelScreen, childElement));
                 } else if ("html-template-decorator".equals(childElement.getNodeName())) {
                     subWidgets.add(new HtmlTemplateDecorator(modelScreen, childElement));
+                } else if ("vuejs".equals(childElement.getNodeName())) {
+                    subWidgets.add(WidgetFactory.getModelScreenWidget(modelScreen, childElement));
                 } else {
                     throw new IllegalArgumentException("Tag not supported under the platform-specific -> html tag with name: "
                             + childElement.getNodeName());
