@@ -1,0 +1,1 @@
+../../plugins/vuejsPortal/ofbizFiles/docs/asciidoc/developer-manual_fr.adoc
