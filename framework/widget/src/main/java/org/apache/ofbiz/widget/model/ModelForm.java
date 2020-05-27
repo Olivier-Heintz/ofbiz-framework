@@ -1763,6 +1763,10 @@ public abstract class ModelForm extends ModelWidget {
             return areaId;
         }
 
+        public String getAreaId(Map<String, ? extends Object> context) {
+            return FlexibleStringExpander.expandString(areaId, context);
+        }
+
         public String getAreaTarget(Map<String, ? extends Object> context) {
             return FlexibleStringExpander.expandString(areaTarget, context);
         }
