@@ -815,7 +815,9 @@ task installPlugin(group: ofbizPlugin, description: 'executes plugin install tas
             .each { component ->
                 if (taskExistsInproject(":plugins:${pluginId}", 'install')) {
                     dependsOn ":plugins:${pluginId}:install"
-                    doLast { println "installed plugin ${pluginId}" }
+                    doLast { println "installed plugin ${pluginId}"
+                            (new File("${rootDir}/plugins/.${pluginId}_is_installed")).createNewFile()
+                           }
                 } else {
                     doLast { println "No install task defined for plugin ${pluginId}, nothing to do" }
                 }
@@ -836,7 +838,9 @@ task uninstallPlugin(group: ofbizPlugin, description: 'executes plugin uninstall
 
     if (project.hasProperty('pluginId') && taskExistsInproject(":plugins:${pluginId}", 'uninstall')) {
         dependsOn ":plugins:${pluginId}:uninstall"
-        doLast { println "uninstalled plugin ${pluginId}" }
+        doLast { println "uninstalled plugin ${pluginId}"
+                 delete  "${rootDir}/plugins/.${pluginId}_is_installed"
+               }
     } else {
         doLast { println "No uninstall task defined for plugin ${pluginId}" }
     }
