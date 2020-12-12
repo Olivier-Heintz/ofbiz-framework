@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2000/10/XMLSchema"
+    xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+  <entity entity-name="TimeEntry" package-name="org.apache.ofbiz.workeffort.timesheet">
+  </entity>
+
+  <entity entity-name="Timesheet" package-name="org.apache.ofbiz.workeffort.timesheet">
+  </entity>
+
+  <entity entity-name="TimesheetRole" package-name="org.apache.ofbiz.workeffort.timesheet">
+    <association-class participant1="Timesheet" participant2="PartyRole" />
+  </entity>
+
+  <entity entity-name="ApplicationSandbox" package-name="org.apache.ofbiz.workeffort.workeffort">
+  </entity>
+
+  <entity entity-name="CommunicationEventWorkEff" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <association-class participant2="WorkEffort" participant1="CommunicationEvent"/>
+  </entity>
+
+  <entity entity-name="Deliverable" package-name="org.apache.ofbiz.workeffort.workeffort">
+  </entity>
+
+  <entity entity-name="DeliverableType" package-name="org.apache.ofbiz.workeffort.workeffort">
+  </entity>
+
+  <entity entity-name="WorkEffort" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <stereotype name="java-object"/>
+    <class-tag name="uniqueNameAttribute" value="true"/>
+  </entity>
+
+  <entity entity-name="WorkEffortAssoc" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <discriminator name="workEffortTypeId"/>
+    <stereotype name="java-object"/>
+    <relation with="WorkEffortAssocType"     type="composite"/>
+    <relation with="WorkEffort" title="From" type="composite"/>
+    <relation with="WorkEffort" title="To"   type="composite"/>
+  </entity>
+
+  <entity entity-name="WorkEffortAssocAttribute" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <relation with="WorkEffortAssoc" type="composite"/>
+  </entity>
+
+  <entity entity-name="WorkEffortAssocType" package-name="org.apache.ofbiz.workeffort.workeffort">
+  </entity>
+
+  <entity entity-name="WorkEffortAssocTypeAttr" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <relation with="WorkEffortAssocType" type="composite"/>
+  </entity>
+
+  <entity entity-name="WorkEffortAttribute" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <relation with="WorkEffort" type="composite"/>
+  </entity>
+
+  <entity entity-name="WorkEffortBilling" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <association-class participant2="WorkEffort" participant1="InvoiceItem"/>
+  </entity>
+
+  <entity entity-name="WorkEffortContactMech" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <association-class participant2="WorkEffort" participant1="ContactMech"/>
+  </entity>
+
+  <entity entity-name="WorkEffortContent" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <relation with="WorkEffort" type="composite"/>
+    <relation with="Content" type="composite"/>
+    <relation with="WorkEffortContentType" type="composite"/>
+  </entity>
+
+  <entity entity-name="WorkEffortContentType" package-name="org.apache.ofbiz.workeffort.workeffort">
+  </entity>
+
+  <entity entity-name="WorkEffortDeliverableProd" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <association-class participant2="Deliverable" participant1="WorkEffort"/>
+  </entity>
+
+  <entity entity-name="WorkEffortEventReminder" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <relation with="WorkEffort" type="composite"/>
+  </entity>
+
+  <entity entity-name="WorkEffortFixedAssetAssign" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <discriminator name="workEffortTypeId"/>
+    <stereotype name="java-object"/>
+    <association-class participant2="WorkEffort" participant1="FixedAsset"/>
+  </entity>
+
+  <entity entity-name="WorkEffortFixedAssetStd" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <association-class participant2="WorkEffort" participant1="FixedAssetType"/>
+  </entity>
+
+  <entity entity-name="WorkEffortGoodStandard" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <discriminator name="workEffortTypeId"/>
+    <stereotype name="java-object"/>
+    <relation with="WorkEffort" type="composite"/>
+    <relation with="WorkEffortGoodStandardType" type="composite"/>
+    <relation with="Product" type="composite"/>
+  </entity>
+
+  <entity entity-name="WorkEffortGoodStandardType" package-name="org.apache.ofbiz.workeffort.workeffort">
+  </entity>
+
+  <entity entity-name="WorkEffortIcalData" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <relation with="WorkEffort" type="composite"/>
+  </entity>
+
+  <entity entity-name="WorkEffortInventoryAssign" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <association-class participant1="WorkEffort" participant2="InventoryItem"/>
+  </entity>
+
+  <entity entity-name="WorkEffortInventoryProduced" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <association-class participant2="WorkEffort" participant1="InventoryItem"/>
+  </entity>
+
+  <entity entity-name="WorkEffortCostCalc" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <relation with="WorkEffort" type="composite"/>
+    <relation with="CostComponentType" type="composite"/>
+  </entity>
+
+  <entity entity-name="WorkEffortKeyword" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <relation with="WorkEffort" type="composite"/>
+  </entity>
+
+  <entity entity-name="WorkEffortNote" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <association-class participant2="WorkEffort" participant1="NoteData"/>
+  </entity>
+
+  <entity entity-name="WorkEffortPartyAssignment" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <association-class participant1="WorkEffort" participant2="PartyRole"/>
+  </entity>
+
+  <entity entity-name="WorkEffortPurposeType" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <discriminator name="workEffortTypeId"/>
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="WorkEffortReview" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <relation with="WorkEffort" type="composite"/>
+    <relation with="UserLogin" type="composite"/>
+    <relation with="StatusItem" type="composite"/>
+  </entity>
+
+  <entity entity-name="WorkEffortSearchConstraint" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <relation with="WorkEffortSearchResult" type="composite"/>
+  </entity>
+
+  <entity entity-name="WorkEffortSearchResult" package-name="org.apache.ofbiz.workeffort.workeffort">
+  </entity>
+
+  <entity entity-name="WorkEffortSkillStandard" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <association-class participant2="WorkEffort" participant1="SkillType"/>
+  </entity>
+
+  <entity entity-name="WorkEffortStatus" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <relation with="WorkEffort" type="composite"/>
+    <relation with="StatusItem" type="composite"/>
+    <assoc-tag name="GetterSetter" value="SetByUserLoginO" title="SetBy" with="UserLogin"/>
+  </entity>
+
+  <entity entity-name="WorkEffortTransBox" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <relation with="WorkEffort" type="composite"/>
+  </entity>
+
+  <entity entity-name="WorkEffortType" package-name="org.apache.ofbiz.workeffort.workeffort">
+  </entity>
+
+  <entity entity-name="WorkEffortTypeAttr" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <relation with="WorkEffortType" type="composite"/>
+  </entity>
+
+  <entity entity-name="WorkEffortSurveyAppl" package-name="org.apache.ofbiz.workeffort.workeffort">
+    <relation with="Survey" type="composite"/>
+    <relation with="WorkEffort" type="composite"/>
+    <relation with="ProductStoreSurveyAppl" type="composite"/>
+  </entity>
+</informationmodel>

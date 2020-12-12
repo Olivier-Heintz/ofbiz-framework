@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+  <!-- ========================================================= -->
+  <!-- ======================== Defaults ======================= -->
+  <!-- ========================================================= -->
+    <title>Entity of an Open For Business Project Component</title>
+    <description>None</description>
+    <copyright>Copyright 2001-2009 The Apache Software Foundation</copyright>
+    <author>None</author>
+    <version>1.0</version>
+
+    <view-entity entity-name="TimesheetStatus" dependent-on="StatusItem"
+            package-name="org.ofbiz.workeffort.timesheet">
+        <member-entity entity-alias="PE" entity-name="StatusItem"/>
+        <alias-all entity-alias="PE"/>
+        <entity-condition>
+            <condition-expr entity-alias="PE" field-name="statusTypeId" operator="equals" value="TIMESHEET_STATUS"/>
+            <order-by field-name="sequenceId"/>
+        </entity-condition>
+    </view-entity>
+    <extend-entity entity-name="Timesheet">
+        <relation rel-entity-name="TimesheetStatus" type="one-nofk" >
+            <key-map field-name="statusId" />
+        </relation>
+    </extend-entity>
+
+    <view-entity entity-name="AssignmentStatus" dependent-on="StatusItem"
+            package-name="org.ofbiz.workeffort.workeffort">
+        <member-entity entity-alias="PE" entity-name="StatusItem"/>
+        <alias-all entity-alias="PE"/>
+        <entity-condition>
+            <condition-expr entity-alias="PE" field-name="statusTypeId" operator="equals" value="PRTYASGN_STATUS"/>
+            <order-by field-name="sequenceId"/>
+        </entity-condition>
+    </view-entity>
+    <view-entity entity-name="Expectation" dependent-on="Enumeration"
+            package-name="org.ofbiz.workeffort.workeffort">
+        <member-entity entity-alias="PE" entity-name="Enumeration"/>
+        <alias-all entity-alias="PE"/>
+        <entity-condition>
+            <condition-expr entity-alias="PE" field-name="enumTypeId" operator="equals" value="WORK_EFF_EXPECT"/>
+            <order-by field-name="sequenceId"/>
+        </entity-condition>
+    </view-entity>
+    <view-entity entity-name="DelegateReason" dependent-on="Enumeration"
+            package-name="org.ofbiz.workeffort.workeffort">
+        <member-entity entity-alias="PE" entity-name="Enumeration"/>
+        <alias-all entity-alias="PE"/>
+        <entity-condition>
+            <condition-expr entity-alias="PE" field-name="enumTypeId" operator="equals" value="WORK_EFF_DEL_REAS"/>
+            <order-by field-name="sequenceId"/>
+        </entity-condition>
+    </view-entity>
+    <view-entity entity-name="AvailabilityStatus" dependent-on="StatusItem"
+            package-name="org.ofbiz.workeffort.workeffort">
+        <member-entity entity-alias="PE" entity-name="StatusItem"/>
+        <alias-all entity-alias="PE"/>
+        <entity-condition>
+            <condition-expr entity-alias="PE" field-name="statusTypeId" operator="equals" value="WEPA_AVAILABILITY"/>
+            <order-by field-name="sequenceId"/>
+        </entity-condition>
+    </view-entity>
+    
+    <extend-entity entity-name="WorkEffortPartyAssignment">
+        <relation rel-entity-name="AssignmentStatus" type="one-nofk" >
+            <key-map field-name="statusId" />
+        </relation>
+        <relation rel-entity-name="Expectation" type="one-nofk" >
+            <key-map field-name="expectationEnumId" rel-field-name="enumId" />
+        </relation>
+        <relation rel-entity-name="DelegateReason" type="one-nofk" >
+            <key-map field-name="delegateReasonEnumId" rel-field-name="enumId" />
+        </relation>
+        <relation rel-entity-name="AvailabilityStatus" type="one-nofk" >
+            <key-map field-name="availabilityStatusId" rel-field-name="statusId" />
+        </relation>
+    </extend-entity>
+    
+    
+    
+</entitymodel>

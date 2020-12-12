@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2000/10/XMLSchema"
+    xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+    <!-- #Bam# entityext-modeldef -->
+    <entity entity-name="EntitySync" package-name="org.apache.ofbiz.entity.synchronization">
+    </entity>
+
+    <entity entity-name="EntitySyncHistory" package-name="org.apache.ofbiz.entity.synchronization">
+        <relation with="EntitySync" type="composite"/>
+    </entity>
+
+    <entity entity-name="EntitySyncRemove" package-name="org.apache.ofbiz.entity.synchronization">
+    </entity>
+
+    <entity entity-name="EntitySyncInclude" package-name="org.apache.ofbiz.entity.synchronization">
+        <relation with="EntitySync" type="composite"/>
+    </entity>
+
+    <entity entity-name="EntitySyncIncludeGroup" package-name="org.apache.ofbiz.entity.synchronization">
+        <association-class participant1="EntitySync" participant2="EntityGroup" />
+    </entity>
+
+    <entity entity-name="EntityGroup" package-name="org.apache.ofbiz.entity.group">
+    </entity>
+
+    <entity entity-name="EntityGroupEntry" package-name="org.apache.ofbiz.entity.group">
+        <relation with="EntityGroup" type="composite"/>
+    </entity>
+    <!-- #Eam# entityext-modeldef -->
+</informationmodel>

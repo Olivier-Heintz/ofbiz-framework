@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2000/10/XMLSchema"
+    xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+
+  <entity entity-name="ContactList" package-name="org.apache.ofbiz.marketing.contact">
+    <assoc-tag name="GetterSetter" value="LastModifiedByUserLogin0" title="LastModifiedBy" with="UserLogin"/>
+    <assoc-tag name="GetterSetter" value="CreatedByUserLogin0" title="CreatedBy" with="UserLogin"/>
+  </entity>
+
+  <entity entity-name="MarketingCampaign" package-name="org.apache.ofbiz.marketing.campaign">
+  </entity>
+
+  <entity entity-name="SegmentGroupClassification" package-name="org.apache.ofbiz.marketing.segment">
+    <association-class participant1="SegmentGroup" participant2="PartyClassificationGroup"/>
+  </entity>
+
+  <entity entity-name="SegmentGroupGeo" package-name="org.apache.ofbiz.marketing.segment">
+    <association-class participant1="SegmentGroup" participant2="Geo"/>
+  </entity>
+
+  <entity entity-name="SegmentGroupRole" package-name="org.apache.ofbiz.marketing.segment">
+    <association-class participant1="SegmentGroup" participant2="PartyRole"/>
+  </entity>
+
+  <!-- ========================================================= -->
+  <!-- org.apache.ofbiz.marketing.opportunity -->
+  <!-- ========================================================= -->
+
+  <entity entity-name="SalesOpportunity" package-name="org.apache.ofbiz.marketing.opportunity">
+  </entity>
+
+  <entity entity-name="SalesOpportunityHistory" package-name="org.apache.ofbiz.marketing.opportunity">
+  </entity>
+
+  <entity entity-name="SalesOpportunityRole" package-name="org.apache.ofbiz.marketing.opportunity">
+    <association-class participant2="PartyRole" participant1="SalesOpportunity"/>
+  </entity>
+
+  <entity entity-name="SalesOpportunityStage" package-name="org.apache.ofbiz.marketing.opportunity">
+  </entity>
+
+  <entity entity-name="SalesOpportunityWorkEffort" package-name="org.apache.ofbiz.marketing.opportunity">
+    <association-class participant2="WorkEffort" participant1="SalesOpportunity"/>
+  </entity>
+
+  <entity entity-name="SalesOpportunityQuote" package-name="org.apache.ofbiz.marketing.opportunity">
+    <association-class participant2="Quote" participant1="SalesOpportunity"/>
+  </entity>
+
+  <entity entity-name="SalesForecast" package-name="org.apache.ofbiz.marketing.opportunity">
+  </entity>
+
+  <entity entity-name="SalesForecastDetail" package-name="org.apache.ofbiz.marketing.opportunity">
+  </entity>
+
+  <entity entity-name="SalesForecastHistory" package-name="org.apache.ofbiz.marketing.opportunity">
+  </entity>
+
+  <entity entity-name="SalesOpportunityCompetitor" package-name="org.apache.ofbiz.marketing.opportunity">
+  </entity>
+
+  <entity entity-name="SalesOpportunityTrckCode" package-name="org.apache.ofbiz.marketing.opportunity">
+  </entity>
+
+</informationmodel>

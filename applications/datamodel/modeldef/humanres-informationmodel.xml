@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2000/10/XMLSchema" xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+  <entity entity-name="Employment" package-name="org.apache.ofbiz.humanres.employment">
+    <relation title="To" with="PartyRole" type="composite"/>
+    <relation title="From" with="PartyRole" type="composite"/>
+  </entity>
+
+  <entity entity-name="TerminationReason" package-name="org.apache.ofbiz.humanres.employment">
+  </entity>
+  <entity entity-name="TerminationType" package-name="org.apache.ofbiz.humanres.employment">
+  </entity>
+
+  <entity entity-name="PartyQual" package-name="org.apache.ofbiz.humanres.ability">
+    <relation with="Party" type="composite"/>
+    <relation with="PartyQualType" type="composite"/>
+  </entity>
+  <entity entity-name="PartyQualType" package-name="org.apache.ofbiz.humanres.ability">
+  </entity>
+  <entity entity-name="PartyResume" package-name="org.apache.ofbiz.humanres.ability">
+  </entity>
+  <entity entity-name="PartySkill" package-name="org.apache.ofbiz.humanres.ability">
+    <association-class participant2="SkillType" participant1="Party"/>
+  </entity>
+  <entity entity-name="PerfRatingType" package-name="org.apache.ofbiz.humanres.ability">
+  </entity>
+  <entity entity-name="PerfReview" package-name="org.apache.ofbiz.humanres.ability">
+    <relation title="Employee" with="PartyRole" type="composite"/>
+  </entity>
+  <entity entity-name="PerfReviewItem" package-name="org.apache.ofbiz.humanres.ability">
+    <relation with="PerfReview" type="composite"/>
+  </entity>
+  <entity entity-name="PerfReviewItemType" package-name="org.apache.ofbiz.humanres.ability">
+  </entity>
+  <entity entity-name="PerformanceNote" package-name="org.apache.ofbiz.humanres.ability">
+    <relation type="composite" with="PartyRole"/>
+  </entity>
+  <entity entity-name="PersonTraining" package-name="org.apache.ofbiz.humanres.ability">
+    <relation with="Party" type="composite"/>
+    <relation with="TrainingClassType" type="composite"/>
+  </entity>
+  <entity entity-name="ResponsibilityType" package-name="org.apache.ofbiz.humanres.ability">
+  </entity>
+  <entity entity-name="SkillType" package-name="org.apache.ofbiz.humanres.ability">
+  </entity>
+  <entity entity-name="TrainingClassType" package-name="org.apache.ofbiz.humanres.ability">
+  </entity>
+  <entity entity-name="BenefitType" package-name="org.apache.ofbiz.humanres.employment">
+  </entity>
+  <entity entity-name="EmploymentApp" package-name="org.apache.ofbiz.humanres.employment">
+  </entity>
+  <entity entity-name="EmploymentAppSourceType" package-name="org.apache.ofbiz.humanres.employment">
+  </entity>
+  <entity entity-name="EmplLeave" package-name="org.apache.ofbiz.humanres.employment">
+    <relation with="Party" type="composite"/>
+    <relation with="EmplLeaveType" type="composite"/>
+  </entity>
+  <entity entity-name="EmplLeaveType" package-name="org.apache.ofbiz.humanres.employment">
+  </entity>
+  <entity entity-name="PartyBenefit" package-name="org.apache.ofbiz.humanres.employment">
+    <relation title="To" with="PartyRole" type="composite"/>
+    <relation title="From" with="PartyRole" type="composite"/>
+    <relation with="BenefitType" type="composite"/>
+  </entity>
+  <entity entity-name="PayGrade" package-name="org.apache.ofbiz.humanres.employment">
+  </entity>
+  <entity entity-name="PayHistory" package-name="org.apache.ofbiz.humanres.employment">
+    <relation with="Employment" type="composite"/>
+  </entity>
+  <entity entity-name="PayrollPreference" package-name="org.apache.ofbiz.humanres.employment">
+    <relation with="Party" type="composite"/>
+    <relation with="PartyRole" type="composite"/>
+  </entity>
+  <entity entity-name="SalaryStep" package-name="org.apache.ofbiz.humanres.employment">
+    <relation with="PayGrade" type="composite"/>
+  </entity>
+  <entity entity-name="UnemploymentClaim" package-name="org.apache.ofbiz.humanres.employment">
+  </entity>
+  <entity entity-name="EmplPosition" package-name="org.apache.ofbiz.humanres.position">
+  </entity>
+  <entity entity-name="EmplPositionClassType" package-name="org.apache.ofbiz.humanres.position">
+  </entity>
+  <entity entity-name="EmplPositionFulfillment" package-name="org.apache.ofbiz.humanres.position">
+    <association-class participant2="Party" participant1="EmplPosition"/>
+  </entity>
+  <entity entity-name="EmplPositionReportingStruct" package-name="org.apache.ofbiz.humanres.position">
+    <relation title="ReportingTo" with="EmplPosition" type="composite"/>
+    <relation title="ManagedBy" with="EmplPosition" type="composite"/>
+  </entity>
+  <entity entity-name="EmplPositionResponsibility" package-name="org.apache.ofbiz.humanres.position">
+    <association-class participant2="ResponsibilityType" participant1="EmplPosition"/>
+  </entity>
+  <entity entity-name="EmplPositionType" package-name="org.apache.ofbiz.humanres.position">
+  </entity>
+  <entity entity-name="EmplPositionTypeClass" package-name="org.apache.ofbiz.humanres.position">
+    <association-class participant2="EmplPositionClassType" participant1="EmplPositionType"/>
+  </entity>
+  <entity entity-name="ValidResponsibility" package-name="org.apache.ofbiz.humanres.position">
+    <association-class participant2="ResponsibilityType" participant1="EmplPositionType"/>
+  </entity>
+  <entity entity-name="EmplPositionTypeRate" package-name="org.apache.ofbiz.humanres.position">
+    <association-class participant1="EmplPositionType" participant2="RateType"/>
+  </entity>
+  <entity entity-name="JobRequisition" package-name="org.apache.ofbiz.humanres.recruitment">
+  </entity>
+  <entity entity-name="JobInterview" package-name="org.apache.ofbiz.humanres.recruitment">
+  </entity>
+  <entity entity-name="JobInterviewType" package-name="org.apache.ofbiz.humanres.recruitment">
+  </entity>
+  <entity entity-name="TrainingRequest" package-name="org.apache.ofbiz.humanres.trainings">
+  </entity>
+  <entity entity-name="EmplLeaveReasonType" package-name="org.apache.ofbiz.humanres.employment">
+  </entity>
+</informationmodel>

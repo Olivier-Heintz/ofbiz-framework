@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:attribute name="entity-name" type="xs:string"/>
+<xs:attribute name="package-name" type="xs:string"/>
+<xs:attribute name="name" type="xs:string"/>
+<xs:attribute name="value" type="xs:string"/>
+<xs:attribute name="attribute" type="xs:string"/>
+<xs:attribute name="return" type="xs:string"/>
+<xs:attribute name="visibility" type="xs:string"/>
+<xs:attribute name="participant1" type="xs:string"/>
+<xs:attribute name="participant2" type="xs:string"/>
+<xs:attribute name="with" type="xs:string"/>
+<xs:attribute name="title" type="xs:string"/>
+<xs:attribute name="javaType" type="xs:string"/>
+<xs:attribute name="staticValue" type="xs:string"/>
+
+<xs:element name="argument">
+  <xs:complexType>
+    <xs:attribute ref="name" use="required"/>
+    <xs:attribute ref="javaType" use="required"/>
+  </xs:complexType>
+</xs:element>
+
+<xs:attribute name="type">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="association" />
+        <xs:enumeration value="composite" />
+        <xs:enumeration value="aggregate" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:attribute>
+
+<xs:element name="static-attribute">
+  <xs:complexType>
+    <xs:attribute ref="name" use="required"/>
+    <xs:attribute ref="staticValue" use="optional"/>
+    <!-- <xs:attribute ref="javaType" use="required"/> currently always name=String-->
+    <!-- <xs:attribute ref="visibility" use="required"/> currently always public-->
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="discriminator">
+  <xs:complexType>
+    <xs:attribute ref="name" use="required"/>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="relation">
+  <xs:complexType>
+    <xs:attribute ref="with" use="required"/>
+    <xs:attribute ref="title" />
+    <xs:attribute ref="type" default="association" use="optional" />
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="method">
+  <xs:complexType>
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="argument"/>
+    </xs:sequence>
+    <xs:attribute ref="name" use="required"/>
+    <xs:attribute ref="return" use="required"/>
+    <xs:attribute ref="visibility" use="required"/>
+  </xs:complexType>
+</xs:element>
+
+<xs:attribute name="stereotypeName">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="java-object" />
+        <xs:enumeration value="java-pojo-object" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:attribute>
+
+<xs:element name="stereotype">
+  <xs:complexType>
+    <xs:attribute name="name" use="required">
+      <xs:annotation>
+        <xs:documentation>show in uml diagram in top of class.
+        Used by generator to know what generate :
+        A) entity, generating a java object inherit from generic value and automatically load when genericValue is created
+        B) view-entity,
+        C) inherit, most of time for status and enumeration entity, for a specifics type (status-type or enumeration-type), most of time a view-entity
+        D) java-pojo-object, (generator not yet write) generating a simple java object with getter and setter, used by drools fo example</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+       <xs:restriction base="xs:string">
+        <xs:enumeration value="entity" />
+        <xs:enumeration value="view-entity" />
+        <xs:enumeration value="inherit" />
+        <xs:enumeration value="java-pojo-object" />
+       </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="class-tag">
+  <xs:complexType>
+    <xs:attribute ref="name" use="required"/>
+    <xs:attribute ref="value" use="required"/>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="association-class">
+  <xs:complexType>
+    <xs:attribute ref="participant1" use="required"/>
+    <xs:attribute ref="participant2" use="required"/>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="attribute-tag">
+  <xs:complexType>
+    <xs:attribute ref="name" use="required"/>
+    <xs:attribute ref="value" use="required"/>
+    <xs:attribute ref="attribute" use="required"/>
+  </xs:complexType>
+</xs:element>
+
+<xs:complexType name="assoc-tag-type" abstract="true"/>
+
+<xs:complexType name="assoc-tag-type-title">
+    <xs:complexContent mixed="true">
+        <xs:extension base="assoc-tag-type">
+                   <xs:attribute ref="name" use="required"/>
+                <xs:attribute ref="value" use="required"/>
+                <xs:attribute ref="title" use="required"/>
+        </xs:extension>
+    </xs:complexContent>
+</xs:complexType>
+
+
+
+<xs:element name="assoc-tag">
+    <xs:complexType>
+           <xs:attribute ref="title"/>
+           <xs:attribute ref="with"/>
+        <xs:attribute ref="name" use="required"/>
+           <xs:attribute ref="value" use="required"/>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="entity">
+  <xs:complexType>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="stereotype"/>
+      <xs:element ref="class-tag"/>
+      <xs:element ref="static-attribute"/>
+      <xs:element ref="attribute-tag"/>
+      <xs:element ref="assoc-tag"/>
+      <xs:element ref="method"/>
+      <xs:element ref="relation"/>
+      <xs:element ref="discriminator"/>
+      <xs:element ref="association-class"/>
+    </xs:choice>
+    <xs:attribute ref="entity-name" use="required"/>
+    <xs:attribute ref="package-name" use="required"/>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="informationmodel">
+  <xs:complexType>
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="entity"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+</xs:schema>

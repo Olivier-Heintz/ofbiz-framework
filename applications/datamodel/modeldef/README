@@ -1,0 +1,3 @@
+to apply xsl template to entitymodel and generate an informationmodel file, copy
+informationmodel.xsl in component modeldef folder and type:
+xsltproc informationmodel.xsl ../entitydef/entitymodel.xml > informationmodel.xml

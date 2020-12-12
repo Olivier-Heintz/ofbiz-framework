@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2000/10/XMLSchema"
+    xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+  <entity entity-name="ShipmentGatewayDhl" package-name="org.apache.ofbiz.shipment.shipment">
+    <stereotype name="entity"/>
+    <discriminator name="shipmentGatewayConfTypeId=SHIP_GATEWAY_DHL" />
+  </entity>
+  <entity entity-name="ShipmentGatewayFedex" package-name="org.apache.ofbiz.shipment.shipment">
+    <stereotype name="entity"/>
+    <discriminator name="shipmentGatewayConfTypeId=SHIP_GATEWAY_FEDEX" />
+  </entity>
+  <entity entity-name="ShipmentGatewayUps" package-name="org.apache.ofbiz.shipment.shipment">
+    <stereotype name="entity"/>
+    <discriminator name="shipmentGatewayConfTypeId=SHIP_GATEWAY_UPS" />
+  </entity>
+  <entity entity-name="ShipmentGatewayUsps" package-name="org.apache.ofbiz.shipment.shipment">
+    <stereotype name="entity"/>
+    <discriminator name="shipmentGatewayConfTypeId=SHIP_GATEWAY_USPS" />
+  </entity>
+  <entity entity-name="ShippingDocument" package-name="org.apache.ofbiz.shipment.shipment">
+    <discriminator name="documentTypeId=SHIPPING_DOCUMENT" />
+  </entity>
+
+</informationmodel>
+

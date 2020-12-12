@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2000/10/XMLSchema"
+    xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+  <entity entity-name="EmploymentStatus" package-name="org.apache.ofbiz.party.party" >
+     <stereotype name="view-entity"/>
+     <stereotype name="inherit"/>
+     <discriminator name="enumTypeId"/>
+     <class-tag name="shortName" value="EMPLOY_STTS"/>
+     <static-attribute   name="FULLTIME" staticValue="EMPS_FULLTIME" />
+     <static-attribute   name="PARTTIME" staticValue="EMPS_PARTTIME" />
+     <static-attribute   name="SELF"     staticValue="EMPS_SELF" />
+     <static-attribute   name="HOUSE"    staticValue="EMPS_HOUSE" />
+     <static-attribute   name="RETIRED"  staticValue="EMPS_RETIRED" />
+     <static-attribute   name="STUDENT"  staticValue="EMPS_STUDENT" />
+     <static-attribute   name="UNEMP"    staticValue="EMPS_UNEMP" />
+  </entity>
+
+</informationmodel>

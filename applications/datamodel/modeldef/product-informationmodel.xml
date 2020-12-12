@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="utf-8"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2000/10/XMLSchema"
+    xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+
+  <entity entity-name="ProdCatalog" package-name="org.apache.ofbiz.product.catalog">
+  </entity>
+
+  <entity entity-name="ProdCatalogCategory" package-name="org.apache.ofbiz.product.catalog">
+    <relation with="ProdCatalog" type="composite"/>
+    <relation with="ProductCategory" type="composite"/>
+    <relation with="ProdCatalogCategoryType" type="composite" />
+  </entity>
+
+  <entity entity-name="ProdCatalogCategoryType" package-name="org.apache.ofbiz.product.catalog">
+  </entity>
+
+  <entity entity-name="ProdCatalogInvFacility" package-name="org.apache.ofbiz.product.catalog">
+    <association-class participant1="ProdCatalog" participant2="Facility"/>
+  </entity>
+
+  <entity entity-name="ProdCatalogRole" package-name="org.apache.ofbiz.product.catalog">
+    <association-class participant1="ProdCatalog" participant2="PartyRole"/>
+  </entity>
+
+  <entity entity-name="ProductCategory" package-name="org.apache.ofbiz.product.category">
+
+  </entity>
+
+  <entity entity-name="ProductCategoryAttribute" package-name="org.apache.ofbiz.product.category">
+    <relation with="ProductCategory" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductCategoryContent" package-name="org.apache.ofbiz.product.category">
+    <relation with="ProductCategory" type="composite"/>
+    <relation with="Content" type="composite"/>
+    <relation with="ProductCategoryContentType" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductCategoryContentType" package-name="org.apache.ofbiz.product.category">
+  </entity>
+
+  <entity entity-name="ProductCategoryGlAccount" package-name="org.apache.ofbiz.product.category">
+    <relation with="ProductCategory" type="composite"/>
+    <relation with="Party" type="composite"/>
+    <relation with="GlAccountType" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductCategoryLink" package-name="org.apache.ofbiz.product.category">
+    <relation with="ProductCategory" type="composite"/>
+    <relation with="Enumeration" type ="composite"/>
+  </entity>
+
+  <entity entity-name="ProductCategoryMember" package-name="org.apache.ofbiz.product.category">
+    <association-class participant1="Product" participant2="ProductCategory"/>
+  </entity>
+
+  <entity entity-name="ProductCategoryRole" package-name="org.apache.ofbiz.product.category">
+    <association-class participant1="PartyRole" participant2="ProductCategory"/>
+  </entity>
+
+  <entity entity-name="ProductCategoryRollup" package-name="org.apache.ofbiz.product.category">
+    <relation with="ProductCategory" title="Current" type="composite"/>
+    <relation with="ProductCategory" title="Parent" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductCategoryType" package-name="org.apache.ofbiz.product.category">
+  </entity>
+
+  <entity entity-name="ProductCategoryTypeAttr" package-name="org.apache.ofbiz.product.category">
+    <relation with="ProductCategoryType" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductConfig" package-name="org.apache.ofbiz.product.config">
+    <relation with="Product" type="composite"/>
+    <relation with="ProductConfigItem"  type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductConfigItem" package-name="org.apache.ofbiz.product.config">
+  </entity>
+
+  <entity entity-name="ProdConfItemContent" package-name="org.apache.ofbiz.product.config">
+    <relation with="ProductConfigItem" type="composite"/>
+    <relation with="Content" type="composite"/>
+    <relation with="ProdConfItemContentType" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProdConfItemContentType" package-name="org.apache.ofbiz.product.config">
+  </entity>
+
+  <entity entity-name="ProductConfigOption" package-name="org.apache.ofbiz.product.config">
+    <relation with="ProductConfigItem" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductConfigOptionIactn" package-name="org.apache.ofbiz.product.config">
+    <relation with="ProductConfigItem" type="composite"/>
+    <relation with="ProductConfigOption" type="composite"/>
+    <relation with="ProductConfigItem" type="composite"/>
+    <relation with="ProductConfigOption" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductConfigProduct" package-name="org.apache.ofbiz.product.config">
+    <relation with="ProductConfigItem" type="composite"/>
+    <relation with="ProductConfigOption" type="composite"/>
+    <relation with="Product" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductConfigConfig" package-name="org.apache.ofbiz.product.config">
+    <relation with="ProductConfigItem" type="composite"/>
+    <relation with="ProductConfigOption" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductConfigStats" package-name="org.apache.ofbiz.product.config">
+  </entity>
+
+  <entity entity-name="ConfigOptionProductOption" package-name="org.apache.ofbiz.product.config">
+    <relation with="ProductConfigConfig" type="composite"/>
+    <relation with="ProductConfigProduct" type="composite"/>
+  </entity>
+
+  <entity entity-name="CostComponent" package-name="org.apache.ofbiz.product.cost">
+  </entity>
+
+  <entity entity-name="CostComponentAttribute" package-name="org.apache.ofbiz.product.cost">
+    <relation with="CostComponent" type="composite"/>
+  </entity>
+
+  <entity entity-name="CostComponentType" package-name="org.apache.ofbiz.product.cost">
+  </entity>
+
+  <entity entity-name="CostComponentTypeAttr" package-name="org.apache.ofbiz.product.cost">
+    <relation with="CostComponentType" type="composite"/>
+  </entity>
+
+  <entity entity-name="CostComponentCalc" package-name="org.apache.ofbiz.product.cost">
+  </entity>
+
+  <entity entity-name="Container" package-name="org.apache.ofbiz.product.facility">
+  </entity>
+
+  <entity entity-name="ContainerType" package-name="org.apache.ofbiz.product.facility">
+  </entity>
+
+  <entity entity-name="ContainerGeoPoint" package-name="org.apache.ofbiz.product.facility">
+    <association-class participant1="Container" participant2="GeoPoint"/>
+  </entity>
+
+  <entity entity-name="Facility" package-name="org.apache.ofbiz.product.facility">
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="FacilityAttribute" package-name="org.apache.ofbiz.product.facility">
+    <relation with="Facility" type="composite"/>
+  </entity>
+
+  <entity entity-name="FacilityCarrierShipment" package-name="org.apache.ofbiz.product.facility">
+    <relation with="Party" type="composite"></relation>
+    <relation with="Facility" type="composite"></relation>
+    <relation with="ShipmentMethodType" type="composite"></relation>
+    <relation with="CarrierShipmentMethod" type="composite"></relation>
+  </entity>
+
+  <entity entity-name="FacilityContactMech" package-name="org.apache.ofbiz.product.facility">
+    <association-class participant1="Facility" participant2="ContactMech"/>
+  </entity>
+
+  <entity entity-name="FacilityContactMechPurpose" package-name="org.apache.ofbiz.product.facility">
+    <relation with="ContactMechPurposeType" type="composite"/>
+    <relation with="Facility" type="composite"/>
+    <relation with="ContactMech" type="composite"/>
+  </entity>
+
+  <entity entity-name="FacilityGroup" package-name="org.apache.ofbiz.product.facility">
+  </entity>
+
+  <entity entity-name="FacilityGroupMember" package-name="org.apache.ofbiz.product.facility">
+    <association-class participant1="Facility" participant2="FacilityGroup"/>
+  </entity>
+
+  <entity entity-name="FacilityGroupRole" package-name="org.apache.ofbiz.product.facility">
+    <relation with="FacilityGroup" type="composite"/>
+    <relation with="PartyRole" type="composite"/>
+  </entity>
+
+  <entity entity-name="FacilityGroupRollup" package-name="org.apache.ofbiz.product.facility">
+    <relation with="FacilityGroup" title="Current" type="composite"/>
+    <relation with="FacilityGroup" title="Parent" type="composite"/>
+  </entity>
+
+  <entity entity-name="FacilityGroupType" package-name="org.apache.ofbiz.product.facility">
+  </entity>
+
+  <entity entity-name="FacilityLocation" package-name="org.apache.ofbiz.product.facility">
+    <stereotype name="java-object"/>
+    <relation with="Facility" type="composite"/>
+  </entity>
+
+  <entity entity-name="FacilityLocationGeoPoint" package-name="org.apache.ofbiz.product.facility">
+    <stereotype name="java-object"/>
+    <association-class participant1="FacilityLocation" participant2="GeoPoint"/>
+  </entity>
+
+  <entity entity-name="FacilityParty" package-name="org.apache.ofbiz.product.facility">
+    <relation with="Facility" type="composite"/>
+    <relation with="Party" type="composite"/>
+    <relation with="RoleType" type="composite"/>
+    <relation with="PartyRole" type="composite"/>
+  </entity>
+
+  <entity entity-name="FacilityType" package-name="org.apache.ofbiz.product.facility">
+  </entity>
+
+  <entity entity-name="FacilityTypeAttr" package-name="org.apache.ofbiz.product.facility">
+    <relation with="FacilityType" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductFacility" package-name="org.apache.ofbiz.product.facility">
+    <stereotype name="java-object"/>
+    <association-class participant1="Product" participant2="Facility"/>
+  </entity>
+
+  <entity entity-name="ProductFacilityLocation" package-name="org.apache.ofbiz.product.facility">
+    <relation with="Product" type="composite"/>
+    <relation with="FacilityLocation" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductFeature" package-name="org.apache.ofbiz.product.feature">
+  </entity>
+
+  <entity entity-name="ProductFeatureAppl" package-name="org.apache.ofbiz.product.feature">
+    <association-class participant1="ProductFeature" participant2="Product"/>
+  </entity>
+
+  <entity entity-name="ProductFeatureApplType" package-name="org.apache.ofbiz.product.feature">
+  </entity>
+
+  <entity entity-name="ProductFeatureApplAttr" package-name="org.apache.ofbiz.product.feature">
+    <relation with="Product" type="composite"/>
+    <relation with="ProductFeature" type="composite"/>
+    <relation with="ProductFeatureAppl" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductFeatureCategory" package-name="org.apache.ofbiz.product.feature">
+  </entity>
+
+  <entity entity-name="ProductFeatureCategoryAppl" package-name="org.apache.ofbiz.product.feature">
+    <association-class participant1="ProductCategory" participant2="ProductFeatureCategory"/>
+  </entity>
+
+  <entity entity-name="ProductFeatureCatGrpAppl" package-name="org.apache.ofbiz.product.feature">
+    <association-class participant1="ProductCategory" participant2="ProductFeatureGroup"/>
+  </entity>
+
+  <entity entity-name="ProductFeatureDataResource" package-name="org.apache.ofbiz.product.feature">
+    <association-class participant1="DataResource" participant2="ProductFeature" />
+  </entity>
+
+  <entity entity-name="ProductFeatureGroup" package-name="org.apache.ofbiz.product.feature">
+  </entity>
+
+  <entity entity-name="ProductFeatureGroupAppl" package-name="org.apache.ofbiz.product.feature">
+    <association-class participant1="ProductFeatureGroup" participant2="ProductFeature"/>
+  </entity>
+
+  <entity entity-name="ProductFeatureIactn" package-name="org.apache.ofbiz.product.feature">
+    <relation with="ProductFeatureIactnType" type="composite"/>
+    <relation with="ProductFeature" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductFeatureIactnType" package-name="org.apache.ofbiz.product.feature">
+  </entity>
+
+  <entity entity-name="ProductFeatureType" package-name="org.apache.ofbiz.product.feature">
+  </entity>
+
+  <entity entity-name="ProductFeaturePrice" package-name="org.apache.ofbiz.product.price">
+    <relation with="ProductPriceType" type="composite"/>
+    <relation title="Currency" with="Uom" type="composite"/>
+    <relation title="CreatedBy" with="UserLogin" type="composite"/>
+    <relation title="LastModifiedBy" with="UserLogin" type="composite"/>
+    <assoc-tag name="GetterSetter" value="LastModifiedByUserLoginO" title="LastModifiedBy" with="UserLogin"/>
+    <assoc-tag name="GetterSetter" value="CreatedByUserLoginO" title="CreatedBy" with="UserLogin"/>
+  </entity>
+
+  <entity entity-name="InventoryItem" package-name="org.apache.ofbiz.product.inventory">
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="InventoryItemAttribute" package-name="org.apache.ofbiz.product.inventory">
+    <relation with="InventoryItem" type="composite"/>
+  </entity>
+
+  <entity entity-name="InventoryItemDetail" package-name="org.apache.ofbiz.product.inventory">
+    <stereotype name="java-object"/>
+     <relation with="InventoryItem" type="composite"/>
+  </entity>
+
+  <entity entity-name="InventoryItemStatus" package-name="org.apache.ofbiz.product.inventory">
+    <association-class participant1="InventoryItem" participant2="StatusItem"/>
+  </entity>
+
+  <entity entity-name="InventoryItemTempRes" package-name="org.apache.ofbiz.product.inventory">
+    <relation with="Product" type="composite"/>
+    <relation with="ProductStore" type="composite"/>
+  </entity>
+
+  <entity entity-name="InventoryItemType" package-name="org.apache.ofbiz.product.inventory">
+  </entity>
+
+  <entity entity-name="InventoryItemTypeAttr" package-name="org.apache.ofbiz.product.inventory">
+    <relation with="InventoryItemType" type="composite"/>
+  </entity>
+
+  <entity entity-name="InventoryItemVariance" package-name="org.apache.ofbiz.product.inventory">
+    <stereotype name="java-object"/>
+    <relation with="PhysicalInventory" type="composite"/>
+    <relation with="InventoryItem" type="composite"/>
+  </entity>
+
+  <entity entity-name="InventoryItemLabelType" package-name="org.apache.ofbiz.product.inventory">
+  </entity>
+
+  <entity entity-name="InventoryItemLabel" package-name="org.apache.ofbiz.product.inventory">
+  </entity>
+
+  <entity entity-name="InventoryItemLabelAppl" package-name="org.apache.ofbiz.product.inventory">
+    <relation with="InventoryItem" type="composite"/>
+    <relation with="InventoryItemLabelType" type="composite"/>
+  </entity>
+
+  <entity entity-name="InventoryTransfer" package-name="org.apache.ofbiz.product.inventory">
+  </entity>
+
+  <entity entity-name="Lot" package-name="org.apache.ofbiz.product.inventory">
+  </entity>
+
+  <entity entity-name="PhysicalInventory" package-name="org.apache.ofbiz.product.inventory">
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="VarianceReason" package-name="org.apache.ofbiz.product.inventory">
+  </entity>
+
+  <entity entity-name="ProductPaymentMethodType" package-name="org.apache.ofbiz.product.price">
+    <relation with="Product" type="composite"/>
+    <relation with="PaymentMethodType" type="composite"/>
+    <relation with="ProductPricePurpose" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductPrice" package-name="org.apache.ofbiz.product.price">
+    <stereotype name="java-object"/>
+    <relation with="Product" type="composite"/>
+    <relation with="ProductPriceType" type="composite"/>
+    <relation with="ProductPricePurpose" type="composite"/>
+    <relation with="Uom" title="Currency" type="composite"/>
+    <relation with="ProductStoreGroup" type="composite"/>
+    <assoc-tag name="GetterSetter" value="LastModifiedByUserLogin0" title="LastModifiedBy" with="UserLogin"/>
+    <assoc-tag name="GetterSetter" value="CreatedByUserLogin0" title="CreatedBy" with="UserLogin"/>
+  </entity>
+
+  <entity entity-name="ProductPriceAction" package-name="org.apache.ofbiz.product.price">
+    <relation with="ProductPriceActionType" type="composite"/>
+    <relation with="ProductPriceRule" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductPriceActionType" package-name="org.apache.ofbiz.product.price">
+  </entity>
+
+  <entity entity-name="ProductPriceAutoNotice" package-name="org.apache.ofbiz.product.price">
+  </entity>
+
+  <entity entity-name="ProductPriceChange" package-name="org.apache.ofbiz.product.price">
+    <assoc-tag name="GetterSetter" value="ChangedByUserLogin0" title="ChangedBy" with="UserLogin"/>
+  </entity>
+
+  <entity entity-name="ProductPriceCond" package-name="org.apache.ofbiz.product.price">
+    <relation with="ProductPriceRule" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductPricePurpose" package-name="org.apache.ofbiz.product.price">
+  </entity>
+
+  <entity entity-name="ProductPriceRule" package-name="org.apache.ofbiz.product.price">
+  </entity>
+
+  <entity entity-name="ProductPriceType" package-name="org.apache.ofbiz.product.price">
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="QuantityBreak" package-name="org.apache.ofbiz.product.price">
+  </entity>
+
+  <entity entity-name="QuantityBreakType" package-name="org.apache.ofbiz.product.price">
+  </entity>
+
+  <entity entity-name="SaleType" package-name="org.apache.ofbiz.product.price">
+  </entity>
+
+  <entity entity-name="GoodIdentification" package-name="org.apache.ofbiz.product.product">
+    <association-class participant1="GoodIdentificationType" participant2="Product"/>
+  </entity>
+
+  <entity entity-name="GoodIdentificationType" package-name="org.apache.ofbiz.product.product">
+  </entity>
+
+  <entity entity-name="Product" package-name="org.apache.ofbiz.product.product">
+    <stereotype name="java-object"/>
+    <assoc-tag name="GetterSetter" value="LastModifiedByUserLoginO" title="LastModifiedBy" with="UserLogin"/>
+    <assoc-tag name="GetterSetter" value="CreatedByUserLoginO" title="CreatedBy" with="UserLogin"/>
+  </entity>
+
+  <entity entity-name="ProductAssoc" package-name="org.apache.ofbiz.product.product">
+    <stereotype name="java-object"/>
+    <relation with="ProductAssocType" type="composite"/>
+    <relation with="Product" title="Main" type="composite"/>
+    <relation with="Product" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductAssocType" package-name="org.apache.ofbiz.product.product">
+  </entity>
+
+  <entity entity-name="ProductRole" package-name="org.apache.ofbiz.product.product">
+    <association-class participant1="PartyRole" participant2="Product"/>
+  </entity>
+
+  <entity entity-name="ProductAttribute" package-name="org.apache.ofbiz.product.product">
+    <relation with="Product" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductCalculatedInfo" package-name="org.apache.ofbiz.product.product">
+    <relation with="Product" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductContent" package-name="org.apache.ofbiz.product.product">
+    <relation with="Product" type="composite"/>
+    <relation with="Content" type="composite"/>
+    <relation with="ProductContentType" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductContentType" package-name="org.apache.ofbiz.product.product">
+  </entity>
+
+  <entity entity-name="ProductGeo" package-name="org.apache.ofbiz.product.product">
+    <association-class participant1="Product" participant2="Geo"/>
+  </entity>
+
+  <entity entity-name="ProductGlAccount" package-name="org.apache.ofbiz.product.product">
+    <relation with="Product" type="composite"/>
+    <relation with="Party" type="composite"/>
+    <relation with="GlAccountType" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductKeyword" package-name="org.apache.ofbiz.product.product">
+    <relation with="Product" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductMeter" package-name="org.apache.ofbiz.product.product">
+    <relation with="Product" type="composite"/>
+    <relation with="ProductMeterType" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductMeterType" package-name="org.apache.ofbiz.product.product">
+  </entity>
+
+  <entity entity-name="ProductMaint" package-name="org.apache.ofbiz.product.product">
+    <relation with="Product" type="composite"/>
+    <relation with="ProductMaintType" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductMaintType" package-name="org.apache.ofbiz.product.product">
+  </entity>
+
+  <entity entity-name="ProductReview" package-name="org.apache.ofbiz.product.product">
+  </entity>
+
+  <entity entity-name="ProductSearchConstraint" package-name="org.apache.ofbiz.product.product">
+    <relation with="ProductSearchResult" type="composite"></relation>
+  </entity>
+
+  <entity entity-name="ProductSearchResult" package-name="org.apache.ofbiz.product.product">
+  </entity>
+
+  <entity entity-name="ProductType" package-name="org.apache.ofbiz.product.product">
+  </entity>
+
+  <entity entity-name="ProductTypeAttr" package-name="org.apache.ofbiz.product.product">
+    <relation with="ProductType" type="composite"/>
+  </entity>
+
+  <entity entity-name="VendorProduct" package-name="org.apache.ofbiz.product.product">
+    <relation with="Product" type="composite"/>
+    <relation with="Party" type="composite"/>
+    <relation with="ProductStoreGroup" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductPromo" package-name="org.apache.ofbiz.product.promo">
+    <assoc-tag name="GetterSetter" value="LastModifiedByUserLogin0" title="LastModifiedBy" with="UserLogin"/>
+    <assoc-tag name="GetterSetter" value="CreatedByUserLogin0" title="CreatedBy" with="UserLogin"/>
+  </entity>
+
+  <entity entity-name="ProductPromoAction" package-name="org.apache.ofbiz.product.promo">
+    <relation with="ProductPromo" type="composite"/>
+    <relation with="ProductPromoRule" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductPromoCategory" package-name="org.apache.ofbiz.product.promo">
+    <association-class participant1="ProductPromo" participant2="ProductCategory"/>
+  </entity>
+
+  <entity entity-name="ProductPromoCode" package-name="org.apache.ofbiz.product.promo">
+    <assoc-tag name="GetterSetter" value="createdByUserLoginO" with="UserLogin" title="CreatedBy"/>
+    <assoc-tag name="GetterSetter" value="lastModifiedByUserLoginO" with="UserLogin" title="LastModifiedBy"/>
+  </entity>
+
+  <entity entity-name="ProductPromoCodeEmail" package-name="org.apache.ofbiz.product.promo">
+    <relation with="ProductPromoCode" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductPromoCodeParty" package-name="org.apache.ofbiz.product.promo">
+    <association-class participant1="ProductPromoCode" participant2="Party"/>
+  </entity>
+
+  <entity entity-name="ProductPromoCond" package-name="org.apache.ofbiz.product.promo">
+    <relation with="ProductPromo" type="composite"/>
+    <relation with="ProductPromoRule" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductPromoProduct" package-name="org.apache.ofbiz.product.promo">
+    <relation with="ProductPromo" type="composite"/>
+    <relation with="Product" type="composite"/>
+    <relation with="ProductPromo" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductPromoRule" package-name="org.apache.ofbiz.product.promo">
+    <relation with="ProductPromo" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductPromoUse" package-name="org.apache.ofbiz.product.promo">
+    <relation with="OrderHeader" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductStore" package-name="org.apache.ofbiz.product.store">
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="ProductStoreCatalog" package-name="org.apache.ofbiz.product.store">
+    <association-class participant2="ProductStore" participant1="ProdCatalog"/>
+  </entity>
+
+  <entity entity-name="ProductStoreEmailSetting" package-name="org.apache.ofbiz.product.store">
+    <association-class participant2="Enumeration" participant1="ProductStore"/>
+  </entity>
+
+  <entity entity-name="ProductStoreFinActSetting" package-name="org.apache.ofbiz.product.store">
+    <relation with="ProductStore" type="composite"/>
+    <relation with="FinAccountType" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductStoreFacility" package-name="org.apache.ofbiz.product.store">
+    <stereotype name="java-object"/>
+    <association-class participant2="ProductStore" participant1="Facility"/>
+  </entity>
+
+  <entity entity-name="ProductStoreGroup" package-name="org.apache.ofbiz.product.store">
+  </entity>
+
+  <entity entity-name="ProductStoreGroupMember" package-name="org.apache.ofbiz.product.store">
+    <relation with="ProductStore" type="composite"/>
+    <relation with="ProductStoreGroup" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductStoreGroupRole" package-name="org.apache.ofbiz.product.store">
+    <association-class participant2="ProductStoreGroup" participant1="PartyRole"/>
+  </entity>
+
+  <entity entity-name="ProductStoreGroupRollup" package-name="org.apache.ofbiz.product.store">
+    <relation with="ProductStoreGroup" title="Current" type="composite"/>
+    <relation with="ProductStoreGroup" title="Parent" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductStoreGroupType" package-name="org.apache.ofbiz.product.store">
+  </entity>
+
+  <entity entity-name="ProductStoreKeywordOvrd" package-name="org.apache.ofbiz.product.store">
+    <relation with="ProductStore" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductStorePaymentSetting" package-name="org.apache.ofbiz.product.store">
+    <relation with="ProductStore" type="composite"/>
+    <relation with="PaymentMethodType" type="composite"/>
+    <relation with="Enumeration" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductStorePromoAppl" package-name="org.apache.ofbiz.product.store">
+    <relation with="ProductStore" type="composite"/>
+    <relation with="ProductStore" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductStoreRole" package-name="org.apache.ofbiz.product.store">
+    <association-class participant2="PartyRole" participant1="ProductStore"/>
+  </entity>
+
+  <entity entity-name="ProductStoreShipmentMeth" package-name="org.apache.ofbiz.product.store">
+  </entity>
+
+  <entity entity-name="ProductStoreSurveyAppl" package-name="org.apache.ofbiz.product.store">
+  </entity>
+
+  <entity entity-name="ProductStoreVendorPayment" package-name="org.apache.ofbiz.product.store">
+    <relation with="ProductStore" type="composite"/>
+    <relation with="Party" type="composite"/>
+    <relation with="PaymentMethodType" type="composite"/>
+    <relation with="Enumeration" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductStoreVendorShipment" package-name="org.apache.ofbiz.product.store">
+    <relation with="ProductStore" type="composite"/>
+    <relation with="Party" type="composite"/>
+    <relation with="ShipmentMethodType" type="composite"/>
+    <relation with="Party" type="composite"/>
+  </entity>
+
+  <entity entity-name="ProductSubscriptionResource" package-name="org.apache.ofbiz.product.subscription">
+    <association-class participant2="Product" participant1="SubscriptionResource"/>
+  </entity>
+
+  <entity entity-name="Subscription" package-name="org.apache.ofbiz.product.subscription">
+  </entity>
+
+  <entity entity-name="SubscriptionActivity" package-name="org.apache.ofbiz.product.subscription">
+  </entity>
+
+  <entity entity-name="SubscriptionAttribute" package-name="org.apache.ofbiz.product.subscription">
+    <relation with="Subscription" type="composite"/>
+  </entity>
+
+  <entity entity-name="SubscriptionFulfillmentPiece" package-name="org.apache.ofbiz.product.subscription">
+    <association-class participant2="Subscription" participant1="SubscriptionActivity"/>
+  </entity>
+
+  <entity entity-name="SubscriptionResource" package-name="org.apache.ofbiz.product.subscription">
+  </entity>
+
+  <entity entity-name="SubscriptionType" package-name="org.apache.ofbiz.product.subscription">
+  </entity>
+
+  <entity entity-name="SubscriptionTypeAttr" package-name="org.apache.ofbiz.product.subscription">
+    <relation with="SubscriptionType" type="composite"/>
+  </entity>
+
+  <entity entity-name="SubscriptionCommEvent" package-name="org.apache.ofbiz.product.subscription">
+   <association-class participant2="CommunicationEvent" participant1="Subscription"/>
+  </entity>
+
+  <entity entity-name="MarketInterest" package-name="org.apache.ofbiz.product.supplier">
+    <association-class participant2="ProductCategory" participant1="PartyClassificationGroup"/>
+  </entity>
+
+  <entity entity-name="ReorderGuideline" package-name="org.apache.ofbiz.product.supplier">
+  </entity>
+
+  <entity entity-name="SupplierPrefOrder" package-name="org.apache.ofbiz.product.supplier">
+  </entity>
+
+  <entity entity-name="SupplierProduct" package-name="org.apache.ofbiz.product.supplier">
+    <stereotype name="java-object"/>
+    <relation with="Product" type="composite"/>
+    <relation with="Party" type="composite"/>
+    <relation title="Currency" with="Uom" type="composite"/>
+    <relation title="Quantity" with="Uom" type="composite"/>
+  </entity>
+
+  <entity entity-name="SupplierProductFeature" package-name="org.apache.ofbiz.product.supplier">
+    <relation with="Party" type="composite"/>
+    <relation with="ProductFeature" type="composite"/>
+    <relation with="Uom" type="composite"/>
+  </entity>
+
+  <entity entity-name="SupplierRatingType" package-name="org.apache.ofbiz.product.supplier">
+  </entity>
+</informationmodel>

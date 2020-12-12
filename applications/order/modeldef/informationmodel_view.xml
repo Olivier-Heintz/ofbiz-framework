@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2000/10/XMLSchema"
+    xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+  <entity entity-name="OrderHeaderAndItems" package-name="org.apache.ofbiz.order.order">
+    <stereotype name="view-entity"/>
+  </entity>
+
+</informationmodel>

@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2000/10/XMLSchema" xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+  <entity entity-name="ItemIssuance" package-name="org.apache.ofbiz.shipment.issuance">
+  </entity>
+
+  <entity entity-name="ItemIssuanceRole" package-name="org.apache.ofbiz.shipment.issuance">
+    <relation with="ItemIssuance" type="composite"/>
+    <relation with="Party" type="composite"/>
+    <relation with="PartyRole" type="composite"/>
+  </entity>
+
+  <entity entity-name="Picklist" package-name="org.apache.ofbiz.shipment.picklist">
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="PicklistBin" package-name="org.apache.ofbiz.shipment.picklist">
+  </entity>
+
+  <entity entity-name="PicklistItem" package-name="org.apache.ofbiz.shipment.picklist">
+    <relation with="PicklistBin" type="composite"/>
+    <relation with="OrderItemShipGroup" type="composite"/>
+    <relation with="OrderItem" type="composite"/>
+    <relation with="InventoryItem" type="composite"/>
+  </entity>
+
+  <entity entity-name="PicklistRole" package-name="org.apache.ofbiz.shipment.picklist">
+    <relation with="Picklist" type="composite"/>
+    <relation with="PartyRole" type="composite"/>
+    <relation with="RoleType" type="composite"/>
+    <assoc-tag name="GetterSetter" value="CreatedByUserLoginO" title="CreatedBy" with="UserLogin"/>
+    <assoc-tag name="GetterSetter" value="LastModifiedByUserLogino" title="LastModifiedBy" with="UserLogin"/>
+  </entity>
+
+  <entity entity-name="PicklistStatusHistory" package-name="org.apache.ofbiz.shipment.picklist">
+    <relation with="Picklist" type="composite"/>
+  </entity>
+
+  <entity entity-name="RejectionReason" package-name="org.apache.ofbiz.shipment.receipt">
+  </entity>
+
+  <entity entity-name="ShipmentReceipt" package-name="org.apache.ofbiz.shipment.receipt">
+  </entity>
+
+  <entity entity-name="ShipmentReceiptRole" package-name="org.apache.ofbiz.shipment.receipt">
+    <relation with="ShipmentReceipt" type="composite"/>
+    <relation with="Party" type="composite"/>
+    <relation with="PartyRole" type="composite"/>
+  </entity>
+
+  <entity entity-name="CarrierShipmentMethod" package-name="org.apache.ofbiz.shipment.shipment">
+    <relation with="ShipmentMethodType" type="composite"/>
+    <relation with="PartyRole" type="composite"/>
+  </entity>
+
+  <entity entity-name="CarrierShipmentBoxType" package-name="org.apache.ofbiz.shipment.shipment">
+    <association-class participant2="Party" participant1="ShipmentBoxType"/>
+  </entity>
+
+  <entity entity-name="Delivery" package-name="org.apache.ofbiz.shipment.shipment">
+  </entity>
+
+  <entity entity-name="Shipment" package-name="org.apache.ofbiz.shipment.shipment">
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="ShipmentAttribute" package-name="org.apache.ofbiz.shipment.shipment">
+    <relation with="Shipment" type="composite"/>
+  </entity>
+
+  <entity entity-name="ShipmentBoxType" package-name="org.apache.ofbiz.shipment.shipment">
+  </entity>
+
+  <entity entity-name="ShipmentContactMech" package-name="org.apache.ofbiz.shipment.shipment">
+    <association-class participant1="Shipment" participant2="ShipmentContactMechType"/>
+  </entity>
+
+  <entity entity-name="ShipmentContactMechType" package-name="org.apache.ofbiz.shipment.shipment">
+  </entity>
+
+  <entity entity-name="ShipmentCostEstimate" package-name="org.apache.ofbiz.shipment.shipment">
+  </entity>
+
+  <entity entity-name="ShipmentGatewayConfigType" package-name="org.apache.ofbiz.shipment.shipment">
+  </entity>
+
+  <entity entity-name="ShipmentGatewayConfig" package-name="org.apache.ofbiz.shipment.shipment">
+  </entity>
+
+  <entity entity-name="ShipmentGatewayDhl" package-name="org.apache.ofbiz.shipment.shipment">
+  </entity>
+
+  <entity entity-name="ShipmentGatewayFedex" package-name="org.apache.ofbiz.shipment.shipment">
+  </entity>
+
+  <entity entity-name="ShipmentGatewayUps" package-name="org.apache.ofbiz.shipment.shipment">
+  </entity>
+
+  <entity entity-name="ShipmentGatewayUsps" package-name="org.apache.ofbiz.shipment.shipment">
+  </entity>
+
+  <entity entity-name="ShipmentItem" package-name="org.apache.ofbiz.shipment.shipment">
+    <stereotype name="java-object"/>
+    <relation with="Shipment" type="composite"/>
+  </entity>
+
+  <entity entity-name="ShipmentItemBilling" package-name="org.apache.ofbiz.shipment.shipment">
+    <relation with="ShipmentItem" type="composite"/>
+    <relation with="InvoiceItem" type="composite"/>
+  </entity>
+
+  <entity entity-name="ShipmentItemFeature" package-name="org.apache.ofbiz.shipment.shipment">
+    <association-class participant2="ShipmentItem" participant1="ProductFeature"/>
+  </entity>
+
+  <entity entity-name="ShipmentMethodType" package-name="org.apache.ofbiz.shipment.shipment">
+  </entity>
+
+  <entity entity-name="ShipmentPackage" package-name="org.apache.ofbiz.shipment.shipment">
+    <relation with="Shipment" type="composite"/>
+  </entity>
+
+  <entity entity-name="ShipmentPackageContent" package-name="org.apache.ofbiz.shipment.shipment">
+    <association-class participant1="ShipmentItem" participant2="ShipmentPackage"/>
+  </entity>
+
+  <entity entity-name="ShipmentPackageRouteSeg" package-name="org.apache.ofbiz.shipment.shipment">
+    <association-class participant2="ShipmentRouteSegment" participant1="ShipmentPackage"/>
+  </entity>
+
+  <entity entity-name="ShipmentRouteSegment" package-name="org.apache.ofbiz.shipment.shipment">
+    <relation with="Shipment" type="composite"/>
+
+  </entity>
+
+  <entity entity-name="ShipmentStatus" package-name="org.apache.ofbiz.shipment.shipment">
+    <stereotype name="java-object"/>
+    <association-class participant2="Shipment" participant1="StatusItem"/>
+    <stereotype name="inherit"/>
+    <discriminator name="statusId"/>
+    <static-attribute visibility="public" name="INPUT" javaType="java.lang.String"/>
+    <attribute-tag name="staticValue" attribute="INPUT" value="SHIPMENT_INPUT"/>
+    <static-attribute visibility="public" name="SCHEDULED" javaType="java.lang.String"/>
+    <attribute-tag name="staticValue" attribute="SCHEDULED" value="SHIPMENT_SCHEDULED"/>
+    <static-attribute visibility="public" name="PICKED" javaType="java.lang.String"/>
+    <attribute-tag name="staticValue" attribute="PICKED" value="SHIPMENT_PICKED"/>
+    <static-attribute visibility="public" name="PACKED" javaType="java.lang.String"/>
+    <attribute-tag name="staticValue" attribute="PACKED" value="SHIPMENT_PACKED"/>
+    <static-attribute visibility="public" name="SHIPPED" javaType="java.lang.String"/>
+    <attribute-tag name="staticValue" attribute="SHIPPED" value="SHIPMENT_SHIPPED"/>
+    <static-attribute visibility="public" name="DELIVERED" javaType="java.lang.String"/>
+    <attribute-tag name="staticValue" attribute="DELIVERED" value="SHIPMENT_DELIVERED"/>
+    <static-attribute visibility="public" name="CANCELLED" javaType="java.lang.String"/>
+    <attribute-tag name="staticValue" attribute="CANCELLED" value="SHIPMENT_CANCELLED"/>
+  </entity>
+
+  <entity entity-name="ShipmentType" package-name="org.apache.ofbiz.shipment.shipment">
+  </entity>
+
+  <entity entity-name="ShipmentTypeAttr" package-name="org.apache.ofbiz.shipment.shipment">
+    <relation with="ShipmentType" type="composite"/>
+  </entity>
+
+  <entity entity-name="ShippingDocument" package-name="org.apache.ofbiz.shipment.shipment">
+  </entity>
+</informationmodel>

@@ -32,4 +32,5 @@ under the License.
   <system systemId="http://ofbiz.apache.org/dtds/entitygroup.xsd" uri="entitygroup.xsd"/>
   <system systemId="http://ofbiz.apache.org/dtds/entitymodel.xsd" uri="entitymodel.xsd"/>
   <system systemId="http://ofbiz.apache.org/dtds/fieldtypemodel.xsd" uri="fieldtypemodel.xsd"/>
+  <system systemId="http://repository.ofbizextra.org/dtd/Informationmodel.xsd" uri="Informationmodel.xsd"/>
 </catalog>

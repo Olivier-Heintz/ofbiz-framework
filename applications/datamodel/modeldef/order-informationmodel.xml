@@ -1,0 +1,472 @@
+<?xml version="1.0"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2000/10/XMLSchema"
+    xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+  <!-- ========================================================= -->
+  <!-- org.apache.ofbiz.order.order -->
+  <!-- ========================================================= -->
+
+  <entity entity-name="OrderAdjustment" package-name="org.apache.ofbiz.order.order">
+    <attribute-tag name="gui" attribute="orderAdjustmentId" value="idName"/>
+  </entity>
+
+  <entity entity-name="OrderAdjustmentAttribute" package-name="org.apache.ofbiz.order.order">
+  </entity>
+
+  <entity entity-name="OrderAdjustmentType" package-name="org.apache.ofbiz.order.order">
+  </entity>
+
+  <entity entity-name="OrderAdjustmentBilling" package-name="org.apache.ofbiz.order.order">
+    <association-class participant2="OrderAdjustment" participant1="InvoiceItem"/>
+  </entity>
+
+  <entity entity-name="OrderAdjustmentTypeAttr" package-name="org.apache.ofbiz.order.order">
+  </entity>
+
+  <entity entity-name="OrderAttribute" package-name="org.apache.ofbiz.order.order">
+  </entity>
+
+  <entity entity-name="OrderBlacklist" package-name="org.apache.ofbiz.order.order">
+  </entity>
+
+  <entity entity-name="OrderBlacklistType" package-name="org.apache.ofbiz.order.order">
+  </entity>
+
+  <entity entity-name="CommunicationEventOrder" package-name="org.apache.ofbiz.order.order">
+    <association-class participant2="CommunicationEvent" participant1="OrderHeader"/>
+  </entity>
+
+  <entity entity-name="OrderContactMech" package-name="org.apache.ofbiz.order.order">
+    <class-tag name="gui" value="lookup"/>
+    <relation with="ContactMechPurposeType" type="composite"/>
+    <relation with="OrderHeader" type="composite"/>
+    <relation with="ContactMech" type="composite"/>
+  </entity>
+
+  <entity entity-name="OrderContent" package-name="org.apache.ofbiz.order.order">
+  </entity>
+
+  <entity entity-name="OrderContentType" package-name="org.apache.ofbiz.order.order">
+  </entity>
+
+  <entity entity-name="OrderDeliverySchedule" package-name="org.apache.ofbiz.order.order">
+    <relation with="OrderItem" type="composite"/>
+  </entity>
+
+  <entity entity-name="OrderHeader" package-name="org.apache.ofbiz.order.order">
+    <attribute-tag name="gui" attribute="orderId" value="idName, list, indexed"/>
+    <attribute-tag name="gui" attribute="orderDate" value="indexed, list"/>
+    <attribute-tag name="gui" attribute="entryDate" value="indexed"/>
+    <attribute-tag name="gui" attribute="remainingSubTotal" value="list"/>
+    <attribute-tag name="gui" attribute="grandTotal" value="indexed, list"/>
+    <class-tag name="gui" value="lookup, list"/>
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="OrderHeaderNote" package-name="org.apache.ofbiz.order.order">
+    <association-class participant2="NoteData" participant1="OrderHeader"/>
+  </entity>
+
+  <entity entity-name="OrderHeaderWorkEffort" package-name="org.apache.ofbiz.order.order">
+    <association-class participant2="OrderHeader" participant1="WorkEffort"/>
+  </entity>
+
+  <entity entity-name="OrderItem" package-name="org.apache.ofbiz.order.order">
+    <attribute-tag name="gui" attribute="orderItemSeqId" value="idName"/>
+    <attribute-tag name="gui" attribute="itemDescription" value="description"/>
+    <attribute-tag name="ofbizAttributeName" attribute="recurringFreq" value="recurringFreqUomId"/>
+    <assoc-tag with="UserLogin" title="DontCancelSet" name="GetterSetter" value="dontCancelSetUserLoginO" />
+    <class-tag name="gui" value="list, print"/>
+    <relation with="OrderHeader" type="composite"/>
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="OrderItemAssoc" package-name="org.apache.ofbiz.order.order">
+    <relation with="OrderItemShipGroupAssoc" type="composite"/>
+  </entity>
+
+  <entity entity-name="OrderItemAssocType" package-name="org.apache.ofbiz.order.order">
+  </entity>
+
+  <entity entity-name="OrderItemAttribute" package-name="org.apache.ofbiz.order.order">
+  </entity>
+
+  <entity entity-name="OrderItemBilling" package-name="org.apache.ofbiz.order.order">
+    <association-class participant2="OrderItem" participant1="InvoiceItem"/>
+  </entity>
+
+  <entity entity-name="OrderItemChange" package-name="org.apache.ofbiz.order.order">
+  </entity>
+
+  <entity entity-name="OrderItemContactMech" package-name="org.apache.ofbiz.order.order">
+    <relation with="ContactMechPurposeType" type="composite"/>
+    <relation with="OrderItem" type="composite"/>
+  </entity>
+
+  <entity entity-name="OrderItemGroup" package-name="org.apache.ofbiz.order.order">
+  </entity>
+
+  <entity entity-name="OrderItemPriceInfo" package-name="org.apache.ofbiz.order.order">
+    <attribute-tag name="gui" attribute="orderItemPriceInfoId" value="idName"/>
+  </entity>
+
+  <entity entity-name="OrderItemRole" package-name="org.apache.ofbiz.order.order">
+    <association-class participant2="PartyRole" participant1="OrderItem"/>
+  </entity>
+
+  <entity entity-name="OrderItemShipGroup" package-name="org.apache.ofbiz.order.order">
+    <attribute-tag name="gui" attribute="orderItemSeqId" value="idName"/>
+    <class-tag name="gui" value="list, edit"/>
+    <class-tag name="ofbizAttributeName" value="OISG"/>
+    <relation with="OrderHeader" type="composite"/>
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="OrderItemShipGroupAssoc" package-name="org.apache.ofbiz.order.order">
+    <relation with="OrderItem" type="composite"/>
+    <relation with="OrderItemShipGroup" type="composite"/>
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="OrderItemShipGrpInvRes" package-name="org.apache.ofbiz.order.order">
+    <relation with="OrderItemShipGroupAssoc" type="composite"/>
+    <relation with="InventoryItem" type="composite"/>
+  </entity>
+
+  <entity entity-name="OrderItemType" package-name="org.apache.ofbiz.order.order">
+    <attribute-tag name="gui" attribute="description" value="description"/>
+    <static-attribute name="BULK" staticValue="BULK_ORDER_ITEM"/>
+    <static-attribute name="PRODUCT" staticValue="PRODUCT_ORDER_ITEM"/>
+    <static-attribute name="WORK" staticValue="WORK_ORDER_ITEM"/>
+    <static-attribute name="RENTAL" staticValue="RENTAL_ORDER_ITEM"/>
+  </entity>
+
+  <entity entity-name="OrderItemTypeAttr" package-name="org.apache.ofbiz.order.order">
+  </entity>
+
+  <entity entity-name="OrderNotification" package-name="org.apache.ofbiz.order.order">
+    <attribute-tag name="gui" attribute="orderNotificationId" value="idName"/>
+  </entity>
+
+  <entity entity-name="OrderPaymentPreference" package-name="org.apache.ofbiz.order.order">
+    <attribute-tag name="gui" attribute="orderPaymentPreferenceId" value="idName"/>
+  </entity>
+
+  <entity entity-name="OrderProductPromoCode" package-name="org.apache.ofbiz.order.order">
+    <association-class participant2="OrderHeader" participant1="ProductPromoCode"/>
+  </entity>
+
+  <entity entity-name="OrderRole" package-name="org.apache.ofbiz.order.order">
+    <association-class participant2="PartyRole" participant1="OrderHeader"/>
+  </entity>
+
+  <entity entity-name="OrderShipment" package-name="org.apache.ofbiz.order.order">
+    <association-class participant2="OrderItem" participant1="ShipmentItem"/>
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="OrderStatus" package-name="org.apache.ofbiz.order.order">
+    <discriminator name="statusId"/>
+    <static-attribute name="CREATED"    staticValue="ORDER_CREATED"/>
+    <static-attribute name="PROCESSING" staticValue="ORDER_PROCESSING"/>
+    <static-attribute name="APPROVED"   staticValue="ORDER_APPROVED"/>
+    <static-attribute name="SENT"       staticValue="ORDER_SENT"/>
+    <static-attribute name="HELD"       staticValue="ORDER_HOLD"/>
+    <static-attribute name="COMPLETED"  staticValue="ORDER_COMPLETED"/>
+    <static-attribute name="REJECTED"   staticValue="ORDER_REJECTED"/>
+    <static-attribute name="CANCELLED"  staticValue="ORDER_CANCELLED"/>
+  </entity>
+
+  <entity entity-name="OrderSummaryEntry" package-name="org.apache.ofbiz.order.order">
+  </entity>
+
+  <entity entity-name="OrderTerm" package-name="org.apache.ofbiz.order.order">
+    <association-class participant2="TermType" participant1="OrderItem"/>
+  </entity>
+
+  <entity entity-name="OrderTermAttribute" package-name="org.apache.ofbiz.order.order">
+    <relation with="OrderTerm" type="composite"/>
+  </entity>
+
+  <entity entity-name="OrderType" package-name="org.apache.ofbiz.order.order">
+    <attribute-tag name="gui" attribute="orderTypeId" value="idName"/>
+    <attribute-tag name="gui" attribute="description" value="description"/>
+    <static-attribute name="SALES"    staticValue="SALES_ORDER"/>
+    <static-attribute name="PURCHASE" staticValue="PURCHASE_ORDER"/>
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="OrderTypeAttr" package-name="org.apache.ofbiz.order.order">
+  </entity>
+
+  <entity entity-name="ProductOrderItem" package-name="org.apache.ofbiz.order.order">
+    <relation with="Product" type="composite"/>
+    <relation with="OrderItem" type="composite"/>
+  </entity>
+
+  <entity entity-name="WorkOrderItemFulfillment" package-name="org.apache.ofbiz.order.order">
+    <association-class participant2="WorkEffort" participant1="OrderItem"/>
+  </entity>
+
+  <!-- ========================================================= -->
+  <!-- org.apache.ofbiz.order.quote -->
+  <!-- ========================================================= -->
+
+  <entity entity-name="Quote" package-name="org.apache.ofbiz.order.quote">
+    <attribute-tag name="gui" attribute="quoteId" value="idName"/>
+    <attribute-tag name="gui" attribute="description" value="description"/>
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="QuoteAttribute" package-name="org.apache.ofbiz.order.quote">
+    <attribute-tag name="gui" attribute="attrName" value="idName"/>
+    <attribute-tag name="gui" attribute="description" value="description"/>
+    <relation with="Quote" type="composite"/>
+  </entity>
+
+  <entity entity-name="QuoteCoefficient" package-name="org.apache.ofbiz.order.quote">
+  </entity>
+
+  <entity entity-name="QuoteItem" package-name="org.apache.ofbiz.order.quote">
+    <attribute-tag name="gui" attribute="quoteItemSeqId" value="idName"/>
+    <relation with="Quote" type="composite"/>
+  </entity>
+
+  <entity entity-name="QuoteRole" package-name="org.apache.ofbiz.order.quote">
+    <association-class participant2="PartyRole" participant1="Quote"/>
+  </entity>
+
+  <entity entity-name="QuoteTerm" package-name="org.apache.ofbiz.order.quote">
+    <association-class participant2="QuoteItem" participant1="TermType"/>
+  </entity>
+
+  <entity entity-name="QuoteTermAttribute" package-name="org.apache.ofbiz.order.quote">
+    <attribute-tag name="gui" attribute="attrName" value="idName"/>
+    <attribute-tag name="gui" attribute="description" value="description"/>
+    <relation with="QuoteTerm" type="composite"/>
+  </entity>
+
+  <entity entity-name="QuoteType" package-name="org.apache.ofbiz.order.quote">
+    <attribute-tag name="gui" attribute="quoteTypeId" value="idName"/>
+    <attribute-tag name="gui" attribute="description" value="description"/>
+  </entity>
+
+  <entity entity-name="QuoteTypeAttr" package-name="org.apache.ofbiz.order.quote">
+    <attribute-tag name="gui" attribute="attrName" value="idName"/>
+    <relation with="QuoteType" type="composite"/>
+  </entity>
+
+  <entity entity-name="QuoteWorkEffort" package-name="org.apache.ofbiz.order.quote">
+    <association-class participant1="Quote" participant2="WorkEffort"/>
+  </entity>
+
+  <entity entity-name="QuoteAdjustment" package-name="org.apache.ofbiz.order.quote">
+  </entity>
+
+  <!-- ========================================================= -->
+  <!-- org.apache.ofbiz.order.request -->
+  <!-- ========================================================= -->
+
+  <entity entity-name="CustRequest" package-name="org.apache.ofbiz.order.request">
+  </entity>
+
+  <entity entity-name="CustRequestAttribute" package-name="org.apache.ofbiz.order.request">
+  </entity>
+
+  <entity entity-name="CustRequestCategory" package-name="org.apache.ofbiz.order.request">
+  </entity>
+
+  <entity entity-name="CustRequestCommEvent" package-name="org.apache.ofbiz.order.request">
+    <association-class participant2="CommunicationEvent" participant1="CustRequest"/>
+  </entity>
+
+  <entity entity-name="CustRequestContent" package-name="org.apache.ofbiz.order.request">
+    <association-class participant2="Content" participant1="CustRequest"/>
+  </entity>
+
+  <entity entity-name="CustRequestItem" package-name="org.apache.ofbiz.order.request">
+    <relation with="CustRequest" type="composite"/>
+  </entity>
+
+  <entity entity-name="CustRequestNote" package-name="org.apache.ofbiz.order.request">
+    <association-class participant2="CustRequest" participant1="NoteData"/>
+  </entity>
+
+  <entity entity-name="CustRequestItemNote" package-name="org.apache.ofbiz.order.request">
+    <association-class participant2="CustRequestItem" participant1="NoteData"/>
+  </entity>
+
+  <entity entity-name="CustRequestItemWorkEffort" package-name="org.apache.ofbiz.order.request">
+    <association-class participant2="CustRequestItem" participant1="WorkEffort"/>
+  </entity>
+
+  <entity entity-name="CustRequestResolution" package-name="org.apache.ofbiz.order.request">
+  </entity>
+
+  <entity entity-name="CustRequestParty" package-name="org.apache.ofbiz.order.request">
+    <association-class participant2="CustRequest" participant1="PartyRole"/>
+  </entity>
+
+  <entity entity-name="CustRequestStatus" package-name="org.apache.ofbiz.order.request">
+  </entity>
+
+  <entity entity-name="CustRequestType" package-name="org.apache.ofbiz.order.request">
+  </entity>
+
+  <entity entity-name="CustRequestTypeAttr" package-name="org.apache.ofbiz.order.request">
+  </entity>
+
+  <entity entity-name="CustRequestWorkEffort" package-name="org.apache.ofbiz.order.request">
+    <association-class participant2="CustRequest" participant1="WorkEffort"/>
+  </entity>
+
+  <entity entity-name="RespondingParty" package-name="org.apache.ofbiz.order.request">
+  </entity>
+
+    <!-- ========================================================= -->
+    <!-- org.apache.ofbiz.order.requirement -->
+    <!-- ========================================================= -->
+
+  <entity entity-name="DesiredFeature" package-name="org.apache.ofbiz.order.requirement">
+  </entity>
+
+  <entity entity-name="OrderRequirementCommitment" package-name="org.apache.ofbiz.order.requirement">
+    <association-class participant2="OrderItem" participant1="Requirement"/>
+  </entity>
+
+  <entity entity-name="Requirement" package-name="org.apache.ofbiz.order.requirement">
+    <attribute-tag name="gui" attribute="requirementId" value="idName"/>
+    <attribute-tag name="" attribute="" value=""/>
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="RequirementAttribute" package-name="org.apache.ofbiz.order.requirement">
+  </entity>
+
+  <entity entity-name="RequirementBudgetAllocation" package-name="org.apache.ofbiz.order.requirement">
+    <association-class participant2="Requirement" participant1="BudgetItem"/>
+  </entity>
+
+  <entity entity-name="RequirementCustRequest" package-name="org.apache.ofbiz.order.requirement">
+    <association-class participant2="CustRequestItem" participant1="Requirement"/>
+  </entity>
+
+  <entity entity-name="RequirementRole" package-name="org.apache.ofbiz.order.requirement">
+    <association-class participant2="PartyRole" participant1="Requirement"/>
+    <class-tag name="ofbizAttributeName" value="rqrol"/>
+  </entity>
+
+  <entity entity-name="RequirementStatus" package-name="org.apache.ofbiz.order.requirement">
+    <discriminator name="statusTypeId"/>
+    <class-tag name="discriminatorValue" value="REQUIREMENT_STATUS"/>
+    <static-attribute name="REQUIREMENT_CREATED"  staticValue="REQ_CREATED"/>
+    <static-attribute name="REQUIREMENT_APPROVED" staticValue="REQ_APPROVED"/>
+    <static-attribute name="REQUIREMENT_ORDERED"  staticValue="REQ_ORDERED"/>
+    <static-attribute name="REQUIREMENT_REJECTED" staticValue="REQ_REJECTED"/>
+    <stereotype name="java-object"/>
+    <association-class participant2="Requirement" participant1="StatusItem"/>
+  </entity>
+
+  <entity entity-name="RequirementType" package-name="org.apache.ofbiz.order.requirement">
+    <attribute-tag name="gui" attribute="requirementTypeId" value="idName"/>
+    <class-tag name="ofbizAttributeName" value="rqtyp"/>
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="RequirementTypeAttr" package-name="org.apache.ofbiz.order.requirement">
+  </entity>
+
+  <entity entity-name="WorkReqFulfType" package-name="org.apache.ofbiz.order.requirement">
+  </entity>
+
+  <entity entity-name="WorkRequirementFulfillment" package-name="org.apache.ofbiz.order.requirement">
+    <association-class participant2="Requirement" participant1="WorkEffort"/>
+  </entity>
+
+    <!-- ========================================================= -->
+    <!-- org.apache.ofbiz.order.returnorder -->
+    <!-- ========================================================= -->
+
+  <entity entity-name="ReturnAdjustment" package-name="org.apache.ofbiz.order.returnorder">
+  </entity>
+
+  <entity entity-name="ReturnAdjustmentType" package-name="org.apache.ofbiz.order.returnorder">
+  </entity>
+
+  <entity entity-name="ReturnHeader" package-name="org.apache.ofbiz.order.returnorder">
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="ReturnHeaderType" package-name="org.apache.ofbiz.order.returnorder">
+    <static-attribute name="SALES_ORD_RET"    staticValue="RET_HD_TY_SA_RET"/>
+    <static-attribute name="PURCHASE_ORD_RET" staticValue="RET_HD_TY_PU_RET"/>
+  </entity>
+
+  <entity entity-name="ReturnItem" package-name="org.apache.ofbiz.order.returnorder">
+    <stereotype name="java-object"/>
+    <relation with="ReturnHeader" type="composite"/>
+  </entity>
+
+  <entity entity-name="ReturnItemResponse" package-name="org.apache.ofbiz.order.returnorder">
+  </entity>
+
+  <entity entity-name="ReturnItemType" package-name="org.apache.ofbiz.order.returnorder">
+  </entity>
+
+  <entity entity-name="ReturnItemTypeMap" package-name="org.apache.ofbiz.order.returnorder">
+  </entity>
+
+  <entity entity-name="ReturnReason" package-name="org.apache.ofbiz.order.returnorder">
+  </entity>
+
+  <entity entity-name="ReturnStatus" package-name="org.apache.ofbiz.order.returnorder">
+    <static-attribute name="RETURN_REQUESTED" staticValue="RETURN_REQUESTED"/>
+    <static-attribute name="RETURN_ACCEPTED"  staticValue="RETURN_ACCEPTED"/>
+    <static-attribute name="RETURN_RECEIVED"  staticValue="RETURN_RECEIVED"/>
+    <static-attribute name="RETURN_COMPLETED" staticValue="RETURN_COMPLETED"/>
+    <static-attribute name="RETURN_CANCELLED" staticValue="RETURN_CANCELLED"/>
+    <stereotype name="java-object"/>
+  </entity>
+
+  <entity entity-name="ReturnType" package-name="org.apache.ofbiz.order.returnorder">
+  </entity>
+
+  <entity entity-name="ReturnItemBilling" package-name="org.apache.ofbiz.order.returnorder">
+    <association-class participant1="ReturnItem" participant2="InvoiceItem"/>
+  </entity>
+
+  <entity entity-name="ReturnItemShipment" package-name="org.apache.ofbiz.order.returnorder">
+    <association-class participant2="ReturnItem" participant1="ShipmentItem"/>
+  </entity>
+
+  <!-- ========================================================= -->
+  <!-- org.apache.ofbiz.order.shoppingcart -->
+  <!-- ========================================================= -->
+
+  <entity entity-name="CartAbandonedLine" package-name="org.apache.ofbiz.order.shoppingcart">
+  </entity>
+
+  <!-- ========================================================= -->
+  <!-- org.apache.ofbiz.order.shoppinglist -->
+  <!-- ========================================================= -->
+
+  <entity entity-name="ShoppingList" package-name="org.apache.ofbiz.order.shoppinglist">
+  </entity>
+
+  <entity entity-name="ShoppingListItem" package-name="org.apache.ofbiz.order.shoppinglist">
+    <relation with="ShoppingList" type="composite"/>
+  </entity>
+
+  <entity entity-name="ShoppingListItemSurvey" package-name="org.apache.ofbiz.order.shoppinglist">
+    <association-class participant2="ShoppingListItem" participant1="SurveyResponse"/>
+  </entity>
+
+  <entity entity-name="ShoppingListType" package-name="org.apache.ofbiz.order.shoppinglist">
+  </entity>
+
+  <entity entity-name="ShoppingListWorkEffort" package-name="org.apache.ofbiz.order.shoppinglist">
+    <association-class participant2="ShoppingList" participant1="WorkEffort"/>
+  </entity>
+
+</informationmodel>

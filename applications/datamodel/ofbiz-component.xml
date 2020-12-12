@@ -29,6 +29,7 @@ under the License.
     <entity-resource type="model" reader-name="main" loader="main" location="entitydef/manufacturing-entitymodel.xml"/>
     <entity-resource type="model" reader-name="main" loader="main" location="entitydef/marketing-entitymodel.xml"/>
     <entity-resource type="model" reader-name="main" loader="main" location="entitydef/order-entitymodel.xml"/>
+    <entity-resource type="model" reader-name="main" loader="main" location="entitydef/order-entitymodel-ufo.xml"/>
     <entity-resource type="model" reader-name="main" loader="main" location="entitydef/party-entitymodel.xml"/>
     <entity-resource type="model" reader-name="main" loader="main" location="entitydef/product-entitymodel.xml"/>
     <entity-resource type="model" reader-name="main" loader="main" location="entitydef/shipment-entitymodel.xml"/>

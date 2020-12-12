@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2000/10/XMLSchema"
+    xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+  <entity entity-name="CustRqStatus" package-name="org.apache.ofbiz.order.request" >
+     <stereotype name="inherit"/>
+     <discriminator name="statusTypeId=CUSTREQ_STTS"/>
+     <static-attribute name="DRAFT" staticValue="CRQ_DRAFT" />
+     <static-attribute name="SUBMITTED" staticValue="CRQ_SUBMITTED" />
+     <static-attribute name="ACCEPTED"  staticValue="CRQ_ACCEPTED" />
+     <static-attribute name="REVIEWED"  staticValue="CRQ_REVIEWED" />
+     <static-attribute name="PENDING"   staticValue="CRQ_PENDING" />
+     <static-attribute name="COMPLETED" staticValue="CRQ_COMPLETED" />
+     <static-attribute name="REJECTED"  staticValue="CRQ_REJECTED" />
+     <static-attribute name="CANCELLED" staticValue="CRQ_CANCELLED" />
+  </entity>
+
+</informationmodel>

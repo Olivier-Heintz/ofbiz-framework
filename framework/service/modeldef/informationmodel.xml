@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2000/10/XMLSchema" xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+  <entity entity-name="JobSandbox" package-name="org.apache.ofbiz.service.schedule">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="RecurrenceInfo" package-name="org.apache.ofbiz.service.schedule">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="RecurrenceRule" package-name="org.apache.ofbiz.service.schedule">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="RuntimeData" package-name="org.apache.ofbiz.service.schedule">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="TemporalExpression" package-name="org.apache.ofbiz.service.schedule">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="TemporalExpressionAssoc" package-name="org.apache.ofbiz.service.schedule">
+    <stereotype name="java-object"/>
+    <relation with="TemporalExpression" type="composite"/>
+    <relation with="TemporalExpression" type="composite"/>
+  </entity>
+  <entity entity-name="ServiceSemaphore" package-name="org.apache.ofbiz.service.semaphore">
+    <stereotype name="java-object"/>
+  </entity>
+</informationmodel>

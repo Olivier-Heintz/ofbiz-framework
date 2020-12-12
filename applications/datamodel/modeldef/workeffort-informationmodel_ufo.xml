@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2000/10/XMLSchema"
+    xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+  <entity entity-name="TimesheetStatus" package-name="org.apache.ofbiz.workeffort.timesheet" >
+     <stereotype name="inherit"/>
+     <discriminator name="statusTypeId"/>
+     <class-tag name="shortName" value="TIMESHEET_STATUS"/>
+     <static-attribute name="IN_PROCESS" staticValue="TIMESHEET_IN_PROCESS" />
+     <static-attribute name="COMPLETED"  staticValue="TIMESHEET_COMPLETED" />
+     <static-attribute name="APPROVED"   staticValue="TIMESHEET_APPROVED" />
+  </entity>
+
+  <entity entity-name="AssignmentStatus" package-name="org.apache.ofbiz.workeffort.workeffort" >
+     <stereotype name="inherit"/>
+     <discriminator name="statusTypeId"/>
+     <class-tag name="shortName" value="PRTYASGN_STATUS"/>
+     <static-attribute name="OFFERED"    staticValue="PRTYASGN_OFFERED"/>
+     <static-attribute name="ASSIGNED"   staticValue="PRTYASGN_ASSIGNED"/>
+     <static-attribute name="UNASSIGNED" staticValue="PRTYASGN_UNASSIGNED"/>
+  </entity>
+
+  <entity entity-name="Expectation" package-name="org.apache.ofbiz.workeffort.workeffort" >
+     <stereotype name="inherit"/>
+     <discriminator name="enumTypeId"/>
+     <class-tag name="shortName" value="WORK_EFF_EXPECT"/>
+     <static-attribute name="FYI"       staticValue="WEE_FYI" />      <!-- For Your Information -->
+     <static-attribute name="REQUIRE"   staticValue="WEE_REQUIRE"/>   <!-- Involvement Required -->
+     <static-attribute name="REQUEST"   staticValue="WEE_REQUEST"/>   <!-- Involvement Requested -->
+     <static-attribute name="IMMEDIATE" staticValue="WEE_IMMEDIATE"/> <!-- Immediate Response Requested -->
+  </entity>
+
+  <entity entity-name="DelegateReason" package-name="org.apache.ofbiz.workeffort.workeffort" >
+     <stereotype name="inherit"/>
+     <discriminator name="enumTypeId"/>
+     <class-tag name="shortName" value="WORK_EFF_DEL_REAS"/>
+     <static-attribute name="NEED_HELP"      staticValue="WEDR_NEED_HELP" />
+     <static-attribute name="PART_FINISHED"  staticValue="WEDR_PART_FINISHED" />
+     <static-attribute name="WHOLE_FINISHED" staticValue="WEDR_WHOLE_FINISHED" />
+  </entity>
+
+  <entity entity-name="AvailabilityStatus" package-name="org.apache.ofbiz.workeffort.workeffort" >
+     <stereotype name="inherit"/>
+     <discriminator name="statusTypeId"/>
+     <class-tag name="shortName" value="WEPA_AVAILABILITY"/>
+     <static-attribute name="AVAILABLE" staticValue="WEPA_AV_AVAILABLE" />
+     <static-attribute name="BUSY"      staticValue="WEPA_AV_BUSY" />
+     <static-attribute name="AWAY"      staticValue="WEPA_AV_AWAY" />
+  </entity>
+
+</informationmodel>

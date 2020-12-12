@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2000/10/XMLSchema" xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+
+  <entity entity-name="Uom" package-name="org.apache.ofbiz.common.uom">
+    <stereotype name="entity" />
+  </entity>
+
+  <entity entity-name="Enumeration" package-name="org.apache.ofbiz.common.enumeration" >
+    <stereotype name="entity"/>
+    <discriminator name="enumTypeId"/>
+    <class-tag name="cache" value="true"/>
+    <class-tag name="orderBy" value="sequenceId"/>
+    <class-tag name="gui" value="drop-down, dd-descriptionOnly"/>
+    <attribute-tag attribute="enumId" name="mandatory" value="true"/>
+    <attribute-tag attribute="enumId" name="gui" value="idName, indexed"/>
+  </entity>
+
+  <entity entity-name="StatusItem" package-name="org.apache.ofbiz.common.status" >
+    <stereotype name="entity"/>
+    <discriminator name="statusTypeId"/>
+    <class-tag name="cache" value="true"/>
+    <class-tag name="orderBy" value="sequenceId"/>
+    <class-tag name="gui" value="drop-down, dd-descriptionOnly"/>
+    <attribute-tag attribute="statusId" name="mandatory" value="true"/>
+    <attribute-tag attribute="statusId" name="gui" value="idName, indexed"/>
+  </entity>
+
+  <entity entity-name="NoteData" package-name="org.apache.ofbiz.common.note" >
+    <stereotype name="entity"/>
+  </entity>
+
+  <entity entity-name="DataSource" package-name="org.apache.ofbiz.common.datasource">
+    <stereotype name="entity"/>
+  </entity>
+
+  <entity entity-name="DataSourceType" package-name="org.apache.ofbiz.common.datasource">
+    <stereotype name="entity"/>
+  </entity>
+
+  <entity entity-name="EmailTemplateSetting" package-name="org.apache.ofbiz.common.email">
+    <stereotype name="entity"/>
+  </entity>
+
+  <entity entity-name="EnumerationType" package-name="org.apache.ofbiz.common.enumeration">
+    <stereotype name="entity"/>
+  </entity>
+
+  <entity entity-name="CountryCapital" package-name="org.apache.ofbiz.common.geo">
+    <relation with="CountryCode" type="composite"/>
+    <assoc-tag with="CountryCode" name="GetterSetter" value="CountryCode0" />
+    <attribute-tag attribute="countryCode"    name="gui" value="idName" />
+    <attribute-tag attribute="countryCapital" name="gui" value="description" />
+  </entity>
+
+  <entity entity-name="CountryCode" package-name="org.apache.ofbiz.common.geo">
+    <stereotype name="entity"/>
+  </entity>
+
+  <entity entity-name="CountryTeleCode" package-name="org.apache.ofbiz.common.geo">
+    <relation with="CountryCode" type="composite"/>
+    <assoc-tag with="CountryCode" name="GetterSetter" value="CountryCode0" />
+  </entity>
+
+  <entity entity-name="Geo" package-name="org.apache.ofbiz.common.geo">
+    <stereotype name="entity"/>
+  </entity>
+
+  <entity entity-name="GeoAssoc" package-name="org.apache.ofbiz.common.geo">
+    <relation with="Geo" type="composite"/>
+    <relation with="GeoAssocType" type="composite"/>
+  </entity>
+
+  <entity entity-name="GeoAssocType" package-name="org.apache.ofbiz.common.geo">
+  </entity>
+
+  <entity entity-name="GeoPoint" package-name="org.apache.ofbiz.common.geo">
+  </entity>
+
+  <entity entity-name="GeoType" package-name="org.apache.ofbiz.common.geo">
+  </entity>
+
+  <entity entity-name="KeywordThesaurus" package-name="org.apache.ofbiz.common.keyword">
+    <relation with="Enumeration" type="composite"/>
+  </entity>
+
+  <entity entity-name="StandardLanguage" package-name="org.apache.ofbiz.common.language">
+  </entity>
+
+  <entity entity-name="CustomMethod" package-name="org.apache.ofbiz.common.method">
+  </entity>
+
+  <entity entity-name="CustomMethodType" package-name="org.apache.ofbiz.common.method">
+  </entity>
+
+  <entity entity-name="CustomTimePeriod" package-name="org.apache.ofbiz.common.period">
+  </entity>
+
+  <entity entity-name="PeriodType" package-name="org.apache.ofbiz.common.period">
+  </entity>
+
+  <entity entity-name="StandardTimePeriod" package-name="org.apache.ofbiz.common.period">
+  </entity>
+
+  <entity entity-name="StatusType" package-name="org.apache.ofbiz.common.status">
+  </entity>
+
+  <entity entity-name="StatusValidChange" package-name="org.apache.ofbiz.common.status">
+    <relation with="StatusItem" title="Main" type="composite"/>
+    <relation with="StatusItem" title="To" type="composite"/>
+  </entity>
+
+  <entity entity-name="UomConversion" package-name="org.apache.ofbiz.common.uom">
+    <relation with="Uom" type="composite"/>
+        <relation with="Uom" type="composite"/>
+  </entity>
+
+  <entity entity-name="UomConversionDated" package-name="org.apache.ofbiz.common.uom">
+    <relation with="Uom" type="composite"/>
+    <relation with="Uom" type="composite"/>
+  </entity>
+
+  <entity entity-name="UomType" package-name="org.apache.ofbiz.common.uom">
+  </entity>
+
+  <entity entity-name="UserPreference" package-name="org.apache.ofbiz.common.user">
+  </entity>
+
+  <entity entity-name="UserPrefGroupType" package-name="org.apache.ofbiz.common.user">
+  </entity>
+
+  <entity entity-name="VisualThemeSet" package-name="org.apache.ofbiz.common.theme">
+  </entity>
+
+  <entity entity-name="VisualTheme" package-name="org.apache.ofbiz.common.theme">
+  </entity>
+
+  <entity entity-name="VisualThemeResource" package-name="org.apache.ofbiz.common.theme">
+    <association-class participant2="VisualTheme" participant1="Enumeration"/>
+  </entity>
+
+  <entity entity-name="PortalPortlet" package-name="org.apache.ofbiz.common.portal">
+  </entity>
+
+  <entity entity-name="PortletCategory" package-name="org.apache.ofbiz.common.portal">
+  </entity>
+
+  <entity entity-name="PortletPortletCategory" package-name="org.apache.ofbiz.common.portal">
+    <association-class participant2="PortalPortlet" participant1="PortletCategory"/>
+  </entity>
+
+  <entity entity-name="PortalPage" package-name="org.apache.ofbiz.common.portal">
+  </entity>
+
+  <entity entity-name="PortalPageColumn" package-name="org.apache.ofbiz.common.portal">
+    <relation with="PortalPage" type="composite"/>
+  </entity>
+
+  <entity entity-name="PortalPagePortlet" package-name="org.apache.ofbiz.common.portal">
+    <association-class participant2="PortalPage" participant1="PortalPortlet"/>
+  </entity>
+
+  <entity entity-name="PortletAttribute" package-name="org.apache.ofbiz.common.portal">
+    <relation with="PortalPortlet" type="composite"/>
+  </entity>
+
+</informationmodel>
+

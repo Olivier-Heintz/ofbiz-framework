@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2000/10/XMLSchema"
+    xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+
+  <entity entity-name="Addendum" package-name="org.apache.ofbiz.party.agreement">
+  </entity>
+
+  <entity entity-name="Agreement" package-name="org.apache.ofbiz.party.agreement">
+  </entity>
+
+  <entity entity-name="AgreementAttribute" package-name="org.apache.ofbiz.party.agreement">
+    <relation with="Agreement" type="composite"/>
+  </entity>
+
+  <entity entity-name="AgreementGeographicalApplic" package-name="org.apache.ofbiz.party.agreement">
+    <association-class participant1="AgreementItem" participant2="Geo"/>
+  </entity>
+
+  <entity entity-name="AgreementItem" package-name="org.apache.ofbiz.party.agreement">
+    <relation with="Agreement" type="composite"/>
+  </entity>
+
+
+  <entity entity-name="AgreementItemAttribute" package-name="org.apache.ofbiz.party.agreement">
+    <relation with="AgreementItem" type="composite"/>
+  </entity>
+
+  <entity entity-name="AgreementItemType" package-name="org.apache.ofbiz.party.agreement">
+  </entity>
+
+  <entity entity-name="AgreementItemTypeAttr" package-name="org.apache.ofbiz.party.agreement">
+    <relation with="AgreementItemType" type="composite"/>
+  </entity>
+
+  <entity entity-name="AgreementPartyApplic" package-name="org.apache.ofbiz.party.agreement">
+    <association-class participant1="AgreementItem" participant2="Party"/>
+  </entity>
+
+  <entity entity-name="AgreementProductAppl" package-name="org.apache.ofbiz.party.agreement">
+    <association-class participant1="AgreementItem" participant2="Product"/>
+  </entity>
+
+  <entity entity-name="AgreementPromoAppl" package-name="org.apache.ofbiz.party.agreement">
+    <association-class participant1="AgreementItem" participant2="ProductPromo"/>
+  </entity>
+
+  <entity entity-name="AgreementRole" package-name="org.apache.ofbiz.party.agreement">
+    <association-class participant1="Agreement" participant2="PartyRole"/>
+  </entity>
+
+  <entity entity-name="AgreementTerm" package-name="org.apache.ofbiz.party.agreement">
+  </entity>
+
+  <entity entity-name="AgreementTermAttribute" package-name="org.apache.ofbiz.party.agreement">
+    <relation with="AgreementTerm" type="composite"/>
+  </entity>
+
+  <entity entity-name="AgreementType" package-name="org.apache.ofbiz.party.agreement">
+  </entity>
+
+  <entity entity-name="AgreementTypeAttr" package-name="org.apache.ofbiz.party.agreement">
+    <relation with="AgreementType" type="composite"/>
+  </entity>
+
+  <entity entity-name="AgreementWorkEffortApplic" package-name="org.apache.ofbiz.party.agreement">
+    <association-class participant1="AgreementItem" participant2="WorkEffort"/>
+  </entity>
+
+  <entity entity-name="TermType" package-name="org.apache.ofbiz.party.agreement">
+  </entity>
+
+  <entity entity-name="TermTypeAttr" package-name="org.apache.ofbiz.party.agreement">
+    <relation with="TermType" type="composite"/>
+  </entity>
+
+  <entity entity-name="AgreementEmploymentAppl" package-name="org.apache.ofbiz.party.agreement">
+    <association-class participant1="AgreementItem" participant2="Employment"/>
+  </entity>
+
+  <!-- ========================================================= -->
+  <!-- org.apache.ofbiz.party.communication -->
+  <!-- ========================================================= -->
+
+  <entity entity-name="CommContentAssocType" package-name="org.apache.ofbiz.party.communication">
+  </entity>
+
+  <entity entity-name="CommEventContentAssoc" package-name="org.apache.ofbiz.party.communication">
+    <relation with="Content" type="composite"/>
+    <relation with="CommunicationEvent" type="composite"/>
+  </entity>
+
+  <entity entity-name="CommunicationEvent" package-name="org.apache.ofbiz.party.communication">
+  </entity>
+
+  <entity entity-name="CommunicationEventProduct" package-name="org.apache.ofbiz.party.communication">
+    <association-class participant1="Product" participant2="CommunicationEvent"/>
+  </entity>
+
+  <entity entity-name="CommunicationEventPrpTyp" package-name="org.apache.ofbiz.party.communication">
+  </entity>
+
+  <entity entity-name="CommunicationEventPurpose" package-name="org.apache.ofbiz.party.communication">
+    <association-class participant1="CommunicationEventPrpTyp" participant2="CommunicationEvent"/>
+  </entity>
+
+  <entity entity-name="CommunicationEventRole" package-name="org.apache.ofbiz.party.communication">
+    <association-class participant1="CommunicationEvent" participant2="PartyRole"/>
+  </entity>
+
+  <entity entity-name="CommunicationEventType" package-name="org.apache.ofbiz.party.communication">
+  </entity>
+
+  <!-- ========================================================= -->
+  <!-- org.apache.ofbiz.party.contact -->
+  <!-- ========================================================= -->
+
+  <entity entity-name="ContactMech" package-name="org.apache.ofbiz.party.contact">
+    <stereotype name="entity" />
+  </entity>
+
+  <entity entity-name="ContactMechAttribute" package-name="org.apache.ofbiz.party.contact">
+    <relation with="ContactMech" type="composite"/>
+  </entity>
+
+  <entity entity-name="ContactMechLink" package-name="org.apache.ofbiz.party.contact">
+    <relation  with="ContactMech" title="From" type="composite"/>
+    <relation  with="ContactMech" title="To"   type="composite"/>
+  </entity>
+
+  <entity entity-name="ContactMechPurposeType" package-name="org.apache.ofbiz.party.contact">
+  </entity>
+
+  <entity entity-name="ContactMechType" package-name="org.apache.ofbiz.party.contact">
+  </entity>
+
+  <entity entity-name="ContactMechTypeAttr" package-name="org.apache.ofbiz.party.contact">
+    <relation with="ContactMechType" type="composite"/>
+  </entity>
+
+  <entity entity-name="ContactMechTypePurpose" package-name="org.apache.ofbiz.party.contact">
+    <association-class participant1="ContactMechType" participant2="ContactMechPurposeType"/>
+  </entity>
+
+  <entity entity-name="EmailAddressVerification" package-name="org.apache.ofbiz.party.contact">
+  </entity>
+
+  <entity entity-name="PartyContactMech" package-name="org.apache.ofbiz.party.contact">
+    <association-class participant1="Party" participant2="ContactMech"/>
+  </entity>
+
+  <entity entity-name="PartyContactMechPurpose" package-name="org.apache.ofbiz.party.contact">
+    <relation with="Party" type="composite"/>
+    <relation with="ContactMech" type="composite"/>
+    <relation with="ContactMechPurposeType" type="composite"/>
+  </entity>
+
+  <entity entity-name="PostalAddress" package-name="org.apache.ofbiz.party.contact">
+    <stereotype name="entity" />
+    <discriminator name="contactMechTypeId=POSTAL_ADDRESS" />
+  </entity>
+
+  <entity entity-name="PostalAddressBoundary" package-name="org.apache.ofbiz.party.contact">
+    <association-class participant1="PostalAddress" participant2="Geo"/>
+  </entity>
+
+  <entity entity-name="TelecomNumber" package-name="org.apache.ofbiz.party.contact">
+    <discriminator name="contactMechTypeId=TELECOM_NUMBER" />
+  </entity>
+
+  <entity entity-name="ValidContactMechRole" package-name="org.apache.ofbiz.party.contact">
+    <association-class participant1="RoleType" participant2="ContactMechType"/>
+  </entity>
+
+  <!-- ========================================================= -->
+  <!-- org.apache.ofbiz.party.need -->
+  <!-- ========================================================= -->
+
+  <entity entity-name="NeedType" package-name="org.apache.ofbiz.party.need">
+  </entity>
+
+  <entity entity-name="PartyNeed" package-name="org.apache.ofbiz.party.need">
+    <association-class participant1="NeedType" participant2="PartyRole"/>
+  </entity>
+
+  <!-- ========================================================= -->
+  <!-- org.apache.ofbiz.party.party -->
+  <!-- ========================================================= -->
+
+  <entity entity-name="AddressMatchMap" package-name="org.apache.ofbiz.party.party">
+  </entity>
+
+  <entity entity-name="Affiliate" package-name="org.apache.ofbiz.party.party">
+    <relation with="PartyGroup" type="composite"/>
+  </entity>
+
+  <entity entity-name="Party" package-name="org.apache.ofbiz.party.party">
+    <!-- <class-tag name="alreadyExistingOfbizEntities" value="true"/> -->
+    <class-tag name="gui" value="lookup"/>
+    <stereotype name="entity" />
+    <attribute-tag  attribute="partyId" name="gui" value="idName, indexed"/>
+    <assoc-tag name="GetterSetter" value="LastModifiedByUserLogin0" title="LastModifiedBy" with="UserLogin"/>
+    <assoc-tag name="GetterSetter" value="CreatedByUserLogin0" title="CreatedBy" with="UserLogin"/>
+  </entity>
+
+  <entity entity-name="PartyIdentification" package-name="org.apache.ofbiz.party.party">
+    <association-class participant1="Party" participant2="PartyIdentificationType"/>
+  </entity>
+
+  <entity entity-name="PartyIdentificationType" package-name="org.apache.ofbiz.party.party">
+  </entity>
+
+  <entity entity-name="PartyGeoPoint" package-name="org.apache.ofbiz.party.party">
+    <association-class participant1="Party" participant2="GeoPoint"/>
+  </entity>
+
+  <entity entity-name="PartyAttribute" package-name="org.apache.ofbiz.party.party">
+    <relation with="Party" type="composite"/>
+  </entity>
+
+  <entity entity-name="PartyCarrierAccount" package-name="org.apache.ofbiz.party.party">
+    <relation with="Party" type="composite"/>
+    <relation with="Party" title="Carrier"  type="composite"/>
+  </entity>
+
+  <entity entity-name="PartyClassification" package-name="org.apache.ofbiz.party.party">
+    <association-class participant1="Party" participant2="PartyClassificationGroup"/>
+  </entity>
+
+  <entity entity-name="PartyClassificationGroup" package-name="org.apache.ofbiz.party.party">
+  </entity>
+
+  <entity entity-name="PartyClassificationType" package-name="org.apache.ofbiz.party.party">
+  </entity>
+
+  <entity entity-name="PartyContent" package-name="org.apache.ofbiz.party.party">
+    <relation with="Party" type="composite"/>
+    <relation with="Content" type="composite"/>
+    <relation with="PartyContentType" type="composite"/>
+  </entity>
+
+  <entity entity-name="PartyContentType" package-name="org.apache.ofbiz.party.party">
+  </entity>
+
+  <entity entity-name="PartyDataSource" package-name="org.apache.ofbiz.party.party">
+    <association-class participant1="Party" participant2="DataSource"/>
+  </entity>
+
+  <entity entity-name="PartyGroup" package-name="org.apache.ofbiz.party.party">
+    <stereotype name="entity" />
+    <discriminator name="partyTypeId=PARTY_GROUP" />
+  </entity>
+
+  <entity entity-name="PartyIcsAvsOverride" package-name="org.apache.ofbiz.party.party">
+    <relation with="Party" type="composite"/>
+  </entity>
+
+  <entity entity-name="PartyInvitation" package-name="org.apache.ofbiz.party.party">
+  </entity>
+
+  <entity entity-name="PartyInvitationGroupAssoc" package-name="org.apache.ofbiz.party.party">
+    <association-class participant1="PartyInvitation" participant2="Party"/>
+  </entity>
+
+  <entity entity-name="PartyInvitationRoleAssoc" package-name="org.apache.ofbiz.party.party">
+    <association-class participant1="PartyInvitation" participant2="RoleType"/>
+  </entity>
+
+  <entity entity-name="PartyNameHistory" package-name="org.apache.ofbiz.party.party">
+  </entity>
+
+  <entity entity-name="PartyNote" package-name="org.apache.ofbiz.party.party">
+    <association-class participant1="Party" participant2="NoteData"/>
+  </entity>
+
+  <entity entity-name="PartyProfileDefault" package-name="org.apache.ofbiz.party.party">
+    <association-class participant1="Party" participant2="ProductStore"/>
+  </entity>
+
+  <entity entity-name="PartyRelationship" package-name="org.apache.ofbiz.party.party">
+    <relation with="PartyRole" title="From" type="composite"/>
+    <relation with="PartyRole" title="To" type="composite"/>
+    <assoc-tag with="PartyRole" title="From" name="titleAsSuffix" value="true" />
+    <assoc-tag with="PartyRole" title="To" name="titleAsSuffix" value="true" />
+  </entity>
+
+  <entity entity-name="PartyRelationshipType" package-name="org.apache.ofbiz.party.party">
+  </entity>
+
+  <entity entity-name="PartyRole" package-name="org.apache.ofbiz.party.party">
+    <association-class participant1="Party" participant2="RoleType"/>
+  </entity>
+
+  <entity entity-name="PartyStatus" package-name="org.apache.ofbiz.party.party">
+    <association-class participant1="Party" participant2="StatusItem"/>
+  </entity>
+
+  <entity entity-name="PartyType" package-name="org.apache.ofbiz.party.party">
+  </entity>
+
+  <entity entity-name="PartyTypeAttr" package-name="org.apache.ofbiz.party.party">
+    <relation with="PartyType" type="composite"/>
+  </entity>
+
+  <entity entity-name="Person" package-name="org.apache.ofbiz.party.party">
+    <stereotype name="entity" />
+    <discriminator name="partyTypeId=PERSON" />
+  </entity>
+
+  <entity entity-name="PriorityType" package-name="org.apache.ofbiz.party.party">
+  </entity>
+
+  <entity entity-name="RoleType" package-name="org.apache.ofbiz.party.party">
+    <class-tag name="gui" value="drop-down"/>
+  </entity>
+
+  <entity entity-name="RoleTypeAttr" package-name="org.apache.ofbiz.party.party">
+    <relation with="RoleType" type="composite"/>
+<!--    <relation with="ExtentAttribute" type="composite"/>-->
+  </entity>
+
+  <entity entity-name="Vendor" package-name="org.apache.ofbiz.party.party">
+    <relation with="Party" type="composite"/>
+  </entity>
+
+  <entity entity-name="NoteData" package-name="org.apache.ofbiz.common.note" >
+    <assoc-tag name="GetterSetter" value="NoteParty0" title="Note" with="Party"/>
+  </entity>
+</informationmodel>

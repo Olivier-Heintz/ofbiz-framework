@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:xsd="http://www.w3.org/2000/10/XMLSchema"
+                   xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+
+  <entity entity-name="Content" package-name="org.apache.ofbiz.content.content">
+    <assoc-tag name="GetterSetter" value="LastModifiedByUserLogin0" title="LastModifiedBy" with="UserLogin"/>
+    <assoc-tag name="GetterSetter" value="CreatedByUserLogin0" title="CreatedBy" with="UserLogin"/>
+  </entity>
+  <entity entity-name="ContentApproval" package-name="org.apache.ofbiz.content.content">
+  </entity>
+
+  <entity entity-name="ContentAssoc" package-name="org.apache.ofbiz.content.content">
+    <relation with="Content" type="composite" title="From"/>
+    <relation with="Content" type="composite" title="To"/>
+    <relation with="ContentAssocType" type="composite"/>
+    <assoc-tag name="GetterSetter" value="LastModifiedByUserLogin0" title="LastModifiedBy" with="UserLogin"/>
+    <assoc-tag name="GetterSetter" value="CreatedByUserLogin0" title="CreatedBy" with="UserLogin"/>
+  </entity>
+
+  <entity entity-name="ContentAssocPredicate" package-name="org.apache.ofbiz.content.content">
+  </entity>
+
+  <entity entity-name="ContentAssocType" package-name="org.apache.ofbiz.content.content">
+  </entity>
+
+  <entity entity-name="ContentAttribute" package-name="org.apache.ofbiz.content.content">
+    <relation with="Content" type="composite"/>
+  </entity>
+
+  <entity entity-name="ContentMetaData" package-name="org.apache.ofbiz.content.content">
+    <association-class participant2="Content" participant1="MetaDataPredicate"/>
+  </entity>
+
+  <entity entity-name="ContentOperation" package-name="org.apache.ofbiz.content.content">
+  </entity>
+
+  <entity entity-name="ContentPurpose" package-name="org.apache.ofbiz.content.content">
+    <association-class participant2="Content" participant1="ContentPurposeType"/>
+  </entity>
+
+  <entity entity-name="ContentPurposeOperation" package-name="org.apache.ofbiz.content.content">
+    <relation with="ContentPurposeType" type="composite"/>
+    <relation with="ContentOperation" type="composite"/>
+    <relation with="RoleType" type="composite"/>
+    <relation with="StatusItem" type="composite"/>
+    <relation with="Enumeration" type="composite"/>
+  </entity>
+
+  <entity entity-name="ContentPurposeType" package-name="org.apache.ofbiz.content.content">
+  </entity>
+
+  <entity entity-name="ContentRevision" package-name="org.apache.ofbiz.content.content">
+  </entity>
+
+  <entity entity-name="ContentRevisionItem" package-name="org.apache.ofbiz.content.content">
+    <relation with="ContentRevision" type="composite"/>
+  </entity>
+
+  <entity entity-name="ContentRole" package-name="org.apache.ofbiz.content.content">
+    <relation with="Content" type="composite"/>
+    <relation with="Party" type="composite"/>
+    <relation with="PartyRole" type="composite"/>
+  </entity>
+
+  <entity entity-name="ContentType" package-name="org.apache.ofbiz.content.content">
+  </entity>
+
+  <entity entity-name="ContentTypeAttr" package-name="org.apache.ofbiz.content.content">
+    <relation with="ContentType" type="composite"/>
+  </entity>
+
+  <entity entity-name="AudioDataResource" package-name="org.apache.ofbiz.content.data">
+    <discriminator name="dataResourceTypeId" />
+
+  </entity>
+
+  <entity entity-name="CharacterSet" package-name="org.apache.ofbiz.content.data">
+  </entity>
+
+  <entity entity-name="DataCategory" package-name="org.apache.ofbiz.content.data">
+  </entity>
+
+  <entity entity-name="DataResource" package-name="org.apache.ofbiz.content.data">
+    <assoc-tag name="GetterSetter" value="LastModifiedByUserLogin0" title="LastModifiedBy" with="UserLogin"/>
+    <assoc-tag name="GetterSetter" value="CreatedByUserLogin0" title="CreatedBy" with="UserLogin"/>
+  </entity>
+
+  <entity entity-name="DataResourceAttribute" package-name="org.apache.ofbiz.content.data">
+    <relation with="DataResource" type="composite"/>
+  </entity>
+
+  <entity entity-name="DataResourceMetaData" package-name="org.apache.ofbiz.content.data">
+    <relation with="DataResource" type="composite"/>
+    <relation with="MetaDataPredicate" type="composite"/>
+    <relation with="DataSource" type="composite"/>
+  </entity>
+
+  <entity entity-name="DataResourcePurpose" package-name="org.apache.ofbiz.content.data">
+    <association-class participant2="DataResource" participant1="ContentPurposeType"/>
+    </entity>
+
+  <entity entity-name="DataResourceRole" package-name="org.apache.ofbiz.content.data">
+    <relation with="DataResource" type="composite"/>
+    <relation with="Party" type="composite"/>
+    <relation with="PartyRole" type="composite"/>
+  </entity>
+
+  <entity entity-name="DataResourceType" package-name="org.apache.ofbiz.content.data">
+  </entity>
+
+  <entity entity-name="DataResourceTypeAttr" package-name="org.apache.ofbiz.content.data">
+    <relation with="DataResourceType" type="composite"/>
+  </entity>
+
+  <entity entity-name="DataTemplateType" package-name="org.apache.ofbiz.content.data">
+  </entity>
+
+  <entity entity-name="ElectronicText" package-name="org.apache.ofbiz.content.data">
+    <discriminator name="dataResourceTypeId" />
+    <class-tag name="shortName" value="ELECTRONIC_TEXT"/>
+  </entity>
+
+  <entity entity-name="FileExtension" package-name="org.apache.ofbiz.content.data">
+  </entity>
+
+  <entity entity-name="ImageDataResource" package-name="org.apache.ofbiz.content.data">
+    <discriminator name="dataResourceTypeId" />
+  </entity>
+
+  <entity entity-name="MetaDataPredicate" package-name="org.apache.ofbiz.content.data">
+  </entity>
+
+  <entity entity-name="MimeType" package-name="org.apache.ofbiz.content.data">
+  </entity>
+
+  <entity entity-name="MimeTypeHtmlTemplate" package-name="org.apache.ofbiz.content.data">
+    <relation with="MimeType" type="composite"/>
+  </entity>
+
+  <entity entity-name="OtherDataResource" package-name="org.apache.ofbiz.content.data">
+    <discriminator name="dataResourceTypeId" />
+  </entity>
+
+  <entity entity-name="VideoDataResource" package-name="org.apache.ofbiz.content.data">
+    <discriminator name="dataResourceTypeId" />
+  </entity>
+
+  <entity entity-name="Document" package-name="org.apache.ofbiz.content.document">
+  </entity>
+
+  <entity entity-name="DocumentAttribute" package-name="org.apache.ofbiz.content.document">
+    <relation with="Document" type="composite"/>
+  </entity>
+
+  <entity entity-name="DocumentType" package-name="org.apache.ofbiz.content.document">
+  </entity>
+  <entity entity-name="DocumentTypeAttr" package-name="org.apache.ofbiz.content.document">
+    <relation with="DocumentType" type="composite"/>
+  </entity>
+
+  <entity entity-name="WebPreferenceType" package-name="org.apache.ofbiz.content.preference">
+  </entity>
+
+  <entity entity-name="WebUserPreference" package-name="org.apache.ofbiz.content.preference">
+    <relation with="WebPreferenceType" type="composite"/>
+    <relation with="UserLogin" type="composite"/>
+    <relation with="Party" type="composite"/>
+  </entity>
+
+  <entity entity-name="Survey" package-name="org.apache.ofbiz.content.survey">
+  </entity>
+
+  <entity entity-name="SurveyApplType" package-name="org.apache.ofbiz.content.survey">
+  </entity>
+
+  <entity entity-name="SurveyMultiResp" package-name="org.apache.ofbiz.content.survey">
+    <relation with="Survey" type="composite"/>
+  </entity>
+
+  <entity entity-name="SurveyMultiRespColumn" package-name="org.apache.ofbiz.content.survey">
+    <relation with="SurveyMultiResp" type="composite"/>
+  </entity>
+
+  <entity entity-name="SurveyPage" package-name="org.apache.ofbiz.content.survey">
+    <relation with="Survey" type="composite"/>
+  </entity>
+
+  <entity entity-name="SurveyQuestion" package-name="org.apache.ofbiz.content.survey">
+  </entity>
+
+  <entity entity-name="SurveyQuestionAppl" package-name="org.apache.ofbiz.content.survey">
+    <association-class participant2="Survey" participant1="SurveyQuestion"/>
+  </entity>
+
+  <entity entity-name="SurveyQuestionCategory" package-name="org.apache.ofbiz.content.survey">
+  </entity>
+
+  <entity entity-name="SurveyQuestionOption" package-name="org.apache.ofbiz.content.survey">
+    <relation with="SurveyQuestion" type="composite"/>
+  </entity>
+
+  <entity entity-name="SurveyQuestionType" package-name="org.apache.ofbiz.content.survey">
+  </entity>
+
+  <entity entity-name="SurveyResponse" package-name="org.apache.ofbiz.content.survey">
+  </entity>
+
+  <entity entity-name="SurveyResponseAnswer" package-name="org.apache.ofbiz.content.survey">
+    <relation with="SurveyResponse" type="composite"/>
+    <relation with="SurveyQuestion" type="composite"/>
+  </entity>
+
+  <entity entity-name="SurveyTrigger" package-name="org.apache.ofbiz.content.survey">
+    <association-class participant2="Survey" participant1="SurveyApplType"/>
+  </entity>
+
+  <entity entity-name="WebSiteContent" package-name="org.apache.ofbiz.content.website">
+  </entity>
+
+  <entity entity-name="WebSiteContentType" package-name="org.apache.ofbiz.content.website">
+  </entity>
+
+  <entity entity-name="WebSitePathAlias" package-name="org.apache.ofbiz.content.website">
+     <relation with="WebSite" type="composite"/>
+  </entity>
+
+  <entity entity-name="WebSitePublishPoint" package-name="org.apache.ofbiz.content.website">
+    <discriminator name="contentTypeId" />
+  </entity>
+
+  <entity entity-name="WebSiteRole" package-name="org.apache.ofbiz.party.party">
+    <association-class participant2="PartyRole" participant1="WebSite"/>
+  </entity>
+</informationmodel>

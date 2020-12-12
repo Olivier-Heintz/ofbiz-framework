@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2000/10/XMLSchema" xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+  <entity entity-name="X509IssuerProvision" package-name="org.apache.ofbiz.security.cert">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="UserLogin" package-name="org.apache.ofbiz.security.login">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="UserLoginPasswordHistory" package-name="org.apache.ofbiz.security.login">
+    <stereotype name="java-object"/>
+    <relation with="UserLogin" type="composite"/>
+  </entity>
+  <entity entity-name="UserLoginHistory" package-name="org.apache.ofbiz.security.login">
+    <stereotype name="java-object"/>
+    <relation with="UserLogin" type="composite"/>
+  </entity>
+  <entity entity-name="UserLoginSession" package-name="org.apache.ofbiz.security.login">
+    <stereotype name="java-object"/>
+    <relation with="UserLogin" type="composite"/>
+  </entity>
+  <entity entity-name="SecurityGroup" package-name="org.apache.ofbiz.security.securitygroup">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="SecurityGroupPermission" package-name="org.apache.ofbiz.security.securitygroup">
+    <stereotype name="java-object"/>
+    <relation with="SecurityGroup" type="composite"/>
+  </entity>
+  <entity entity-name="SecurityPermission" package-name="org.apache.ofbiz.security.securitygroup">
+    <stereotype name="java-object"/>
+  </entity>
+<!--  <entity entity-name="SecurityPermissionAutoGrant" package-name="org.apache.ofbiz.security.securitygroup">-->
+<!--    <stereotype name="java-object"/>-->
+<!--    <relation with="SecurityPermission" type="composite"/>-->
+<!--  </entity>-->
+  <entity entity-name="UserLoginSecurityGroup" package-name="org.apache.ofbiz.security.securitygroup">
+    <stereotype name="java-object"/>
+    <association-class participant2="UserLogin" participant1="SecurityGroup"/>
+  </entity>
+  <entity entity-name="ProtectedView" package-name="org.apache.ofbiz.security.securitygroup">
+    <stereotype name="java-object"/>
+    <relation with="SecurityGroup" type="composite"/>
+  </entity>
+  <entity entity-name="TarpittedLoginView" package-name="org.apache.ofbiz.security.securitygroup">
+    <stereotype name="java-object"/>
+  </entity>
+</informationmodel>

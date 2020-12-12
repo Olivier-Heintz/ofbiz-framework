@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2000/10/XMLSchema" xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+  <entity entity-name="BrowserType" package-name="org.apache.ofbiz.webapp.visit">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="PlatformType" package-name="org.apache.ofbiz.webapp.visit">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="ProtocolType" package-name="org.apache.ofbiz.webapp.visit">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="ServerHit" package-name="org.apache.ofbiz.webapp.visit">
+    <stereotype name="java-object"/>
+    <relation with="ServerHitType" type="composite"/>
+    <relation with="Visit" type="composite"/>
+  </entity>
+  <entity entity-name="ServerHitBin" package-name="org.apache.ofbiz.webapp.visit">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="ServerHitType" package-name="org.apache.ofbiz.webapp.visit">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="UserAgent" package-name="org.apache.ofbiz.webapp.visit">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="UserAgentMethodType" package-name="org.apache.ofbiz.webapp.visit">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="UserAgentType" package-name="org.apache.ofbiz.webapp.visit">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="Visit" package-name="org.apache.ofbiz.webapp.visit">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="Visitor" package-name="org.apache.ofbiz.webapp.visit">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="WebPage" package-name="org.apache.ofbiz.webapp.website">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="WebSite" package-name="org.apache.ofbiz.webapp.website">
+    <stereotype name="java-object"/>
+  </entity>
+</informationmodel>

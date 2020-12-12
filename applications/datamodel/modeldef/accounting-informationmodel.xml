@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2000/10/XMLSchema"
+    xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+    <!-- ========================================================= -->
+    <!-- org.apache.ofbiz.accounting.budget -->
+    <!-- ========================================================= -->
+  <entity entity-name="Budget" package-name="org.apache.ofbiz.accounting.budget">
+    </entity>
+    <entity entity-name="BudgetAttribute" package-name="org.apache.ofbiz.accounting.budget">
+    <relation with="Budget" type="composite"/>
+  </entity>
+  <entity entity-name="BudgetItem" package-name="org.apache.ofbiz.accounting.budget">
+    <relation with="Budget" type="composite"/>
+  </entity>
+  <entity entity-name="BudgetItemAttribute" package-name="org.apache.ofbiz.accounting.budget">
+    <relation with="BudgetItem" type="composite"/>
+  </entity>
+  <entity entity-name="BudgetItemType" package-name="org.apache.ofbiz.accounting.budget">
+  </entity>
+  <entity entity-name="BudgetItemTypeAttr" package-name="org.apache.ofbiz.accounting.budget">
+    <relation with="BudgetItemType" type="composite"/>
+  </entity>
+  <entity entity-name="BudgetReview" package-name="org.apache.ofbiz.accounting.budget">
+    <relation with="Budget" type="composite"/>
+    <relation with="Party" type="composite"/>
+    <relation with="BudgetReviewResultType" type="composite"/>
+  </entity>
+  <entity entity-name="BudgetReviewResultType" package-name="org.apache.ofbiz.accounting.budget">
+  </entity>
+  <entity entity-name="BudgetRevision" package-name="org.apache.ofbiz.accounting.budget">
+    <relation with="Budget" type="composite"/>
+  </entity>
+   <entity entity-name="BudgetRevisionImpact" package-name="org.apache.ofbiz.accounting.budget">
+      <relation with="BudgetItem" type="composite"/>
+      <relation with="BudgetRevision" type="composite"/>
+  </entity>
+  <entity entity-name="BudgetRole" package-name="org.apache.ofbiz.accounting.budget">
+    <relation with="Budget" type="composite"/>
+    <relation with="PartyRole" type="composite"/>
+  </entity>
+  <entity entity-name="BudgetScenario" package-name="org.apache.ofbiz.accounting.budget">
+  </entity>
+  <entity entity-name="BudgetScenarioApplication" package-name="org.apache.ofbiz.accounting.budget">
+    <relation with="BudgetScenario" type="composite"/>
+  </entity>
+  <entity entity-name="BudgetScenarioRule" package-name="org.apache.ofbiz.accounting.budget">
+    <relation with="BudgetScenario" type="composite"/>
+    <relation with="BudgetItemType" type="composite"/>
+  </entity>
+  <entity entity-name="BudgetStatus" package-name="org.apache.ofbiz.accounting.budget">
+    <relation with="Budget" type="composite"/>
+    <relation with="StatusItem" type="composite"/>
+  </entity>
+  <entity entity-name="BudgetType" package-name="org.apache.ofbiz.accounting.budget">
+  </entity>
+  <entity entity-name="BudgetTypeAttr" package-name="org.apache.ofbiz.accounting.budget">
+    <relation with="BudgetType" type="composite"/>
+  </entity>
+      <!-- ========================================================= -->
+    <!-- org.apache.ofbiz.accounting.finaccount -->
+    <!-- financial account entities for gift certificates, calling cards, or customer accounts -->
+    <!-- ========================================================= -->
+  <entity entity-name="FinAccount" package-name="org.apache.ofbiz.accounting.finaccount">
+  </entity>
+  <entity entity-name="FinAccountAttribute" package-name="org.apache.ofbiz.accounting.finaccount">
+     <relation with="FinAccount" type="composite"/>
+  </entity>
+  <entity entity-name="FinAccountAuth" package-name="org.apache.ofbiz.accounting.finaccount">
+  </entity>
+  <entity entity-name="FinAccountRole" package-name="org.apache.ofbiz.accounting.finaccount">
+    <relation with="FinAccount" type="composite"/>
+    <relation with="PartyRole" type="composite"/>
+  </entity>
+  <entity entity-name="FinAccountStatus" package-name="org.apache.ofbiz.accounting.finaccount">
+    <relation with="FinAccount" type="composite"/>
+    <relation with="StatusItem" type="composite"/>
+  </entity>
+  <entity entity-name="FinAccountTrans" package-name="org.apache.ofbiz.accounting.finaccount">
+  </entity>
+  <entity entity-name="FinAccountTransAttribute" package-name="org.apache.ofbiz.accounting.finaccount">
+    <relation with="FinAccountTrans" type="composite"/>
+  </entity>
+  <entity entity-name="FinAccountTransType" package-name="org.apache.ofbiz.accounting.finaccount">
+  </entity>
+  <entity entity-name="FinAccountTransTypeAttr" package-name="org.apache.ofbiz.accounting.finaccount">
+    <relation with="FinAccountTransType" type="composite"/>
+  </entity>
+  <entity entity-name="FinAccountType" package-name="org.apache.ofbiz.accounting.finaccount">
+  </entity>
+   <entity entity-name="FinAccountTypeAttr" package-name="org.apache.ofbiz.accounting.finaccount">
+    <relation with="FinAccountType" type="composite"/>
+  </entity>
+  <entity entity-name="FinAccountTypeGlAccount" package-name="org.apache.ofbiz.accounting.finaccount">
+    <relation with="FinAccountType" type="composite"/>
+    <relation with="Party" type="composite"/>
+  </entity>
+     <!-- ========================================================= -->
+    <!-- org.apache.ofbiz.accounting.fixedasset -->
+    <!-- ========================================================= -->
+  <entity entity-name="FixedAsset" package-name="org.apache.ofbiz.accounting.fixedasset">
+   <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="FixedAssetAttribute" package-name="org.apache.ofbiz.accounting.fixedasset">
+    <relation with="FixedAsset" type="composite"/>
+  </entity>
+  <entity entity-name="FixedAssetDepMethod" package-name="org.apache.ofbiz.accounting.fixedasset">
+    <relation with="CustomMethod" type="composite"/>
+    <relation with="FixedAsset" type="composite"/>
+  </entity>
+  <entity entity-name="FixedAssetGeoPoint" package-name="org.apache.ofbiz.accounting.fixedasset">
+    <relation with="FixedAsset" type="composite"/>
+    <relation with="GeoPoint" type="composite"/>
+  </entity>
+  <entity entity-name="FixedAssetIdent" package-name="org.apache.ofbiz.accounting.fixedasset">
+    <relation with="FixedAsset" type="composite"/>
+    <relation with="FixedAssetIdentType" type="composite"/>
+  </entity>
+   <entity entity-name="FixedAssetIdentType" package-name="org.apache.ofbiz.accounting.fixedasset">
+  </entity>
+  <entity entity-name="FixedAssetMaint" package-name="org.apache.ofbiz.accounting.fixedasset">
+    <relation with="FixedAsset" type="composite"/>
+  </entity>
+  <entity entity-name="FixedAssetMaintMeter" package-name="org.apache.ofbiz.accounting.fixedasset">
+    <relation with="FixedAssetMaint" type="composite"/>
+    <relation with="ProductMeterType" type="composite"/>
+  </entity>
+  <entity entity-name="FixedAssetMeter" package-name="org.apache.ofbiz.accounting.fixedasset">
+    <relation with="FixedAssetMaint" type="composite"/>
+    <relation with="ProductMeterType" type="composite"/>
+  </entity>
+  <entity entity-name="FixedAssetProduct" package-name="org.apache.ofbiz.accounting.fixedasset">
+    <relation with="FixedAsset" type="composite"/>
+    <relation with="Product" type="composite"/>
+    <relation with="FixedAssetProductType" type="composite"/>
+  </entity>
+  <entity entity-name="FixedAssetProductType" package-name="org.apache.ofbiz.accounting.fixedasset">
+  </entity>
+   <entity entity-name="FixedAssetRegistration" package-name="org.apache.ofbiz.accounting.fixedasset">
+    <relation with="FixedAsset" type="composite"/>
+  </entity>
+  <entity entity-name="FixedAssetStdCost" package-name="org.apache.ofbiz.accounting.fixedasset">
+    <relation with="FixedAsset" type="composite"/>
+    <relation with="FixedAssetStdCostType" type="composite"/>
+  </entity>
+  <entity entity-name="FixedAssetStdCostType" package-name="org.apache.ofbiz.accounting.fixedasset">
+  </entity>
+  <entity entity-name="FixedAssetType" package-name="org.apache.ofbiz.accounting.fixedasset">
+  </entity>
+  <entity entity-name="FixedAssetTypeAttr" package-name="org.apache.ofbiz.accounting.fixedasset">
+    <relation with="FixedAssetType" type="composite"/>
+  </entity>
+   <entity entity-name="PartyFixedAssetAssignment" package-name="org.apache.ofbiz.accounting.fixedasset">
+    <relation with="FixedAsset" type="composite"/>
+    <relation with="PartyRole" type="composite"/>
+  </entity>
+  <entity entity-name="FixedAssetMaintOrder" package-name="org.apache.ofbiz.accounting.fixedasset">
+    <relation with="FixedAsset" type="composite"/>
+    <relation with="OrderHeader" type="composite"/>
+    <relation with="OrderItem" type="composite"/>
+  </entity>
+   <entity entity-name="AccommodationClass" package-name="org.apache.ofbiz.accounting.fixedasset">
+  </entity>
+  <entity entity-name="AccommodationMap" package-name="org.apache.ofbiz.accounting.fixedasset">
+  </entity>
+  <entity entity-name="AccommodationMapType" package-name="org.apache.ofbiz.accounting.fixedasset">
+  </entity>
+    <!-- ========================================================= -->
+      <!-- org.apache.ofbiz.accounting.invoice -->
+      <!-- ========================================================= -->
+  <entity entity-name="Invoice" package-name="org.apache.ofbiz.accounting.invoice">
+    <stereotype name="java-object" />
+  </entity>
+   <entity entity-name="InvoiceAttribute" package-name="org.apache.ofbiz.accounting.invoice">
+    <relation with="Invoice" type="composite"/>
+  </entity>
+  <entity entity-name="InvoiceContactMech" package-name="org.apache.ofbiz.accounting.invoice">
+    <relation with="Invoice" type="composite"/>
+    <relation with="ContactMech" type="composite"/>
+    <relation with="ContactMechPurposeType" type="composite"/>
+  </entity>
+   <entity entity-name="InvoiceItem" package-name="org.apache.ofbiz.accounting.invoice">
+    <relation with="Invoice" type="composite"/>
+  </entity>
+   <entity entity-name="InvoiceItemAssoc" package-name="org.apache.ofbiz.accounting.invoice">
+    <relation with="InvoiceItemAssocType" type="composite"/>
+    <relation with="InvoiceItem" type="composite"/>
+  </entity>
+  <entity entity-name="InvoiceItemAssocType" package-name="org.apache.ofbiz.accounting.invoice">
+  </entity>
+   <entity entity-name="InvoiceItemAttribute" package-name="org.apache.ofbiz.accounting.invoice">
+    <relation with="InvoiceItem" type="composite"/>
+  </entity>
+  <entity entity-name="InvoiceItemTypeGlAccount" package-name="org.apache.ofbiz.accounting.invoice">
+    <relation with="InvoiceItemType" type="composite"/>
+    <relation with="Party" type="composite"/>
+  </entity>
+  <entity entity-name="InvoiceItemTypeMap" package-name="org.apache.ofbiz.accounting.invoice">
+    <relation with="InvoiceType" type="composite"/>
+  </entity>
+  <entity entity-name="InvoiceRole" package-name="org.apache.ofbiz.accounting.invoice">
+    <relation with="Invoice" type="composite"/>
+    <relation with="PartyRole" type="composite"/>
+  </entity>
+  <entity entity-name="InvoiceStatus" package-name="org.apache.ofbiz.accounting.invoice">
+    <relation with="Invoice" type="composite"/>
+    <relation with="StatusItem" type="composite"/>
+  </entity>
+  <entity entity-name="InvoiceItemType" package-name="org.apache.ofbiz.accounting.invoice">
+  </entity>
+  <entity entity-name="InvoiceTerm" package-name="org.apache.ofbiz.accounting.invoice">
+  </entity>
+  <entity entity-name="InvoiceTermAttribute" package-name="org.apache.ofbiz.accounting.invoice">
+    <relation with="InvoiceTerm" type="composite"/>
+  </entity>
+  <entity entity-name="InvoiceType" package-name="org.apache.ofbiz.accounting.invoice">
+  </entity>
+  <entity entity-name="InvoiceTypeAttr" package-name="org.apache.ofbiz.accounting.invoice">
+    <relation with="InvoiceType" type="composite"/>
+  </entity>
+  <!-- ========================================================= -->
+  <!-- org.apache.ofbiz.accounting.ledger -->
+  <!-- ========================================================= -->
+  <entity entity-name="AcctgTrans" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+  <entity entity-name="AcctgTransEntry" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+  <entity entity-name="AcctgTransEntryType" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+  <entity entity-name="AcctgTransType" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+  <entity entity-name="AcctgTransTypeAttr" package-name="org.apache.ofbiz.accounting.ledger">
+    <relation with="AcctgTransType" type="composite"/>
+  </entity>
+  <entity entity-name="GlAccount" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+  <entity entity-name="GlAccountClass" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+  <entity entity-name="GlAccountGroup" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+   <entity entity-name="GlAccountGroupMember" package-name="org.apache.ofbiz.accounting.ledger">
+    <relation with="GlAccount" type="composite"/>
+    <relation with="GlAccountGroup" type="composite"/>
+  </entity>
+   <entity entity-name="GlAccountGroupType" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+  <entity entity-name="GlAccountHistory" package-name="org.apache.ofbiz.accounting.ledger">
+    <relation with="GlAccount" type="composite"/>
+    <relation with="Party" type="composite"/>
+    <relation with="CustomTimePeriod" type="composite"/>
+  </entity>
+  <entity entity-name="GlAccountOrganization" package-name="org.apache.ofbiz.accounting.ledger">
+    <relation with="GlAccount" type="composite"/>
+    <relation with="Party" type="composite"/>
+  </entity>
+  <entity entity-name="GlAccountRole" package-name="org.apache.ofbiz.accounting.ledger">
+    <relation with="GlAccount" type="composite"/>
+    <relation with="PartyRole" type="composite"/>
+  </entity>
+  <entity entity-name="GlAccountType" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+  <entity entity-name="GlAccountTypeDefault" package-name="org.apache.ofbiz.accounting.ledger">
+    <relation with="GlAccountType" type="composite"/>
+    <relation with="Party" type="composite"/>
+  </entity>
+  <entity entity-name="GlBudgetXref" package-name="org.apache.ofbiz.accounting.ledger">
+    <relation with="GlAccount" type="composite"/>
+    <relation with="BudgetItemType" type="composite"/>
+  </entity>
+  <entity entity-name="GlFiscalType" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+  <entity entity-name="GlJournal" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+  <entity entity-name="GlReconciliation" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+   <entity entity-name="GlReconciliationEntry" package-name="org.apache.ofbiz.accounting.ledger">
+     <relation with="GlReconciliation" type="composite"/>
+    <relation with="AcctgTransEntry" type="composite"/>
+  </entity>
+  <entity entity-name="GlResourceType" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+  <entity entity-name="GlXbrlClass" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+  <entity entity-name="PartyAcctgPreference" package-name="org.apache.ofbiz.accounting.ledger">
+    <stereotype name="java-object" />
+    <relation with="Party" type="composite"/>
+  </entity>
+  <entity entity-name="ProductAverageCost" package-name="org.apache.ofbiz.accounting.ledger">
+    <relation with="ProductAverageCostType" type="composite"/>
+    <relation with="Party" type="composite"/>
+    <relation with="Product" type="composite"/>
+    <relation with="Facility" type="composite"/>
+  </entity>
+  <entity entity-name="ProductAverageCostType" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+  <entity entity-name="SettlementTerm" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+  <entity entity-name="VarianceReasonGlAccount" package-name="org.apache.ofbiz.accounting.ledger">
+    <relation with="VarianceReason" type="composite"/>
+    <relation with="Party" type="composite"/>
+  </entity>
+  <!-- ========================================================= -->
+  <!-- org.apache.ofbiz.accounting.payment -->
+  <!-- ========================================================= -->
+  <entity entity-name="BillingAccount" package-name="org.apache.ofbiz.accounting.payment">
+  </entity>
+  <entity entity-name="BillingAccountRole" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="BillingAccount" type="composite"/>
+    <relation with="PartyRole" type="composite"/>
+  </entity>
+   <entity entity-name="BillingAccountTerm" package-name="org.apache.ofbiz.accounting.payment">
+  </entity>
+  <entity entity-name="BillingAccountTermAttr" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="BillingAccountTerm" type="composite"/>
+  </entity>
+   <entity entity-name="CreditCard" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="PaymentMethod" type="composite"/>
+  </entity>
+  <entity entity-name="CreditCardTypeGlAccount" package-name="org.apache.ofbiz.accounting.payment">
+  </entity>
+   <entity entity-name="Deduction" package-name="org.apache.ofbiz.accounting.payment">
+  </entity>
+  <entity entity-name="DeductionType" package-name="org.apache.ofbiz.accounting.payment">
+  </entity>
+   <entity entity-name="EftAccount" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="PaymentMethod" type="composite"/>
+  </entity>
+  <entity entity-name="GiftCard" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="PaymentMethod" type="composite"/>
+  </entity>
+  <entity entity-name="GiftCardFulfillment" package-name="org.apache.ofbiz.accounting.payment">
+  </entity>
+   <entity entity-name="Payment" package-name="org.apache.ofbiz.accounting.payment">
+    <stereotype name="java-object" />
+  </entity>
+  <entity entity-name="PaymentApplication" package-name="org.apache.ofbiz.accounting.payment">
+    <stereotype name="java-object" />
+  </entity>
+  <entity entity-name="PaymentAttribute" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="Payment" type="composite"/>
+  </entity>
+  <entity entity-name="PaymentBudgetAllocation" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="BudgetItem" type="composite"/>
+    <relation with="Payment" type="composite"/>
+  </entity>
+  <entity entity-name="PaymentMethod" package-name="org.apache.ofbiz.accounting.payment">
+  </entity>
+   <entity entity-name="PaymentMethodType" package-name="org.apache.ofbiz.accounting.payment">
+    <stereotype name="java-object" />
+  </entity>
+  <entity entity-name="PaymentMethodTypeGlAccount" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="PaymentMethodType" type="composite"/>
+    <relation with="Party" type="composite"/>
+  </entity>
+  <entity entity-name="PaymentMethodTypeGlAccount" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="PaymentMethodType" type="composite"/>
+    <relation with="Party" type="composite"/>
+  </entity>
+  <entity entity-name="PaymentType" package-name="org.apache.ofbiz.accounting.payment">
+  </entity>
+  <entity entity-name="PaymentTypeAttr" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="PaymentType" type="composite"/>
+  </entity>
+  <entity entity-name="PaymentGlAccountTypeMap" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="PaymentType" type="composite"/>
+    <relation with="Party" type="composite"/>
+  </entity>
+  <entity entity-name="PaymentGatewayConfigType" package-name="org.apache.ofbiz.accounting.payment">
+  </entity>
+   <entity entity-name="PaymentGatewayConfig" package-name="org.apache.ofbiz.accounting.payment">
+  </entity>
+  <entity entity-name="PaymentGatewayAuthorizeNet" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="PaymentGatewayConfig" type="composite"/>
+  </entity>
+  <entity entity-name="PaymentGatewayCyberSource" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="PaymentGatewayConfig" type="composite"/>
+  </entity>
+   <entity entity-name="PaymentGatewayPayflowPro" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="PaymentGatewayConfig" type="composite"/>
+  </entity>
+  <entity entity-name="PaymentGatewayPayPal" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="PaymentGatewayConfig" type="composite"/>
+  </entity>
+  <entity entity-name="PaymentGatewayClearCommerce" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="PaymentGatewayConfig" type="composite"/>
+  </entity>
+   <entity entity-name="PaymentGatewayWorldPay" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="PaymentGatewayConfig" type="composite"/>
+  </entity>
+   <entity entity-name="PaymentGatewayOrbital" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="PaymentGatewayConfig" type="composite"/>
+  </entity>
+  <entity entity-name="PaymentGatewayRespMsg" package-name="org.apache.ofbiz.accounting.payment">
+  </entity>
+  <entity entity-name="PaymentGatewayResponse" package-name="org.apache.ofbiz.accounting.payment">
+  </entity>
+  <entity entity-name="PaymentGroup" package-name="org.apache.ofbiz.accounting.payment">
+  </entity>
+  <entity entity-name="PaymentGroupType" package-name="org.apache.ofbiz.accounting.payment">
+  </entity>
+    <entity entity-name="PaymentGroupMember" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="PaymentGroup" type="composite"/>
+    <relation with="Payment" type="composite"/>
+  </entity>
+    <entity entity-name="PayPalPaymentMethod" package-name="org.apache.ofbiz.accounting.payment">
+    <relation with="PaymentMethod" type="composite"/>
+  </entity>
+  <entity entity-name="ValueLinkKey" package-name="org.apache.ofbiz.accounting.payment">
+  </entity>
+      <!-- ========================================================= -->
+    <!-- org.apache.ofbiz.accounting.tax -->
+    <!-- ========================================================= -->
+  <entity entity-name="PartyTaxAuthInfo" package-name="org.apache.ofbiz.accounting.tax">
+    <relation with="Party" type="composite"/>
+    <relation with="TaxAuthority" type="composite"/>
+  </entity>
+   <entity entity-name="TaxAuthority" package-name="org.apache.ofbiz.accounting.tax">
+    <relation with="Party" type="composite" title="TaxAuth"/>
+    <relation with="Geo" type="composite" title="TaxAuth"/>
+  </entity>
+   <entity entity-name="TaxAuthorityAssoc" package-name="org.apache.ofbiz.accounting.tax">
+    <relation with="TaxAuthority" type="composite"/>
+  </entity>
+  <entity entity-name="TaxAuthorityAssocType" package-name="org.apache.ofbiz.accounting.tax">
+  </entity>
+  <entity entity-name="TaxAuthorityCategory" package-name="org.apache.ofbiz.accounting.tax">
+    <relation with="TaxAuthority" type="composite"/>
+    <relation with="ProductCategory" type="composite"/>
+  </entity>
+   <entity entity-name="TaxAuthorityGlAccount" package-name="org.apache.ofbiz.accounting.tax">
+    <relation with="TaxAuthority" type="composite"/>
+    <relation with="Party" type="composite"/>
+  </entity>
+  <entity entity-name="TaxAuthorityRateProduct" package-name="org.apache.ofbiz.accounting.tax">
+  </entity>
+  <entity entity-name="TaxAuthorityRateType" package-name="org.apache.ofbiz.accounting.tax">
+  </entity>
+  <entity entity-name="ZipSalesRuleLookup" package-name="org.apache.ofbiz.accounting.tax">
+  </entity>
+   <entity entity-name="ZipSalesTaxLookup" package-name="org.apache.ofbiz.accounting.tax">
+  </entity>
+  <entity entity-name="PartyGlAccount" package-name="org.apache.ofbiz.accounting.ledger">
+    <relation with="Party" type="composite"/>
+    <relation with="RoleType" type="composite"/>
+    <relation with="PartyRole" type="composite"/>
+    <relation with="GlAccountType" type="composite"/>
+  </entity>
+  <entity entity-name="RateType" package-name="org.apache.ofbiz.accounting.rate">
+  </entity>
+   <entity entity-name="RateAmount" package-name="org.apache.ofbiz.accounting.rate">
+    <relation with="RateType" type="composite"/>
+    <relation with="Uom" type="composite"/>
+    <relation with="WorkEffort" type="composite"/>
+    <relation with="Party" type="composite"/>
+    <relation with="PeriodType" type="composite"/>
+    <relation with="EmplPositionType" type="composite"/>
+  </entity>
+   <entity entity-name="PartyRate" package-name="org.apache.ofbiz.accounting.rate">
+    <association-class participant1="Party"  participant2="RateType"/>
+  </entity>
+   <entity entity-name="GlAccountCategory" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+  <entity entity-name="GlAccountCategoryMember" package-name="org.apache.ofbiz.accounting.ledger">
+     <relation with="GlAccount" type="composite"/>
+    <relation with="GlAccountCategory" type="composite"/>
+  </entity>
+  <entity entity-name="GlAccountCategoryType" package-name="org.apache.ofbiz.accounting.ledger">
+  </entity>
+</informationmodel>
+

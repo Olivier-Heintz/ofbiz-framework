@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<informationmodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2000/10/XMLSchema"
+    xsi:noNamespaceSchemaLocation="http://repository.ofbizextra.org/dtd/Informationmodel.xsd">
+
+  <entity entity-name="ProductManufacturingRule" package-name="org.apache.ofbiz.manufacturing.bom">
+    <assoc-tag name="GetterSetter" value="ProductFeatureO" with="ProductFeature"/>
+  </entity>
+  <entity entity-name="TechDataCalendar" package-name="org.apache.ofbiz.manufacturing.techdata">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="TechDataCalendarExcDay" package-name="org.apache.ofbiz.manufacturing.techdata">
+    <stereotype name="java-object"/>
+    <relation with="TechDataCalendar" type="composite"/>
+  </entity>
+  <entity entity-name="TechDataCalendarExcWeek" package-name="org.apache.ofbiz.manufacturing.techdata">
+    <relation with="TechDataCalendar" type="composite"/>
+  </entity>
+  <entity entity-name="TechDataCalendarWeek" package-name="org.apache.ofbiz.manufacturing.techdata">
+    <stereotype name="java-object"/>
+  </entity>
+  <entity entity-name="MrpEventType" package-name="org.apache.ofbiz.manufacturing.mrp">
+  </entity>
+  <entity entity-name="MrpEvent" package-name="org.apache.ofbiz.manufacturing.mrp">
+    <relation with="Product" type="composite"/>
+    <relation with="MrpEventType" type="composite"/>
+  </entity>
+</informationmodel>
