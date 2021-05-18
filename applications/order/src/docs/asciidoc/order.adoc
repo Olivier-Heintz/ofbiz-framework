@@ -173,7 +173,7 @@ include::_include/order-ecommerce-entry-path.adoc[leveloffset=+3]
 
 include::_include/order-report.adoc[leveloffset=+1]
 
-== Requests
+include::_include/order-request.adoc[leveloffset=+1]
 
 == Quotes
 

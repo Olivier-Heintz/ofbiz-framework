@@ -26,6 +26,7 @@ under the License.
             <actions>
                 <set field="titleProperty" value="OrderFindRequests"/>
                 <set field="headerItem" value="request"/>
+                <set field="helpAnchor" value="_find_request"/>
                 <set field="entityName" value="CustRequest"/>
                 <set field="asm_multipleSelectForm" value="FindRequests"/>
                 <set field="custRequestType.asm_multipleSelect" value="FindRequests_custRequestTypeId"/>
@@ -107,7 +108,7 @@ under the License.
                 <entity-condition entity-name="CustRequestAndContent" list="custRequestAndContents">
                     <condition-list combine="and">
                         <condition-expr field-name="custRequestId" from-field="custRequestId"/>
-                        <condition-expr field-name="fromDate" operator="less-equals" from-field="nowTimestamp"/>                        
+                        <condition-expr field-name="fromDate" operator="less-equals" from-field="nowTimestamp"/>
                         <condition-list combine="or">
                             <condition-expr field-name="thruDate" operator="greater-equals" from-field="nowTimestamp"/>
                             <condition-expr field-name="thruDate" from-field="null"/>
@@ -155,13 +156,14 @@ under the License.
             </widgets>
         </section>
     </screen>
-    
+
     <screen name="ViewRequest">
         <section>
             <actions>
                 <set field="MainColumnStyle" value="rightonly"/>
                 <set field="tabButtonItem" value="ViewRequest"/>
                 <set field="headerItem" value="request"/>
+                <set field="helpAnchor" value="_view_request"/>
                 <set field="titleProperty" value="PageTitleViewRequest"/>
                 <set field="showRequestManagementLinks" value="Y"/>
             </actions>
@@ -180,6 +182,7 @@ under the License.
                 <set field="titleProperty" value="OrderRequest"/>
                 <set field="tabButtonItem" value="editRequest"/>
                 <set field="headerItem" value="request"/>
+                <set field="helpAnchor" value="_new_request"/>
                 <set field="custRequestId" from-field="parameters.custRequestId"/>
                 <entity-one entity-name="CustRequest" value-field="custRequest"/>
                 <set field="statusId" from-field="custRequest.statusId"/>
@@ -232,6 +235,7 @@ under the License.
                 <set field="titleProperty" value="PageTitleRequestRoles"/>
                 <set field="tabButtonItem" value="requestroles"/>
                 <set field="headerItem" value="request"/>
+                <set field="helpAnchor" value="_request_roles"/>
                 <set field="custRequestId" from-field="parameters.custRequestId"/>
                 <entity-one entity-name="CustRequest" value-field="custRequest"/>
                 <entity-and entity-name="CustRequestParty" list="custRequestParties">
@@ -256,6 +260,7 @@ under the License.
                 <set field="titleProperty" value="PageTitleRequestItems"/>
                 <set field="tabButtonItem" value="requestitems"/>
                 <set field="headerItem" value="request"/>
+                <set field="helpAnchor" value="_request_items"/>
                 <set field="custRequestId" from-field="parameters.custRequestId"/>
                 <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer"/>
                 <set field="viewSizeDefaultValue" value="${groovy: modelTheme.getDefaultViewSize()}" type="Integer"/>
@@ -287,6 +292,7 @@ under the License.
                 <set field="titleProperty" value="PageTitleEditRequestItem"/>
                 <set field="tabButtonItem" value="requestitem"/>
                 <set field="headerItem" value="request"/>
+                <set field="helpAnchor" value="_request_items"/>
                 <set field="custRequestId" from-field="parameters.custRequestId"/>
                 <set field="custRequestItemSeqId" from-field="parameters.custRequestItemSeqId"/>
                 <entity-one entity-name="CustRequest" value-field="custRequest"/>
@@ -321,6 +327,7 @@ under the License.
                 <set field="titleProperty" value="PageTitleRequestItemNotes"/>
                 <set field="tabButtonItem" value="requestitemnotes"/>
                 <set field="headerItem" value="request"/>
+                <set field="helpAnchor" value="_request_items"/>
                 <set field="custRequestId" from-field="parameters.custRequestId"/>
                 <set field="custRequestItemSeqId" from-field="parameters.custRequestItemSeqId"/>
                 <entity-one entity-name="CustRequest" value-field="custRequest"/>
@@ -513,11 +520,12 @@ under the License.
                 <set field="titleProperty" value="PageTitleEditRequestContent"/>
                 <set field="tabButtonItem" value="custRequestContent"/>
                 <set field="headerItem" value="request"/>
+                <set field="helpAnchor" value="_request_contents"/>
                 <set field="custRequestId" from-field="parameters.custRequestId"/>
                 <entity-condition entity-name="CustRequestAndContent" list="custRequestAndContents">
                     <condition-list combine="and">
                         <condition-expr field-name="custRequestId" from-field="custRequestId"/>
-                        <condition-expr field-name="fromDate" operator="less-equals" from-field="nowTimestamp"/>                        
+                        <condition-expr field-name="fromDate" operator="less-equals" from-field="nowTimestamp"/>
                         <condition-list combine="or">
                             <condition-expr field-name="thruDate" operator="greater-equals" from-field="nowTimestamp"/>
                             <condition-expr field-name="thruDate" from-field="null"/>
@@ -738,7 +746,7 @@ under the License.
                 <set field="subject" value="A note has been added to your Customer request ${custRequest.custRequestName}[${custRequest.custRequestId}]"/>
             </actions>
             <widgets>
-                <platform-specific><html><html-template 
+                <platform-specific><html><html-template
                 location="component://order/template/request/AddedNoteCustRequestNotification.ftl"/>
                 </html></platform-specific>
             </widgets>

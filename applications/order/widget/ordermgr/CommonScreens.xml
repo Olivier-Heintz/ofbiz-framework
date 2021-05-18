@@ -58,6 +58,7 @@ under the License.
     <screen name="CommonRequestDecorator">
         <section>
             <actions>
+                <set field="helpAnchor" from-field="helpAnchor" default-value="_request"/>
                 <set field="custRequestId" from-field="parameters.custRequestId"/>
                 <entity-one entity-name="CustRequest" value-field="custRequest"/>
             </actions>
