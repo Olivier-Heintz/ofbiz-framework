@@ -37,6 +37,8 @@ This makes OFBiz a great platform for HR services because managing people and or
 Important terms in the documentation are defined in a Glossary. In order to promote a consistent usage
 and understanding of terms, links to the Glossary definitions are placed throughout the document.
 
+include::_include/hr-about-doc.adoc[leveloffset=+1]
+
 include::_include/hr-intro.adoc[leveloffset=+1]
 
 == HR core object

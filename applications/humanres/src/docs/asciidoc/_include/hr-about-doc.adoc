@@ -1,0 +1,99 @@
+////
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+////
+= About this documentation
+
+This guide was written based on the OFBiz trunk in beginning 2019 using the Tomahawk theme.
+The information should be useful too, for users of earlier versions and other themes.
+The screen shots, included in the documentation, may look different from what you see in your version
+but not so much so that you can not understand the big part of the features.
+
+With close to 100 screens, some which link to applications outside of the HR App, it is easy for a new user to get lost.
+Knowing the common UI pattern used in HR App, as described here, will help you stay oriented.
+
+In OFBiz, screens are collection of graphical user interface (GUI) elements that provide an intuitive way to interact with applications.
+
+== Menu Hierarchy
+In the back office applications, like Accounting, Marketing and Human Resource, menus are the primary method of navigation between GUI screens. +
+The Application menu is the top level menu and links to the back office administration applications. +
+Each application has an application sub menu that is the top level menu within the application.
+
+=== Applications Menu
+
+image::ApplicationsMenu_TOMAHAWK.png[OFBiz App Main Menu (Tomahawk)]
+
+or
+
+image::ApplicationsMenu_Rainbow_Stone.png[OFBiz App Main Menu (Rainbow_Stone)]
+
+
+=== HR Application Submenu
+
+image::humanres/HR_Application_Submenu_Tomahawk.png[OFBiz HR App Sub-Menu (Tomahawk)]
+
+or
+
+image::humanres/HR_Application_Submenu_Rainbow_Stone.png[OFBiz HR App Sub-Menu (Rainbow Stone)]
+
+[NOTE]
+On all this documentation, "HR menu" refer to the "HR Application sub menu".
+
+=== HR Core Object Menu
+Typically, but not always, HR Menu items take their name from an important Core Object or <<ENTITY, entity>>.
+For example you have Employees, Employments, Employee Positions etc. All important information subjects in human resource departments.
+
+Many of these menu items open a screen, we will call a Main Search Screen.
+
+image::humanres/Employee_Main_Screen.png[OFBiz HR Employee Main Screen (Tomahawk)]
+
+It has three main elements
+
+<1> A button : link to a screen for creating a new entity
+<2> A Search Options screenlet for building a search filter
+<3> A search results screenlet that has columns with navigation widgets to open other application areas.
+
+One of these navigation columns (most of time the first) will open a screen we will call a Feature Menu Screen.
+It has menu items for displaying / editing the feature entity and it's supporting entities. +
+
+image::humanres/HR-Employee_Submenu_Tomahawk.png[OFBiz HR Employee Sub-Menu (Tomahawk)]
+
+or
+
+image::humanres/HR-Employee_Submenu_Rainbow_Stone.png[OFBiz HR Employee Sub-Menu (Rainbow Stone)]
+
+On most of screens, you can see,
+
+<1> which Application
+<2> which Core Object
+<3> which related entity
+
+== Process, Tutorial, Video
+This documentation is oriented Business Process. Each process is described like a tutorial, and each time a new
+Core Object, or important notion is mentioned, a link is done to more detailed information.
+
+Each process described is associated with a Scenario User Interface Automated Test, which is run on
+https://demo-trunk.ofbiz.apache.org/humanres/control/main[Apache OFBiz Trunk Demo environment] daily, and on a ofbizextra platform to be able to have a video
+of all actions with some comments (Explaining, at each stage, what action will be taken).
+
+Video can be download on the jenkins ofbizextra site,
+https://jenkins.ofbizextra.org/view/Trunk-Sel./job/02_Ofbiz_trunk_wktr1_SeleniumWebDriver_tests/[Running Selenium Test],
+look by job name and starting with hrscenariodoc, test name is the tutorial name.
+
+or visualize at https://video.ploud.fr/video-channels/ofbizextra_tutorial/videos[Apache OFBiz Tutorial channel]
+
+To have time to read comments, you need to slow down the video speed or to pause it, if you read the documentation in conjunction.
