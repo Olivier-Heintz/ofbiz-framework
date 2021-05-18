@@ -68,6 +68,7 @@ If you need to define one or more <<_employee_positions, Job positions>>, you mu
  HR sub-component ( Main HR Menu, option Employee Position) and maybe previously create some <<EMPLOYEE_POSITION_TYPE, Position Type>>
  in Global HR Settings HR sub-component.
 
+include::hr-tuto-define-company-organization.adoc[leveloffset=+2]
 
 == Employee Salary and Benefits Administration
 
@@ -94,6 +95,7 @@ In the OFBiz Human Resources application you can:
 ** his Leaves (Holidays, ill, family event,..)
 * Calculate salaries and Generate Payslips
 
+include::hr-tuto-employment-and-salary.adoc[leveloffset=+2]
 
 == Employee Training and Development
 

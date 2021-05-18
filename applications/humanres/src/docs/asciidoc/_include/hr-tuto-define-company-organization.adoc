@@ -1,0 +1,593 @@
+////
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+////
+
+= Tutorial: Define my Company Organization
+This tutorial will show you how to create this organization
+
+image::humanres/CompanyOrganization_tuto_final.png[Company Organization goal]
+base on existing OFBiz <<DEMO_DATA, demo data>>.
+
+The associated video (showing all the actions described in this tutorial) can be download on
+https://jenkins.ofbizextra.org/view/Trunk-Sel./job/02_Ofbiz_trunk_wktr1_SeleniumWebDriver_tests/193/artifact/build/test-output/CompanyOrganization-implementation.avi[CompanyOrganization-implementation.avi]
+
+or directly visualize at https://video.ploud.fr/videos/watch/c98f8b34-204c-4671-9cb9-f16f4f52c386[CompanyOrganization-implementation]
+
+This tutorial have 6 step
+
+. <<_step_1_cleaning_demo_data, Cleaning demo data>>
+. <<_step_2_create_agile_team, Create Agile Team>>
+. <<_step_3_design_company_internal_organization, Design Company internal organization>>
+. <<_step_4_create_all_the_position_types, Create all the Position Types>>
+. <<_step_5_create_all_the_employee_positions, Create all the Employee Positions>>
+  * Job Position Creation
+  * Job Position Reporting Structure
+  * Job Position Responsibilities
+  * Job Position Reporting and Responsibilities
+. <<_step_6_create_all_the_employees, Create all the Employees>>
+
+= Step 1 : cleaning demo data
+Demo data are for a lot of functionality, for this tutorial we want focus only on Company Organisation and
+Employee Position, so we should start by removing some data.
+
+Goto to Web Tools Application, select <XML Data Import> option and copy-paste the following lines
+[source,XML]
+  <delete>
+    <PartyRelationship partyIdFrom="DevTeam1" partyIdTo="Developer1" roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="_NA_" fromDate="2001-05-02 00:00:00.000"/>
+    <PartyRelationship partyIdFrom="DevTeam1" partyIdTo="Developer2" roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="_NA_" fromDate="2001-05-02 00:00:00.000"/>
+    <PartyRelationship partyIdFrom="DevTeam1" partyIdTo="Developer3" roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="_NA_" fromDate="2001-05-02 00:00:00.000"/>
+    <PartyRelationship partyIdFrom="TestingTeam1" partyIdTo="TestingTeamMember1" roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="_NA_" fromDate="2001-05-02 00:00:00.000"/>
+    <PartyRelationship partyIdFrom="TestingTeam1" partyIdTo="TestingTeamMember2" roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="_NA_" fromDate="2001-05-02 00:00:00.000"/>
+    <PartyRelationship partyIdFrom="TestingTeam1" partyIdTo="TestingTeamMember3" roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="_NA_" fromDate="2001-05-02 00:00:00.000"/>
+    <PartyRelationship partyIdFrom="Company" partyIdTo="accountant_group" roleTypeIdFrom="_NA_" roleTypeIdTo="_NA_" fromDate="2001-01-01 12:00:00.000"/>
+  </delete>
+
+in the field <Complete XML document (root tag: entity-engine-xml)> +
+in the entity-engine-xml root tag.
+
+= Step 2 : Create Agile Team
+. Goto Party application
+. <create New Party Group>
+. Group Name Agile Team
+. Note the partyId (ex: 10003)
+. goto <Role(s)>
+. in Add To Role : view all
+  *  Internal Organization
+. return to HR Application
+
+= Step 3 : Design Company internal organization
+. add INFO_TECH as internal Organization for company
+. remove Development Department for company
+. add DEV as internal Organization for Information Technology
+. add Agile Team as internal Organization for Information Technology, you should select with the partyId previously created in step 2
+. remove Testing Department for company
+. add TESTING as internal Organization for Information Technology
+. add DemoLeadOwnersGroup as internal Organization for Sales department
+. remove <A Group of Lead Owners> Department for company
+. add RECEIVING as internal Organization for Accounting department
+. add LEGAL as internal Organization for Accounting department
+. Goto Employee Position
+..  Find
+..  select DEMO100
+..  Employee Position
+..  change Internal Organization to Development Team 1
+..  Update
+. goto Main and deploy all to check you have the correct "internal organization"
+
+you should see something like
+
+image::humanres/CompanyOrganization_tuto_step3.png[Company Organization goal]
+
+= Step 4 : Create all the Position Types
+Check the existing list and create all missing. +
+For each Position Type you can give a description and optionally one or more rate (standard, average, overtime, ...).
+
+[WARNING]
+TODO remove detail about Rate but add some detail about ValidResponsibilities and "Unions" link
+
+To check, go to <Global HR Settings> and menu <Position Types> and <find>.
+\_NA_ is mandatory for some screens, where Position Type is technically mandatory but not on a business point of view.
+
+For Company it's necessary to create
+
+* IT
+** Backend Developer
+** Frontend Developer
+** Senior Programmer
+** Senior Business Analyst
+** Scrum Master
+** Product Owner
+* Marketing
+** Web Designer
+** Designer
+** Community Manager
+** Product Manager
+* Accounting
+** Accountant
+** Auditor
+** Chatered Accountant
+* Sales
+** Sales man
+** Customer Manager
+** commercial Assistant
+* Miscellaneous
+** Secretary
+** Assistant
+
+[IMPORTANT]
+To create one, you need to give the ID and a Description, to avoid technical problem it's advisable to use
+*only standard characters and whitout space* for ID. ID lenght must be less than 20 characters.
+
+After create one, you can go (but it's not mandatory) on sub-menu <Position Type Rate> to enter one or more rate.
+
+Create (For all, select N in HasTable and nothing in ParentTypeId) :
+
+. BACK_DEV,  Backend Developer, with standard rate 2000$/month
+. FRONT_DEV, Frontend Developer, with standard rate 2300$/month
+. SENIOR_PROGRAMMER, Senior Programmer
+. SENIOR_BIZ_ANALYST, Senior Business Analyst
+
+For all the others it also possible to import with a XML file in the "Web Tools" application. +
+Example for one PositionType with rate
+[source,XML]
+  <EmplPositionType emplPositionTypeId="SCRUM_MASTER" description="Scrum Master" hasTable="N"/>
+  <EmplPositionTypeRate emplPositionTypeId="SCRUM_MASTER" rateTypeId="STANDARD" fromDate="2019-01-02 00:00:00.000"/>
+  <RateAmount       emplPositionTypeId="SCRUM_MASTER" rateTypeId="STANDARD" rateAmount="3500" rateCurrencyUomId="USD" periodTypeId="RATE_MONTH" workEffortId="_NA_" partyId="_NA_" fromDate="2019-01-02 00:00:00.000" />
+
+for the complete import data see <<d_import_position_type, Data Import Position Type>> in <<tuto_dco_annex_data_import, Annex Data import>>.
+
+
+= Step 5 : Create all the Employee Positions
+<<_employee_positions, Employee Position>> is one of the core business object of HR application.
+
+On the demo data, there is only one, already defined, Job Position. +
+Goto <Employee Position> and <find>, all existing position will be show.
+
+On this step, we will create some Job Position and for each define
+
+* reporting structure
+* responsibilities
+
+== *_Job Position Creation_*
+[IMPORTANT]
+On the standard user interface, it's possible to enter the Job Position ID, it's better for readability when using it,
+but it's dangerous to create wrong ID, in ID
+*only standard characters and without space* are authorized. ID length must be less than 20 characters. +
+Best practice is to use only UpperCase.
+
+When Creating Job Position, Position Id is not a mandatory field, if it's leave empty a sequence number will be used.
+
+For this tutorial step, BudgetId (and BudgetItemId) is leaving empty.
+
+Important fields are :
+
+* status
+* Position Type
+* Internal Organization
+
+Some flag are available to give more informations about this Position, currently no process is associated with these flags.
+It's useful to search criteria.
+
+* <<SALARY_FLAG, Salary>>
+* <<EXEMPT_FLAG, Exempt>>
+* <<FULLTIME_FLAG, FullTime>>
+* <<TEMPORARY_FLAG, Temporary>>
+
+
+We will created (with New Employee Position Button):
+
+* In IT for each Development department
+  ** 2 BackEnd developer (active/Open, BackEnd developer, Development team1, Salary, not exempt, full-time, not temporary)
+    *** BACK_DEV1_T1
+    *** BACK_DEV2_T1
+    *** BACK_DEV1_T2
+    *** BACK_DEV2_T2
+    *** ...
+  ** 1 Front end developer
+    *** FRONT_DEV1_T1
+  ** 1 Business Analyst
+    *** BIZ_ANALYST_T1
+* In IT on agile team
+  ** 1 scrum master
+    *** SCRUM_MASTER
+  ** 2 product owner
+    *** PRODUCT_OWNER_1
+    *** PRODUCT_OWNER_2
+* Directly for IT
+  ** CIO
+  ** 1 assistant
+    *** IT_ASSISTANT
+  ** 1 senior developer
+    *** IT_SENIOR_DEV
+  ** 1 senior Business Analyst
+    *** IT_SENIOR_BIZ_ANALYST
+
+In this example, the day to day (or project) organization is not explicitly show. This organization is more an administration
+presentation.
+
+After creating some Job Positions with screen, it also possible to import with a XML file in the "Web Tools" application. +
+Example for one EmplPosition
+[source,XML]
+  <EmplPosition emplPositionId="CIO"                  statusId="EMPL_POS_ACTIVE" emplPositionTypeId="CIO"                partyId="INFO_TECH"    salaryFlag="Y" exemptFlag="N" fulltimeFlag="Y" temporaryFlag="N"/>
+
+for the complete import data see <<d_import_employee_position, Data Import Employee Position>> in <<tuto_dco_annex_data_import, Annex Data import>>.
+
+== *_Job Position Reporting Structure_*
+On main HR Tree Company presentation, the Organization of the company is defined / shown from a department point of view.
+
+It's on the Job Position that the hierarchy in the company is defined. +
+it's possible to define who report to who and in the same time who reported to who icon:smile-o[]
+
+[WARNING]
+In the HR App it is possible to create circular reporting structures where a Position the reporting to and managed by positions
+are the same. It is the users responsibility to exercise common sense when creating the reporting structure.
+
+To define that CIO report to CEO, Open tree to see CIO Job Position and click on it, go to tab <Reporting Structure> and
+add CEO with the first screen (CIO Report to) +
+After added, check the result
+
+* first, in the summary tab
+* secondly, in the summary tab for CEO
+
+== *_Job Position Responsibilities_*
+Each Job Position could have some <<RESPONSIBILITY, responsibilities>> to better defined boundary of the job.
+
+First, Responsibility Types should be created in Global HR settings. For each you only need a ID
+(same remark than for Position Type, same constrain) and a description +
+For IT we can define some responsibilities types :
+
+* USER_AMBASSADOR User ambassador
+* USER_SUPPORT User support
+* CODE_QUALITY Code Quality
+* INTERNAL_DOC Internal Documentation
+* LIB_SECURITY_APPLY security patch applying
+* HR_MGMT Human resource management
+* PROJECT_MGMT Project Management
+* BUDGET_MGMT Budget Management
+* TASK_REAL Task realization
+
+Go to <Global HR Settings> and menu <Responsability Types> and directly use the create form.
+
+Secondly, return to Job Positions where it's necessary to add some responsibility.
+
+Return to CEO Job Position, by using Company Tree, and in the Responsibility Tab and add
+
+* General Management
+* Budget Management with comment Budget defined by the board
+
+
+== *_Job Position Reporting and Responsibilities_*
+Now for all Job Positions, we are going to define the reporting Structure and the responsibilities :
+
+* CIO
+  ** manage Senior Developer, Senior Analyst, scrum master
+  ** has responsibilities Information Management (Good information in right place, privacy respect, security),
+     Budget management (Defined by its Report-to), Human Resource Management (turn-over is a PKI, up to date skill for all IT people is important)
+* Senior Developer
+  ** manage all BackEnd developer (all team) and FrontEnd Developer from team1
+  ** has responsibilities Code Quality (define the rules and checking/reporting process), Internal Documentation (review all technical document, Technical Documentation Organization)
+     Task realization
+* All dev has responsibilities Code Quality (producing), Internal Documentation (producing) and Task realization
+* Senior Analyst
+  ** manage all Business Analyst (all teams, Dev & test)
+  ** has responsibility User Ambassador (knowledge of all business process and guarantee a company overall view in each process)
+* All Business Analysts has responsibilities User Support and Task Realization
+* All Programmer has responsibility User Support
+* FrontEnd Developer (team1)
+  ** manage all other FrontEnd Developer
+  ** has responsibilities security patch applying (technical security design), Code Quality (coding rules for Front technology), Task realization
+* Scrun master
+  ** manage Programmer, all test teams
+  ** has responsibilities Project Management (animation and coordination to project succeed)
+* ProductOwner1
+  ** report to CFO
+  ** is a User Ambassador
+* ProductOwner2
+  ** report to CMO
+  ** is a User Ambassador
+
+With user interface for CIO and Senior Developer +
+with import webtools for all others +
+Example for one EmplPosition Responsibility and one EmplPosition Reporting Structure
+[source,XML]
+  <EmplPositionResponsibility emplPositionId="BACK_DEV1_T1"  responsibilityTypeId="CODE_QUALITY" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionReportingStruct emplPositionIdReportingTo="IT_SENIOR_BIZ_ANALYS" emplPositionIdManagedBy="BIZ_ANALYST_T1"    fromDate="2019-01-02 09:00:00.0" comments="to manage unit/scenario request"  primaryFlag="Y"/>
+
+for the complete import data see <<d_import_empl_position_responsibility, Data Import EmplPosition Responsibility>> in <<tuto_dco_annex_data_import, Annex Data import>>.
+
+
+= Step 6 : Create all the Employees
+The last step of this tutorial, create all the <<_employees, employees>> and affect it to its <<_employee_positions, Job positions>>.
+
+<<_employees, Employee>> will be detailed in two other tutorials <<_employee_training_and_development, Employee Training and Development>>
+and <<_employee_training_and_development, Employee Training and Development>>. +
+Now we need only to create employee and in Job Position use Fulfillments tab to add employee the Job Position.
+
+A <<_employee_positions, Job positions>> can be fulfilled by one employee if Job Position is a full time and employee too,
+or fulfilled by multiple employee if each is partial time.
+
+For this tutorial, all job positions area full-time and fulfill by only one employee, except dev team 2 where the
+Job Position are fulfill by two employees.
+
+To create an employee, only a few informations are mandatory : first and last Name; one postal address and one phone number. +
+You need to choose by which internal organization the employee is employed, most of time the "establishment" is used,
+a legal entity used for legal social process. In our case we will use "company".
+
+Employees to create :
+
+* CEO, Pierre Lavigne, 11 rue Croix-Rouge 7140 CHAPELLE, 479 287 434
+* CIO, Esmee Bacheler, 4 rue Ingrande 7190 SACHE, 630 383 392
+* IT Assistant, Marco Ceccoto, 51 rue principal 7360 Rouizere, 954 562 160
+* Senior Dev, Nuala Tulasme, 78 Bd morandial, 7140 CHAPELLE, 427 567 188
+* Senior Business Analyst, Karsten Ulman, 10 pl La Lande, 7700 ST PIERRE, 247 566 268
+* BackEnd dev1 team1, Rachel Teyrat, 38 av Lenine 7700 ST PIERRE, 614 392 510
+* BackEnd dev2 team1, Morning, Remco Ivanov, 20 Bd morandial, 7140 CHAPELLE, 427 445 831
+* BackEnd dev2 team1, Afternoon, Maria DaSilva, 134 Bd liberation, 7100 TOURS, 524 123 765
+* FrontEnd dev team1, Sieste Issongo, 3 r 11 april 1944 7700 ST PIERRE, 972 888 116
+* Business Analyst team1, Marion Huet, 221 imp Marat 7360 Rouizere, 476 461 036
+
+Go to Employee Menu and New Employee. +
+After creation there is a tab <Employee Position> which show (only show) Employee Position for the employee. +
+To associate an employee to a Job Position, it's needed to go to Job Position Menu, tab Fulfillment.
+You can also go to this screen by the Organization Tree and open the Job Position and contextual menu <add person>
+
+[NOTE]
+Employee Id (or partyId) is always a sequence Id given automatically.
+
+If you want import data for employee there are multiple entities, Employee use Party's entities :
+
+* Party
+* Person
+* PartyRelationship
+* ContactMech (POSTAL_ADDRESS, TELECOM_NUMBER)
+* PostalAdress
+* TelecomNumber
+* PartyContacMech
+* PartyContactMechPurpose (GENERAL_LOCATION, PRIMARY_LOCATION, PRIMARY_PHONE)
+
+Example for one Employee with all related information
+
+*_Senior Business Analyst, Karsten Ulman, 10 pl La Lande, 7700 ST PIERRE, 247 566 268_*
+[source,XML]
+  <Party partyId="PEMPL001" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2019-01-02 09:00:00.0" createdByUserLogin="admin"/>
+  <Person partyId="PEMPL001" firstName="Karsten" lastName="Ulman" />
+  <PartyRole partyId="PEMPL001" roleTypeId="_NA_" />
+  <PartyRole partyId="PEMPL001" roleTypeId="EMPLOYEE" />
+  <PartyRelationship partyIdFrom="Company" partyIdTo="PEMPL001" roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" fromDate="2019-01-02 09:00:00.0" relationshipName="EMPLOYMENT" />
+  <ContactMech   contactMechId="CMEMPL001" contactMechTypeId="POSTAL_ADDRESS" />
+  <PostalAddress contactMechId="CMEMPL001" address1="10 pl La Lande" city="ST PIERRE" postalCode="7700" countryGeoId="FRA" stateProvinceGeoId="_NA_" />
+  <PartyContactMech partyId="PEMPL001" contactMechId="CMEMPL001" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL001" contactMechId="CMEMPL001" contactMechPurposeTypeId="GENERAL_LOCATION" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL001" contactMechId="CMEMPL001" contactMechPurposeTypeId="PRIMARY_LOCATION" fromDate="2019-01-02 09:00:00.0" />
+  <ContactMech   contactMechId="CMEMPL002" contactMechTypeId="TELECOM_NUMBER" />
+  <TelecomNumber contactMechId="CMEMPL002" contactNumber="247 566 268" />
+  <PartyContactMech partyId="PEMPL001" contactMechId="CMEMPL002" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL001" contactMechId="CMEMPL002" contactMechPurposeTypeId="PRIMARY_PHONE" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionFulfillment emplPositionId="IT_SENIOR_BIZ_ANALYS" partyId="PEMPL001" fromDate="2019-01-02 09:00:00.0"/>
+
+for the complete import data see <<d_import_employee, Data Import Employee>> in <<tuto_dco_annex_data_import, Annex Data import>>.
+
+
+[#tuto_dco_annex_data_import]
+= Annex Data import
+For each import, Goto to Web Tools Application, select <XML Data Import> option and copy-paste the following lines,
+in the field <Complete XML document (root tag: entity-engine-xml)> +
+in the entity-engine-xml root tag.
+
+[#d_import_position_type]
+==  *_Data Import Position Type_*
+[source,XML]
+  <EmplPositionType emplPositionTypeId="SCRUM_MASTER" description="Scrum Master" hasTable="N"/>
+  <EmplPositionTypeRate emplPositionTypeId="SCRUM_MASTER" rateTypeId="STANDARD" fromDate="2019-01-02 00:00:00.000"/>
+  <RateAmount       emplPositionTypeId="SCRUM_MASTER" rateTypeId="STANDARD" rateAmount="3500" rateCurrencyUomId="USD" periodTypeId="RATE_MONTH" workEffortId="_NA_" partyId="_NA_" fromDate="2019-01-02 00:00:00.000" />
+  <EmplPositionType emplPositionTypeId="PRODUCT_OWNER" description="Product Owner (IT)" hasTable="N"/>
+  <EmplPositionTypeRate emplPositionTypeId="PRODUCT_OWNER" rateTypeId="STANDARD" fromDate="2019-01-02 00:00:00.000"/>
+  <RateAmount       emplPositionTypeId="PRODUCT_OWNER" rateTypeId="STANDARD" rateAmount="30" rateCurrencyUomId="USD" periodTypeId="RATE_HOUR" workEffortId="_NA_" partyId="_NA_" fromDate="2019-01-02 00:00:00.000" />
+  <EmplPositionType emplPositionTypeId="WEB_DESIGNER" description="Web Designer" hasTable="N"/>
+  <EmplPositionType emplPositionTypeId="DESIGNER" description="Designer" hasTable="N"/>
+  <EmplPositionType emplPositionTypeId="COMMUNITY_MANAGER" description="Community Manager" hasTable="N"/>
+  <EmplPositionType emplPositionTypeId="PRODUCT_MANAGER" description="Product Manager" hasTable="N"/>
+  <EmplPositionType emplPositionTypeId="ACCOUNTANT" description="Accountant" hasTable="N"/>
+  <EmplPositionType emplPositionTypeId="AUDITOR" description="Auditor" hasTable="N"/>
+  <EmplPositionType emplPositionTypeId="CHATERED_ACCOUNTANT" description="Chatered Accountant" hasTable="N"/>
+  <EmplPositionType emplPositionTypeId="SALES_MAN" description="Sales man/woman" hasTable="N"/>
+  <EmplPositionType emplPositionTypeId="CUSTOMER_MANAGER" description="Customer Manager" hasTable="N"/>
+  <EmplPositionType emplPositionTypeId="COMMERCIAL_ASSISTANT" description="Commercial Assistant" hasTable="N"/>
+  <EmplPositionType emplPositionTypeId="SECRETARY" description="Secretary" hasTable="N"/>
+  <EmplPositionType emplPositionTypeId="ASSISTANT" description="Assistant" hasTable="N"/>
+
+[#d_import_employee_position]
+==  *_Data Import Employee Position_*
+[source,XML]
+  <EmplPosition emplPositionId="CIO"                  statusId="EMPL_POS_ACTIVE" emplPositionTypeId="CIO"                partyId="INFO_TECH"    salaryFlag="Y" exemptFlag="N" fulltimeFlag="Y" temporaryFlag="N"/>
+  <EmplPosition emplPositionId="IT_ASSISTANT"         statusId="EMPL_POS_ACTIVE" emplPositionTypeId="ASSISTANT"          partyId="INFO_TECH"    salaryFlag="Y" exemptFlag="N" fulltimeFlag="Y" temporaryFlag="N"/>
+  <EmplPosition emplPositionId="IT_SENIOR_DEV"        statusId="EMPL_POS_ACTIVE" emplPositionTypeId="SENIOR_PROGRAMMER"  partyId="INFO_TECH"    salaryFlag="Y" exemptFlag="N" fulltimeFlag="Y" temporaryFlag="N"/>
+  <EmplPosition emplPositionId="IT_SENIOR_BIZ_ANALYS" statusId="EMPL_POS_ACTIVE" emplPositionTypeId="SENIOR_BIZ_ANALYST" partyId="INFO_TECH"    salaryFlag="Y" exemptFlag="N" fulltimeFlag="Y" temporaryFlag="N"/>
+  <EmplPosition emplPositionId="PROGRAMMER_T1"        statusId="EMPL_POS_ACTIVE" emplPositionTypeId="PROGRAMMER"         partyId="TestingTeam1" salaryFlag="Y" exemptFlag="N" fulltimeFlag="Y" temporaryFlag="N"/>
+  <EmplPosition emplPositionId="BIZ_ANALYST_TEST1"    statusId="EMPL_POS_ACTIVE" emplPositionTypeId="BIZ_ANALYST"        partyId="TestingTeam1" salaryFlag="Y" exemptFlag="N" fulltimeFlag="Y" temporaryFlag="N"/>
+  <EmplPosition emplPositionId="PROGRAMMER_T2"        statusId="EMPL_POS_ACTIVE" emplPositionTypeId="PROGRAMMER"         partyId="TestingTeam2" salaryFlag="Y" exemptFlag="N" fulltimeFlag="Y" temporaryFlag="N"/>
+  <EmplPosition emplPositionId="BIZ_ANALYST_TEST2"    statusId="EMPL_POS_ACTIVE" emplPositionTypeId="BIZ_ANALYST"        partyId="TestingTeam2" salaryFlag="Y" exemptFlag="N" fulltimeFlag="Y" temporaryFlag="N"/>
+  <EmplPosition emplPositionId="CEO"                  statusId="EMPL_POS_ACTIVE" emplPositionTypeId="CEO"                partyId="Company"      salaryFlag="Y" exemptFlag="N" fulltimeFlag="Y" temporaryFlag="N"/>
+  <EmplPosition emplPositionId="CEO_ASSISTANT"        statusId="EMPL_POS_ACTIVE" emplPositionTypeId="ASSISTANT"          partyId="Company"      salaryFlag="Y" exemptFlag="N" fulltimeFlag="Y" temporaryFlag="N"/>
+  <EmplPosition emplPositionId="CEO_SECRETARY"        statusId="EMPL_POS_ACTIVE" emplPositionTypeId="SECRETARY"          partyId="Company"      salaryFlag="Y" exemptFlag="N" fulltimeFlag="Y" temporaryFlag="N"/>
+  <EmplPosition emplPositionId="CFO"                  statusId="EMPL_POS_ACTIVE" emplPositionTypeId="CFO"                partyId="ACCOUNTING"   salaryFlag="Y" exemptFlag="N" fulltimeFlag="Y" temporaryFlag="N"/>
+  <EmplPosition emplPositionId="CFO_ASSISTANT"        statusId="EMPL_POS_ACTIVE" emplPositionTypeId="ASSISTANT"          partyId="ACCOUNTING"   salaryFlag="Y" exemptFlag="N" fulltimeFlag="Y" temporaryFlag="N"/>
+  <EmplPosition emplPositionId="CFO_SECRETARY"        statusId="EMPL_POS_ACTIVE" emplPositionTypeId="SECRETARY"          partyId="ACCOUNTING"   salaryFlag="Y" exemptFlag="N" fulltimeFlag="Y" temporaryFlag="N"/>
+  <EmplPosition emplPositionId="CMO"                  statusId="EMPL_POS_ACTIVE" emplPositionTypeId="CMO"                partyId="MARKETING"    salaryFlag="Y" exemptFlag="N" fulltimeFlag="Y" temporaryFlag="N"/>
+  <EmplPosition emplPositionId="CMO_ASSISTANT"        statusId="EMPL_POS_ACTIVE" emplPositionTypeId="ASSISTANT"          partyId="MARKETING"    salaryFlag="Y" exemptFlag="N" fulltimeFlag="Y" temporaryFlag="N"/>
+
+[#d_import_empl_position_responsibility]
+==  *_Data Import EmplPosition Responsibility_*
+[source,XML]
+  <EmplPositionResponsibility emplPositionId="BACK_DEV1_T1"  responsibilityTypeId="CODE_QUALITY" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="BACK_DEV2_T1"  responsibilityTypeId="CODE_QUALITY" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="BACK_DEV1_T2"  responsibilityTypeId="CODE_QUALITY" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="BACK_DEV2_T2"  responsibilityTypeId="CODE_QUALITY" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="10000"         responsibilityTypeId="CODE_QUALITY" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="10001"         responsibilityTypeId="CODE_QUALITY" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="10002"         responsibilityTypeId="CODE_QUALITY" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="10003"         responsibilityTypeId="CODE_QUALITY" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="FRONT_DEV1_T2" responsibilityTypeId="CODE_QUALITY" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="10004"         responsibilityTypeId="CODE_QUALITY" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="10005"         responsibilityTypeId="CODE_QUALITY" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="PROGRAMMER_T1" responsibilityTypeId="CODE_QUALITY" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="PROGRAMMER_T2" responsibilityTypeId="CODE_QUALITY" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="BACK_DEV1_T1"  responsibilityTypeId="INTERNAL_DOC" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="BACK_DEV2_T1"  responsibilityTypeId="INTERNAL_DOC" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="BACK_DEV1_T2"  responsibilityTypeId="INTERNAL_DOC" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="BACK_DEV2_T2"  responsibilityTypeId="INTERNAL_DOC" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="10000"         responsibilityTypeId="INTERNAL_DOC" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="10001"         responsibilityTypeId="INTERNAL_DOC" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="10002"         responsibilityTypeId="INTERNAL_DOC" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="10003"         responsibilityTypeId="INTERNAL_DOC" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="FRONT_DEV1_T2" responsibilityTypeId="INTERNAL_DOC" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="10004"         responsibilityTypeId="INTERNAL_DOC" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="10005"         responsibilityTypeId="INTERNAL_DOC" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="PROGRAMMER_T1" responsibilityTypeId="INTERNAL_DOC" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="PROGRAMMER_T2" responsibilityTypeId="INTERNAL_DOC" fromDate="2019-01-02 09:00:00.0" comments="producing" />
+  <EmplPositionResponsibility emplPositionId="BACK_DEV1_T1"  responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="BACK_DEV2_T1"  responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="BACK_DEV1_T2"  responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="BACK_DEV2_T2"  responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="10000"         responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="10001"         responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="10002"         responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="10003"         responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="FRONT_DEV1_T2" responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="10004"         responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="10005"         responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="PROGRAMMER_T1" responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="PROGRAMMER_T2" responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionReportingStruct emplPositionIdReportingTo="IT_SENIOR_BIZ_ANALYS" emplPositionIdManagedBy="BIZ_ANALYST_T1"    fromDate="2019-01-02 09:00:00.0" comments="to manage unit/scenario request"  primaryFlag="Y"/>
+  <EmplPositionReportingStruct emplPositionIdReportingTo="IT_SENIOR_BIZ_ANALYS" emplPositionIdManagedBy="BIZ_ANALYST_T2"    fromDate="2019-01-02 09:00:00.0" comments="to manage unit/scenario request"  primaryFlag="Y"/>
+  <EmplPositionReportingStruct emplPositionIdReportingTo="IT_SENIOR_BIZ_ANALYS" emplPositionIdManagedBy="10006"             fromDate="2019-01-02 09:00:00.0" comments="to manage unit/scenario request"  primaryFlag="Y"/>
+  <EmplPositionReportingStruct emplPositionIdReportingTo="IT_SENIOR_BIZ_ANALYS" emplPositionIdManagedBy="10007"             fromDate="2019-01-02 09:00:00.0" comments="to manage unit/scenario request"  primaryFlag="Y"/>
+  <EmplPositionReportingStruct emplPositionIdReportingTo="IT_SENIOR_BIZ_ANALYS" emplPositionIdManagedBy="BIZ_ANALYST_TEST1" fromDate="2019-01-02 09:00:00.0" comments="to manage unit/scenario testing"  primaryFlag="Y"/>
+  <EmplPositionReportingStruct emplPositionIdReportingTo="IT_SENIOR_BIZ_ANALYS" emplPositionIdManagedBy="BIZ_ANALYST_TEST2" fromDate="2019-01-02 09:00:00.0" comments="to manage unit/scenario testing"  primaryFlag="Y"/>
+  <EmplPositionResponsibility emplPositionId="IT_SENIOR_BIZ_ANALYS" responsibilityTypeId="USER_AMBASSADOR" fromDate="2019-01-02 09:00:00.0" comments="knowledge of all business process and garanty a company overall view in each process" />
+  <EmplPositionResponsibility emplPositionId="BIZ_ANALYST_T1"    responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="BIZ_ANALYST_T1"    responsibilityTypeId="USER_SUPPORT" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="BIZ_ANALYST_T2"    responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="BIZ_ANALYST_T2"    responsibilityTypeId="USER_SUPPORT" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="10006"             responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="10006"             responsibilityTypeId="USER_SUPPORT" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="10007"             responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="10007"             responsibilityTypeId="USER_SUPPORT" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="BIZ_ANALYST_TEST1" responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="BIZ_ANALYST_TEST1" responsibilityTypeId="USER_SUPPORT" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="BIZ_ANALYST_TEST2" responsibilityTypeId="TASK_REAL" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="BIZ_ANALYST_TEST2" responsibilityTypeId="USER_SUPPORT" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="PROGRAMMER_T1"     responsibilityTypeId="USER_SUPPORT" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionResponsibility emplPositionId="PROGRAMMER_T2"     responsibilityTypeId="USER_SUPPORT" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionReportingStruct emplPositionIdReportingTo="FRONT_DEV1_T1" emplPositionIdManagedBy="FRONT_DEV_T2"     fromDate="2019-01-02 09:00:00.0" comments="technical management"  primaryFlag="Y"/>
+  <EmplPositionReportingStruct emplPositionIdReportingTo="FRONT_DEV1_T1" emplPositionIdManagedBy="10004"            fromDate="2019-01-02 09:00:00.0" comments="technical management"  primaryFlag="Y"/>
+  <EmplPositionReportingStruct emplPositionIdReportingTo="FRONT_DEV1_T1" emplPositionIdManagedBy="10005"            fromDate="2019-01-02 09:00:00.0" comments="technical management"  primaryFlag="Y"/>
+  <EmplPositionResponsibility emplPositionId="FRONT_DEV1_T1" responsibilityTypeId="LIB_SECURITY_APPLY" fromDate="2019-01-02 09:00:00.0" comments="technical security design" />
+  <EmplPositionResponsibility emplPositionId="FRONT_DEV1_T1" responsibilityTypeId="CODE_QUALITY"       fromDate="2019-01-02 09:00:00.0" comments="coding rules for Front technology" />
+  <EmplPositionResponsibility emplPositionId="FRONT_DEV1_T1" responsibilityTypeId="TASK_REAL"          fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionReportingStruct emplPositionIdReportingTo="SCRUM_MASTER" emplPositionIdManagedBy="PROGRAMMER_T1"     fromDate="2019-01-02 09:00:00.0" comments="to manage unit/scenario testing"  primaryFlag="Y"/>
+  <EmplPositionReportingStruct emplPositionIdReportingTo="SCRUM_MASTER" emplPositionIdManagedBy="PROGRAMMER_T2"     fromDate="2019-01-02 09:00:00.0" comments="to manage unit/scenario testing"  primaryFlag="Y"/>
+  <EmplPositionResponsibility emplPositionId="SCRUM_MASTER" responsibilityTypeId="PROJECT_MGMT" fromDate="2019-01-02 09:00:00.0" comments="animation and coordination to project succeed" />
+  <EmplPositionReportingStruct emplPositionIdReportingTo="CFO"          emplPositionIdManagedBy="PRODUCT_OWNER1"    fromDate="2019-01-02 09:00:00.0" comments="delegate acceptance decision for IT delivery"  primaryFlag="Y"/>
+  <EmplPositionResponsibility emplPositionId="PRODUCT_OWNER1" responsibilityTypeId="USER_AMBASSADOR" fromDate="2019-01-02 09:00:00.0" comments="For Accounting people, and the others" />
+  <EmplPositionReportingStruct emplPositionIdReportingTo="CMO"          emplPositionIdManagedBy="PRODUCT_OWNER2"    fromDate="2019-01-02 09:00:00.0" comments="delegate acceptance decision for IT delivery"  primaryFlag="Y"/>
+  <EmplPositionResponsibility emplPositionId="PRODUCT_OWNER2" responsibilityTypeId="USER_AMBASSADOR" fromDate="2019-01-02 09:00:00.0" comments="For Marketing people, and the others" />
+
+
+[#d_import_employee]
+==  *_Data Import Employee_*
+*_BackEnd dev1 team1, Rachel Teyrat, 38 av Lenine 7700 ST PIERRE, 614 392 510_*
+[source,XML]
+  <Party partyId="PEMPL002" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2019-01-02 09:00:00.0" createdByUserLogin="admin"/>
+  <Person partyId="PEMPL002" firstName="Rachel" lastName="Teyrat" />
+  <PartyRole partyId="PEMPL002" roleTypeId="_NA_" />
+  <PartyRole partyId="PEMPL002" roleTypeId="EMPLOYEE" />
+  <PartyRelationship partyIdFrom="Company" partyIdTo="PEMPL002" roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" fromDate="2019-01-02 09:00:00.0" relationshipName="EMPLOYMENT" />
+  <ContactMech   contactMechId="CMEMPL003" contactMechTypeId="POSTAL_ADDRESS" />
+  <PostalAddress contactMechId="CMEMPL003" address1="38 av Lenine" city="ST PIERRE" postalCode="7700" countryGeoId="FRA" stateProvinceGeoId="_NA_" />
+  <PartyContactMech partyId="PEMPL002" contactMechId="CMEMPL003" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL002" contactMechId="CMEMPL003" contactMechPurposeTypeId="GENERAL_LOCATION" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL002" contactMechId="CMEMPL003" contactMechPurposeTypeId="PRIMARY_LOCATION" fromDate="2019-01-02 09:00:00.0" />
+  <ContactMech   contactMechId="CMEMPL004" contactMechTypeId="TELECOM_NUMBER" />
+  <TelecomNumber contactMechId="CMEMPL004" contactNumber="614 392 510" />
+  <PartyContactMech partyId="PEMPL002" contactMechId="CMEMPL004" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL002" contactMechId="CMEMPL004" contactMechPurposeTypeId="PRIMARY_PHONE" fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionFulfillment emplPositionId="BACK_DEV1_T1" partyId="PEMPL002" fromDate="2019-01-02 09:00:00.0"/>
+
+*_The 4 last demo employee_*
+[source,XML]
+  <Party partyId="PEMPL003" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2019-01-02 09:00:00.0" createdByUserLogin="admin"/>
+  <Party partyId="PEMPL004" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2019-01-02 09:00:00.0" createdByUserLogin="admin"/>
+  <Party partyId="PEMPL005" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2019-01-02 09:00:00.0" createdByUserLogin="admin"/>
+  <Party partyId="PEMPL006" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2019-01-02 09:00:00.0" createdByUserLogin="admin"/>
+  <Person partyId="PEMPL003" firstName="Remco" lastName="Ivanov" />
+  <Person partyId="PEMPL004" firstName="Karsten" lastName="DaSilva" />
+  <Person partyId="PEMPL005" firstName="Sieste" lastName="Issongo" />
+  <Person partyId="PEMPL006" firstName="Marion" lastName="Huet" />
+  <PartyRole partyId="PEMPL003" roleTypeId="_NA_" />
+  <PartyRole partyId="PEMPL003" roleTypeId="EMPLOYEE" />
+  <PartyRole partyId="PEMPL004" roleTypeId="_NA_" />
+  <PartyRole partyId="PEMPL004" roleTypeId="EMPLOYEE" />
+  <PartyRole partyId="PEMPL005" roleTypeId="_NA_" />
+  <PartyRole partyId="PEMPL005" roleTypeId="EMPLOYEE" />
+  <PartyRole partyId="PEMPL006" roleTypeId="_NA_" />
+  <PartyRole partyId="PEMPL006" roleTypeId="EMPLOYEE" />
+  <PartyRelationship partyIdFrom="Company" partyIdTo="PEMPL003" roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" fromDate="2019-01-02 09:00:00.0" relationshipName="EMPLOYMENT" />
+  <PartyRelationship partyIdFrom="Company" partyIdTo="PEMPL004" roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" fromDate="2019-01-02 09:00:00.0" relationshipName="EMPLOYMENT" />
+  <PartyRelationship partyIdFrom="Company" partyIdTo="PEMPL005" roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" fromDate="2019-01-02 09:00:00.0" relationshipName="EMPLOYMENT" />
+  <PartyRelationship partyIdFrom="Company" partyIdTo="PEMPL006" roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" fromDate="2019-01-02 09:00:00.0" relationshipName="EMPLOYMENT" />
+  <ContactMech   contactMechId="CMEMPL005" contactMechTypeId="POSTAL_ADDRESS" />
+  <ContactMech   contactMechId="CMEMPL006" contactMechTypeId="TELECOM_NUMBER" />
+  <ContactMech   contactMechId="CMEMPL007" contactMechTypeId="POSTAL_ADDRESS" />
+  <ContactMech   contactMechId="CMEMPL008" contactMechTypeId="TELECOM_NUMBER" />
+  <ContactMech   contactMechId="CMEMPL009" contactMechTypeId="POSTAL_ADDRESS" />
+  <ContactMech   contactMechId="CMEMPL010" contactMechTypeId="TELECOM_NUMBER" />
+  <ContactMech   contactMechId="CMEMPL011" contactMechTypeId="POSTAL_ADDRESS" />
+  <ContactMech   contactMechId="CMEMPL012" contactMechTypeId="TELECOM_NUMBER" />
+  <PostalAddress contactMechId="CMEMPL005" address1="20 Bd morandial" city="CHAPELLE" postalCode="7140" countryGeoId="FRA" stateProvinceGeoId="_NA_" />
+  <TelecomNumber contactMechId="CMEMPL006" contactNumber="427 445 831" />
+  <PostalAddress contactMechId="CMEMPL007" address1="134 Bd liberation" city="TOURS" postalCode="7100" countryGeoId="FRA" stateProvinceGeoId="_NA_" />
+  <TelecomNumber contactMechId="CMEMPL008" contactNumber="524 123 765" />
+  <PostalAddress contactMechId="CMEMPL009" address1="3 r 11 april 1944" city="ST PIERRE" postalCode="7700" countryGeoId="FRA" stateProvinceGeoId="_NA_" />
+  <TelecomNumber contactMechId="CMEMPL010" contactNumber="972 888 116" />
+  <PostalAddress contactMechId="CMEMPL011" address1="221 imp Marat" city="Rouizere" postalCode="7360" countryGeoId="FRA" stateProvinceGeoId="_NA_" />
+  <TelecomNumber contactMechId="CMEMPL012" contactNumber="476 461 036" />
+  <PartyContactMech partyId="PEMPL003" contactMechId="CMEMPL005" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMech partyId="PEMPL003" contactMechId="CMEMPL006" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMech partyId="PEMPL004" contactMechId="CMEMPL007" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMech partyId="PEMPL004" contactMechId="CMEMPL008" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMech partyId="PEMPL005" contactMechId="CMEMPL009" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMech partyId="PEMPL005" contactMechId="CMEMPL010" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMech partyId="PEMPL006" contactMechId="CMEMPL011" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMech partyId="PEMPL006" contactMechId="CMEMPL012" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL003" contactMechId="CMEMPL005" contactMechPurposeTypeId="GENERAL_LOCATION" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL003" contactMechId="CMEMPL005" contactMechPurposeTypeId="PRIMARY_LOCATION" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL003" contactMechId="CMEMPL006" contactMechPurposeTypeId="PRIMARY_PHONE"    fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL004" contactMechId="CMEMPL007" contactMechPurposeTypeId="GENERAL_LOCATION" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL004" contactMechId="CMEMPL007" contactMechPurposeTypeId="PRIMARY_LOCATION" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL004" contactMechId="CMEMPL008" contactMechPurposeTypeId="PRIMARY_PHONE"    fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL005" contactMechId="CMEMPL009" contactMechPurposeTypeId="GENERAL_LOCATION" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL005" contactMechId="CMEMPL009" contactMechPurposeTypeId="PRIMARY_LOCATION" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL005" contactMechId="CMEMPL010" contactMechPurposeTypeId="PRIMARY_PHONE"    fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL006" contactMechId="CMEMPL011" contactMechPurposeTypeId="GENERAL_LOCATION" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL006" contactMechId="CMEMPL011" contactMechPurposeTypeId="PRIMARY_LOCATION" fromDate="2019-01-02 09:00:00.0" />
+  <PartyContactMechPurpose partyId="PEMPL006" contactMechId="CMEMPL012" contactMechPurposeTypeId="PRIMARY_PHONE"    fromDate="2019-01-02 09:00:00.0" />
+  <EmplPositionFulfillment emplPositionId="BACK_DEV2_T1" partyId="PEMPL003" fromDate="2019-01-02 09:00:00.0"/>
+  <EmplPositionFulfillment emplPositionId="BACK_DEV2_T1" partyId="PEMPL004" fromDate="2019-01-02 09:00:00.0"/>
+  <EmplPositionFulfillment emplPositionId="FRONT_DEV1_T1" partyId="PEMPL005" fromDate="2019-01-02 09:00:00.0"/>
+  <EmplPositionFulfillment emplPositionId="BIZ_ANALYST_T1" partyId="PEMPL006" fromDate="2019-01-02 09:00:00.0"/>

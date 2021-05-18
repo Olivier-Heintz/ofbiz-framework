@@ -1,0 +1,391 @@
+////
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+////
+
+= Tutorial: Employment and Salary
+This tutorial will show you how to create and manage Employee Salaries and associated benefits. +
+It is base on existing OFBiz <<DEMO_DATA, demo data>> and Company organization defined in the tutorial
+<<_tutorial_define_my_company_organization>>
+
+The associated video (showing all the actions described in this tutorial) can be download on
+https://jenkins.ofbizextra.org/view/Trunk-Sel./job/02_Ofbiz_trunk_wktr1_SeleniumWebDriver_tests/202/artifact/build/test-output/EmploymentAndSalary-implementation.avi[EmploymentAndSalary-implementation.avi]
+
+or directly visualize at https://video.ploud.fr/videos/watch/83cb1332-6d5e-4dd9-a4af-7a77595c93ac[EmploymentAndSalary]
+
+This tutorial have 6 step
+
+. <<_step_1_pay_grade_and_salary_step, Pay Grade and Salary Step>>
+. <<_step_2_positiontype_rate_and_grade, PositionType Rate and Grade>>
+. <<_step_3_employment_and_salary_history, Employment and Salary history>>
+. <<_step_4_employee_associated_benefits, Employee associated Benefits>>
+. <<_step_5_employee_leaves, Employee Leaves>>
+. <<_step_6_salaries_calculation, Salaries calculation>>
+
+= Step 1 : Pay Grade and Salary Step
+<<_pay_grades>> is managed in <Global HR Settings> and menu <Pay Grades>, and when you select one (from the list) you can
+see / manage the SalaryStep associated to it.
+
+When creation PayGrade or SalaryStep, it's possible to define the ID and most of time when the Grade-Step are used only Id are show,
+so it's better to create clear ID.
+
+In some country, legal social convention contain Grade-Step table for lowest salary by Job type, so it's good to be able to have
+exactly same Id than in the convention.
+
+[IMPORTANT]
+So clearly, it's better for readability to enter the ID, but it's dangerous to create wrong ID,
+in ID *only standard characters and without space* are authorized. ID length must be less than 20 characters. +
+Best practice is to use only UpperCase.
+
+PayGradeName and comment can be used to explain.
+
+For SalaryStep, there are fromDate and thruDate to be able to have history of change.
+
+.Table Grades-Step (per month)
+|===
+| payGradeId | payGradeName | salaryStepSeqId | amount
+
+| M1
+| Worker unqualified /month
+| 1
+| 1'500
+
+|
+|
+| 2
+| 1'600
+
+|
+|
+| 3
+| 1'700
+
+|
+|
+| 4
+| 1'800
+
+| M2
+| Worker qualified /month
+| 1
+| 1'650
+
+|
+|
+| 2
+| 1'760
+
+|
+|
+| 3
+| 1'870
+
+|
+|
+| 4
+| 1'990
+
+| M3
+| Manager /month
+| 1
+| 1'850
+
+|
+|
+| 2
+| 1'985
+
+|
+|
+| 3
+| 2'250
+
+|
+|
+| 4
+| 2'500
+
+|
+|
+| 5
+| 3'500
+
+| M4
+| Director /month
+| 1
+| 3'000
+
+|
+|
+| 2
+| 4'000
+
+|
+|
+| 3
+| 6'000
+
+|===
+
+.Table Grades-Step (per Hours)
+|===
+| payGradeId | payGradeName | salaryStepSeqId | amount
+
+| H1
+| Worker unqualified /hour
+| 1
+| 15
+
+|
+|
+| 2
+| 20
+
+| H2
+| Worker qualified /hour
+| 1
+| 17
+
+|
+|
+| 2
+| 25
+
+| DEV_H
+| Developpers /hour
+| WIHTOUT_EXP
+| 30
+
+|
+|
+| EXP_2-3
+| 50
+
+|
+|
+| EXP_4-10
+| 100
+
+| BA_H
+| Business Analyst /hour
+| WIHTOUT_EXP
+| 35
+
+|
+|
+| EXP_2-3
+| 60
+
+|
+|
+| EXP_4-10
+| 150
+
+|===
+
+M1,M2 and their steps will be created with the User Screens and all other will create by import data
+
+Example for M3 PayGrade and its 5 SalaryStep associated
+[source,XML]
+  <PayGrade payGradeId="M3" payGradeName="Manager /month" comment="All job position with management"/>
+  <SalaryStep payGradeId="M3" salaryStepSeqId="1"  fromDate="2019-01-02 00:00:00.000" amount="1850"/>
+  <SalaryStep payGradeId="M3" salaryStepSeqId="2"  fromDate="2019-01-02 00:00:00.000" amount="1985"/>
+  <SalaryStep payGradeId="M3" salaryStepSeqId="3"  fromDate="2019-01-02 00:00:00.000" amount="2250"/>
+  <SalaryStep payGradeId="M3" salaryStepSeqId="4"  fromDate="2019-01-02 00:00:00.000" amount="2500"/>
+  <SalaryStep payGradeId="M3" salaryStepSeqId="5"  fromDate="2019-01-02 00:00:00.000" amount="3500"/>
+
+for the complete import data see <<d_import_grade_step, Data Import PayGrade, SalaryStep>> in <<tuto_eas_annex_data_import, Annex Data import>>.
+
+= Step 2 : PositionType Rate and Grade
+As saying in introduction of this chapter, salary is not related to job position, BUT, it's possible to define
+some Job Position indicators about Salary, for budgeting for example or to help in recruitment process.
+
+Salary amount or Grade-Step are'nt associated with Job Position but with Job Position Type, in Global HR Setting. +
+For each RateType (Standard, Average, Hightest, lowest, …​), it's possible to choose to enter directly a amount or associated to it
+a Grade-Step.
+
+In <<_tutorial_define_my_company_organization, previous tutorial>>, multiple Position Type have been created, and for some of them
+ValidResponsibilities have been added. Now we are able to add some Salary amount informations.
+
+[WARNING]
+TODO to put RateAmount added information coming from Tutorial 1
+
+For Position Type Grade, as example, we will associate:
+
+* Senior Programmer with Grade-Step M3-4 as Standard Rate and M3-5 as Hightest Pay Rate
+* Senior Business Analyst with Grade-Step M3-3 as Standard Rate and M3-5 as Hightest Pay Rate
+* CEO with Grade-Step M4-3 as standard Rate
+* CIO with Grade-Step M4-2 as standard Rate, first enter M4-1 and modification to M4-2
+
+Go to <Global HR Settings> and menu <Position Type>, click on find and select PositionType wanted, on PositionType subMenu
+there are option Rate and Grade. In each, the existing list is print and it's possible to add one more. If a existing one is
+added twice, the first is expired.
+
+= Step 3 : Employment and Salary history
+Currently, there is a functional bug in OFBiz (cf <<_createemployee>> ), so create Employee not create an employment,
+so for employee created in first tutorial <<_step_6_create_all_the_employees>>, no employment has been created. +
+In this step, all the employments will be created.
+
+In Employment menu, you can check, no employment exist. +
+In the <New Employment> screen :
+
+* First field, internal Organization should be which legal entity hire the employee, not in which internal organization
+  employee will fulfill an employee position
+* Amount is mandatory, even if you fulfill Grade-Step fields, it's to have a complete (and clear) pay history and so
+  see when the Grade-Step have change.
+* Period Type should not be forgot
+
+Employment to create :
+
+* CEO, Pierre Lavigne, 7000/month
+* CIO, Esmee Bacheler, 5500/month
+* IT Assistant, Marco Ceccoto, 1870/month M2-3
+* Senior Dev, Nuala Tulasme, 4000/month
+* Senior Business Analyst, Karsten Ulman, 50/hour
+* BackEnd dev1 team1, Rachel Teyrat, 3000/month
+* BackEnd dev2 team1, Morning, Remco Ivanov, 30/hour
+* BackEnd dev2 team1, Afternoon, Maria DaSilva, 30/hour
+* FrontEnd dev team1, Sieste Issongo, 3000/month
+* Business Analyst team1, Marion Huet, 3000/month
+
+The three first will be created with User Screen, and with import data for the others.
+
+After Employment creation, the Employment submenu appear, with <Pay Histories> item. +
+In Pay Histories, it's possible to change the last record, click on Edit and you can change what you want. +
+If amount or Grade-Step is changed, a new record in Pay History will be created and previous one will be expired.
+
+For CIO, change amount to 5555, with coments "Good job" +
+and a second change, only add in the coments a smiley at the end ;-)
+
+If we come back to the employee screens, on the summary page, employment summary is present and details are in Employment subMenu.
+
+Example for Nuala Tulasme employment data import
+[source,XML]
+  <Employment roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" partyIdFrom="Company" partyIdTo="10005" fromDate="2019-01-02 00:00:00.000"/>
+  <PayHistory roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" partyIdFrom="Company" partyIdTo="10005" emplFromDate="2019-01-02 00:00:00.000" fromDate="2019-01-02 00:00:00.000" amount="4000" periodTypeId="RATE_MONTH"/>
+
+for the complete import data see <<d_import_employment, Data Import Employment>> in <<tuto_eas_annex_data_import, Annex Data import>>.
+
+= Step 4 : Employee associated Benefits
+To be able to manage Employee <<BENEFITS, Benefits>>, you should first create / manage some Benefit Type. Currently there is
+no User Interface to manage Benefit Type, you should use <<ENTITY_DATA_MAINTENANCE, Entity Maintenance WebTools>> sub-application.
+In this tutorial, we just go to look to the 3 existing value. Got to Webtools, Entitty Data Maintenance,
+find and select BenefitType entity and click to search. With view button you go to a detail screen with a update and delete button.
+
+Now it's possible to go to Employment in HR application Menu and select Karsten Ulman with edit button and go to <Party Benefits>.
+
+Currently there is no fromDate field, it's a functional bug (see <<_hr_data_model_resource_book_difference, PartyBenefit>> remark).
+
+Three Benefit will be entered:
+
+* Health insurance cost 200 / month with actual employer paid 50%
+* Vacation 20 days paid by employer 100%
+* Seak leave 10 days paid by employer 100%
+
+
+= Step 5 : Employee Leaves
+To be able to manage the Employee <<Leave>>, you should first create your Leave Type and Reason list for your company (in Global HR Settings).
+In this tutorial we want to have 3 Types : Paid, UnPaid, Insurance and 4 reasons Holiday, Recuperation, Medical, Family.
+
+Employee Leaves, can be manage directly by employee if there have the right Permission (more detail in <<_human_resource_permissions>>)
+in HR application or in Portal application , with MyPortalEmployee pages. +
+In this tutorial we will continu with a role like a HR clerk which manage HR, so he will create request leave for employee,
+and manager will approve. +
+You should first create a login for the manager and affect to it the correct HR permission.
+
+== 5.a Leave Type and Reason
+Go to Global HR Settings, sub menu "Employee Leave Type", there is a fourth level menu to choose between Leave Type and Reason Type.
+
+In each case it's possible to create (by carreful about ID, only standard characters and without space, less than 20), modify
+and delete.
+
+Currently there are 4 existing Type, we delete INLAND_EARNED, RESTRICTED_HOLIDAY and SPECIAL_DAY_OFF, +
+we create PAID and INSURANCE, and mofifying description for LOSS_OF_PAY to "unPaid, loss of pay"
+
+Currently there are 2 existings Reason Type, we delete CASUAL and create HOLIDAY Holiday, RECUP Recuperation of extra hours,
+FAMILY Family Event.
+
+== 5.b CIO login creation
+We should create login for Esmee Bacheler, so go to Party Application, and find Esmee and go to profile page. +
+Use Create button on <User Name(s)> portlet, only the first 3 fields are mandatory (ebacheler, tutobach, tutobach). +
+After creation, return to profile page (with <profile> button) and click on <Security Groups> in <User Nmae(s)> portlet
+choose HUMANRES_APPROVER and add it, fromDate will be now. +
+Return to HR application (the only one Esmee Bacheler is authorized to use), logout and login with ebacheler, and check
+you can go to <Leave> Menu.
+
+== 5.c Create leave for Karsten Ulman
+Login to the HR application with the Test user ( testSwd1 ), and go to the <Leave> applicationHRMenu.
+Create a new leave for Karsten Ulman (id PEMPL001), Paid, from 01 july 2019 to 21 july, reason Holiday, Approver Esmee Bacheler
+description annual holidays. +
+You have no choice for status, Leave is always created with "created" status.
+
+It's also possible to create Leave in <Employee> menu, select Rachel Teyrat, so her profil is open and <Leave> submenu is
+available. In this screen, there are list of all existing leaves and add form. Add her a leave for holiday, (01-21 july).
+
+== 5.d Leave Approbation
+Now login to HR application with ebacheler login and go to <Leave> menu, to the <Leave Approval>, with update approve the two leaves.
+
+
+= Step 6 : Salaries calculation
+[WARNING]
+TODO to be completed
+
+[#tuto_eas_annex_data_import]
+= Annex Data import
+For each import, Goto to Web Tools Application, select <XML Data Import> option and copy-paste the following lines,
+in the field <Complete XML document (root tag: entity-engine-xml)> +
+in the entity-engine-xml root tag.
+
+[#d_import_grade_step]
+==  *_Data Import PayGrade, SalaryStep_*
+[source,XML]
+  <PayGrade payGradeId="M4" payGradeName="Director /month" comment="All Direction job position"/>
+  <SalaryStep payGradeId="M4" salaryStepSeqId="1"  fromDate="2019-01-02 00:00:00.000" amount="3000"/>
+  <SalaryStep payGradeId="M4" salaryStepSeqId="2"  fromDate="2019-01-02 00:00:00.000" amount="4000"/>
+  <SalaryStep payGradeId="M4" salaryStepSeqId="3"  fromDate="2019-01-02 00:00:00.000" amount="6000"/>
+  <PayGrade payGradeId="H1" payGradeName="Worker unqualified /hour" comment="For subcontractor"/>
+  <SalaryStep payGradeId="H1" salaryStepSeqId="1"  fromDate="2019-01-02 00:00:00.000" amount="15"/>
+  <SalaryStep payGradeId="H1" salaryStepSeqId="2"  fromDate="2019-01-02 00:00:00.000" amount="20"/>
+  <PayGrade payGradeId="H2" payGradeName="Worker qualified /hour" comment="For subcontractor"/>
+  <SalaryStep payGradeId="H2" salaryStepSeqId="1"  fromDate="2019-01-02 00:00:00.000" amount="17"/>
+  <SalaryStep payGradeId="H2" salaryStepSeqId="2"  fromDate="2019-01-02 00:00:00.000" amount="25"/>
+  <PayGrade payGradeId="DEV_H" payGradeName="Developper /hour" comment="For subcontractor"/>
+  <SalaryStep payGradeId="DEV_H" salaryStepSeqId="WITHOUT_EXP" fromDate="2019-01-02 00:00:00.000" amount="30"/>
+  <SalaryStep payGradeId="DEV_H" salaryStepSeqId="EXP_2-3"     fromDate="2019-01-02 00:00:00.000" amount="50"/>
+  <SalaryStep payGradeId="DEV_H" salaryStepSeqId="EXP_4-10"    fromDate="2019-01-02 00:00:00.000" amount="100"/>
+  <PayGrade payGradeId="BA_H" payGradeName="Business Analyst /hour" comment="For subcontractor"/>
+  <SalaryStep payGradeId="BA_H" salaryStepSeqId="WITHOUT_EXP" fromDate="2019-01-02 00:00:00.000" amount="35"/>
+  <SalaryStep payGradeId="BA_H" salaryStepSeqId="EXP_2-3"     fromDate="2019-01-02 00:00:00.000" amount="60"/>
+  <SalaryStep payGradeId="BA_H" salaryStepSeqId="EXP_4-10"    fromDate="2019-01-02 00:00:00.000" amount="150"/>
+
+[#d_import_employment]
+==  *_Data Import Employment_*
+[source,XML]
+  <Employment roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" partyIdFrom="Company" partyIdTo="10005" fromDate="2019-01-02 00:00:00.000"/>
+  <PayHistory roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" partyIdFrom="Company" partyIdTo="10005" emplFromDate="2019-01-02 00:00:00.000" fromDate="2019-01-02 00:00:00.000" amount="4000" periodTypeId="RATE_MONTH"/>
+  <Employment roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" partyIdFrom="Company" partyIdTo="PEMPL001" fromDate="2019-01-02 00:00:00.000"/>
+  <PayHistory roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" partyIdFrom="Company" partyIdTo="PEMPL001" emplFromDate="2019-01-02 00:00:00.000" fromDate="2019-01-02 00:00:00.000" amount="50" periodTypeId="RATE_HOUR"/>
+  <Employment roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" partyIdFrom="Company" partyIdTo="PEMPL002" fromDate="2019-01-02 00:00:00.000"/>
+  <PayHistory roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" partyIdFrom="Company" partyIdTo="PEMPL002" emplFromDate="2019-01-02 00:00:00.000" fromDate="2019-01-02 00:00:00.000" amount="3000" periodTypeId="RATE_MONTH"/>
+  <Employment roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" partyIdFrom="Company" partyIdTo="PEMPL003" fromDate="2019-01-02 00:00:00.000"/>
+  <PayHistory roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" partyIdFrom="Company" partyIdTo="PEMPL003" emplFromDate="2019-01-02 00:00:00.000" fromDate="2019-01-02 00:00:00.000" amount="30" periodTypeId="RATE_HOUR"/>
+  <Employment roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" partyIdFrom="Company" partyIdTo="PEMPL004" fromDate="2019-01-02 00:00:00.000"/>
+  <PayHistory roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" partyIdFrom="Company" partyIdTo="PEMPL004" emplFromDate="2019-01-02 00:00:00.000" fromDate="2019-01-02 00:00:00.000" amount="30" periodTypeId="RATE_HOUR"/>
+  <Employment roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" partyIdFrom="Company" partyIdTo="PEMPL005" fromDate="2019-01-02 00:00:00.000"/>
+  <PayHistory roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" partyIdFrom="Company" partyIdTo="PEMPL005" emplFromDate="2019-01-02 00:00:00.000" fromDate="2019-01-02 00:00:00.000" amount="3000" periodTypeId="RATE_MONTH"/>
+  <Employment roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" partyIdFrom="Company" partyIdTo="PEMPL006" fromDate="2019-01-02 00:00:00.000"/>
+  <PayHistory roleTypeIdFrom="INTERNAL_ORGANIZATIO" roleTypeIdTo="EMPLOYEE" partyIdFrom="Company" partyIdTo="PEMPL006" emplFromDate="2019-01-02 00:00:00.000" fromDate="2019-01-02 00:00:00.000" amount="3000" periodTypeId="RATE_MONTH"/>
